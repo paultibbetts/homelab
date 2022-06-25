@@ -44,6 +44,10 @@ NAS
 
 ## Network
 
+### DNS
+
+[Pi-hole](https://pi-hole.net/) running on a [Raspberry Pi 1](https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/). It also blocks adverts.
+
 ### LAN
 
  [TP-Link Managed Network Switch 8 Port Gigabit](https://www.tp-link.com/uk/business-networking/easy-smart-switch/tl-sg108e/)
