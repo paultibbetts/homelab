@@ -34,13 +34,32 @@ NAS
 
 4 x [Seagate IronWolf 6TB NAS 3.5" SATA HDD](https://www.scan.co.uk/products/6tb-seagate-ironwolf-st6000vn001-nas-hard-drive-35-hdd-sata-iii-6gb-s-5400rpm-256mb-cache)
 
-**Total** 24GB
+**Total** 24TB
 
 
 ### Software
 
 [TrueNAS Scale](https://www.truenas.com/truenas-scale/)
 
+#### RAID
+
+##### ssd-storage
+
+System Dataset Pool.
+
+Raw storage: 500GB
+
+RAID: N/A
+
+Usable storage: 500GB
+
+##### hdd-storage
+
+Raw storage: 24TB
+
+RAID: RAIDZ2
+
+Usable storage: 12TB
 
 #### TLS
 
