@@ -42,6 +42,19 @@ NAS
 [TrueNAS Scale](https://www.truenas.com/truenas-scale/)
 
 
+#### TLS
+
+Used [Truecharts video](https://www.youtube.com/watch?v=TJ5fDiDRcbU) to add a wildcard Let's Encrypt certificate for `cloud.paultibbetts.uk`.
+
+### Apps
+
+- **Books** - [Calibre](https://calibre-ebook.com/) + [Calibre Web](https://github.com/janeczku/calibre-web) - https://books.cloud.paultibbetts.uk
+- **Dashboard** - [Heimdall](https://heimdall.site/) - https://apps.cloud.paultibbetts.uk
+- **Games** - [EmulatorJS](https://github.com/ethanaobrien/emulatorjs) - https://games.cloud.paultibbetts.uk
+- **Home Automation** - [Home Assistant](https://www.home-assistant.io/) - https://home.cloud.paultibbetts.uk
+- **Ingress** - [Traefik](https://traefik.io/)
+- **Media** - [Jellyfin](https://jellyfin.org/) - https://media.cloud.paultibbetts.uk
+
 ## Network
 
 ### DNS
