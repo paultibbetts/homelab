@@ -79,7 +79,18 @@ Used [Truecharts video](https://www.youtube.com/watch?v=TJ5fDiDRcbU) to add a wi
 
 ### DNS
 
-[Pi-hole](https://pi-hole.net/) running on a [Raspberry Pi 1](https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/). It also blocks adverts.
+[Pi-hole](https://pi-hole.net/) running on a [Raspberry Pi 1](https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/).
+
+It also blocks adverts.
+
+Pi-hole manages the DNS for the homelab with a Dnsmasq entry:
+
+```
+# /etc/dnsmasq.d/02-homelab.conf
+address=/cloud.paultibbetts.uk/192.168.1.4
+```
+
+This needed a restart with `pihole restartdns`.
 
 ### LAN
 
