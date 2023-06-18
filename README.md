@@ -2,9 +2,37 @@
 
 An overview of my homelab.
 
-## Server
+## Intel NUC
 
-NAS
+Virtualisation and compute.
+
+### Hardware
+
+- **CPU** - [i7 1360P](https://www.intel.com/content/www/us/en/products/sku/233099/intel-nuc-13-pro-kit-nuc13anhi7/specifications.html)
+- **RAM** - [64GB 3200MHz Corsair Vengeance SODIMM DDR4](https://www.corsair.com/uk/en/p/memory/cmsx64gx4m2a2933c19/vengeancea-series-64gb-2-x-32gb-ddr4-sodimm-2933mhz-cl19-memory-kit-cmsx64gx4m2a2933c19)
+- **NIC** - 2.5GBE
+
+#### Storage
+
+##### Boot
+
+- 1 x [500GB Samsung SSD 870 EVO](https://www.samsung.com/uk/memory-storage/sata-ssd/870-evo-500gb-sata-3-2-5-ssd-mz-77e500b-eu/)
+
+**Total** 500GB
+
+##### SSD
+
+- 1 [1TB Samsung SSD 980 Pro](https://www.samsung.com/uk/memory-storage/nvme-ssd/980-pro-pcle-4-0-nvme-m-2-ssd-1tb-mz-v8p1t0bw/)
+
+**Total** 1TB
+
+### Software
+
+[Proxmox VE](https://www.proxmox.com/en/proxmox-ve)
+
+## NAS
+
+Provides storage and a few core apps.
 
 ### Hardware
 
@@ -63,7 +91,7 @@ Usable storage: 12TB
 
 #### TLS
 
-Used [Truecharts video](https://www.youtube.com/watch?v=TJ5fDiDRcbU) to add a wildcard Let's Encrypt certificate for `cloud.paultibbetts.uk`.
+Used [Truecharts clusterissuer](https://truecharts.org/charts/enterprise/clusterissuer/) to add a wildcard Let's Encrypt certificate for `cloud.paultibbetts.uk`.
 
 ### Apps
 
@@ -71,15 +99,18 @@ Used [Truecharts video](https://www.youtube.com/watch?v=TJ5fDiDRcbU) to add a wi
 - **Dashboard** - [Heimdall](https://heimdall.site/) - https://apps.cloud.paultibbetts.uk
 - **Games** - [EmulatorJS](https://github.com/ethanaobrien/emulatorjs) - https://games.cloud.paultibbetts.uk
 - **Git** - [Gitea](https://gitea.io/en-us/) - https://git.cloud.paultibetts.uk
-- **Home Automation** - [Home Assistant](https://www.home-assistant.io/) - https://home.cloud.paultibbetts.uk
 - **Ingress** - [Traefik](https://traefik.io/)
 - **Media** - [Jellyfin](https://jellyfin.org/) - https://media.cloud.paultibbetts.uk
 
 ## Network
 
+### Internet
+
+500 Mbps Fibre
+
 ### DNS
 
-[Pi-hole](https://pi-hole.net/) running on a [Raspberry Pi 1](https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/).
+[Pi-hole](https://pi-hole.net/) running on an Ubuntu LXC container in Proxmox on the Intel NUC.
 
 It also blocks adverts.
 
@@ -94,8 +125,10 @@ This needed a restart with `pihole restartdns`.
 
 ### LAN
 
- [TP-Link Managed Network Switch 8 Port Gigabit](https://www.tp-link.com/uk/business-networking/easy-smart-switch/tl-sg108e/)
+[TP-Link Managed Network Switch 8 Port Gigabit](https://www.tp-link.com/uk/business-networking/easy-smart-switch/tl-sg108e/)
 
- ### Internet
+[D-Link Mesh](https://eu.dlink.com/uk/en/products/m15-eagle-pro-ai-ax1500-mesh-system) setup in bridge mode.
 
- [Devolo Magic 2 LAN Powerline adapter](https://www.devolo.co.uk/magic-2-lan)
+### VPN
+
+[Wireguard](https://www.wireguard.com/) installed on an Ubuntu Server VM in Proxmox on the Intel NUC.
