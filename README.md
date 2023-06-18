@@ -30,6 +30,11 @@ Virtualisation and compute.
 
 [Proxmox VE](https://www.proxmox.com/en/proxmox-ve)
 
+### Apps
+
+- **Ad Block / DNS** - [PiHole](https://pi-hole.net/) - http://192.168.1.2/admin
+- **VPN** - [PiVPN](https://pivpn.io/) ([Wireguard](https://www.wireguard.com/)) - 192.168.1.8
+
 ## NAS
 
 Provides storage and a few core apps.
