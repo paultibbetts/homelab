@@ -22,7 +22,7 @@ Virtualisation and compute.
 
 ##### SSD
 
-- 1 [1TB Samsung SSD 980 Pro](https://www.samsung.com/uk/memory-storage/nvme-ssd/980-pro-pcle-4-0-nvme-m-2-ssd-1tb-mz-v8p1t0bw/)
+- 1 x [1TB Samsung SSD 980 Pro](https://www.samsung.com/uk/memory-storage/nvme-ssd/980-pro-pcle-4-0-nvme-m-2-ssd-1tb-mz-v8p1t0bw/)
 
 **Total** 1TB
 
