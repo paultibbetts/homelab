@@ -76,6 +76,10 @@ Used [Truecharts clusterissuer](https://truecharts.org/charts/enterprise/cluster
 
 ## Network
 
+### Internet
+
+500 Mbps Fibre
+
 ### DNS
 
 [Pi-hole](https://pi-hole.net/) running on a [Raspberry Pi 1](https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/).
@@ -93,8 +97,6 @@ This needed a restart with `pihole restartdns`.
 
 ### LAN
 
- [TP-Link Managed Network Switch 8 Port Gigabit](https://www.tp-link.com/uk/business-networking/easy-smart-switch/tl-sg108e/)
+[TP-Link Managed Network Switch 8 Port Gigabit](https://www.tp-link.com/uk/business-networking/easy-smart-switch/tl-sg108e/)
 
- ### Internet
-
- [Devolo Magic 2 LAN Powerline adapter](https://www.devolo.co.uk/magic-2-lan)
+[D-Link Mesh](https://eu.dlink.com/uk/en/products/m15-eagle-pro-ai-ax1500-mesh-system) setup in bridge mode.
