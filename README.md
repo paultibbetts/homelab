@@ -63,7 +63,7 @@ Usable storage: 12TB
 
 #### TLS
 
-Used [Truecharts video](https://www.youtube.com/watch?v=TJ5fDiDRcbU) to add a wildcard Let's Encrypt certificate for `cloud.paultibbetts.uk`.
+Used [Truecharts clusterissuer](https://truecharts.org/charts/enterprise/clusterissuer/) to add a wildcard Let's Encrypt certificate for `cloud.paultibbetts.uk`.
 
 ### Apps
 
