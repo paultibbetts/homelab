@@ -45,7 +45,7 @@ module "k3s_workers" {
 
     proxmox_host = var.proxmox_host
     proxmox_resource_pool = var.k3s_resource_pool
-    template_name = var.cloud-init_template_name
+    template_name = var.cloud_init_template_name
     vmid_start = var.k3s_workers_vmid_start
 
     cores = var.k3s_workers_cores
@@ -56,4 +56,14 @@ module "k3s_workers" {
     ip_start = var.k3s_workers_ip
     network_gateway = var.network_gateway
     ssh_key = var.ssh_key
+}
+
+resource "local_file" "k3s_hosts_cfg" {
+  content = templatefile("${path.module}/templates/hosts.tpl",
+    {
+      k3s_leaders = module.k3s_leaders.ssh_hosts
+      k3s_workers = module.k3s_workers.ssh_hosts
+    }
+  )
+  filename = "../playbooks/k3s/inventory/hosts.ini"
 }
