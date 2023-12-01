@@ -80,7 +80,7 @@ Role: Administrator
 
 `cloud-init` is used for early-stage initialization of VMs.
 
-Specifically it used here to set the IP of the VM and to add my SSH key.
+Specifically it is used here to set the IP of the VM and to add my SSH key.
 
 #### On local machine
 
