@@ -11,7 +11,7 @@ An overview of my homelab.
 - **Books** - [Calibre](https://calibre-ebook.com/) + [Calibre Web](https://github.com/janeczku/calibre-web) - https://books.cloud.paultibbetts.uk
 - **Dashboard** - [Heimdall](https://heimdall.site/) - https://apps.cloud.paultibbetts.uk
 - **Games** - [EmulatorJS](https://github.com/ethanaobrien/emulatorjs) - https://games.cloud.paultibbetts.uk
-- **Git** - [Gitea](https://gitea.io/en-us/) - https://git.cloud.paultibetts.uk
+- **Git** - [Gitea](https://gitea.io/en-us/) - https://git.cloud.paultibbetts.uk
 - **Ingress** - [Traefik](https://traefik.io/)
 - **Media** - [Jellyfin](https://jellyfin.org/) - https://media.cloud.paultibbetts.uk
 
