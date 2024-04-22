@@ -54,6 +54,6 @@ resource "proxmox_vm_qemu" "proxmox_cloud-init_vm" {
     ipconfig0 = "ip=${var.ip_start}${count.index + 1}/24,gw=${var.network_gateway}"
 
     sshkeys = <<EOF
-    ${var.ssh_key}
+    ${var.ssh_keys}
     EOF
 }

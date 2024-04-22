@@ -68,7 +68,7 @@ variable "network_gateway" {
     type = string
 }
 
-variable "ssh_key" {
-    description = "The SSH key to add"
+variable "ssh_keys" {
+    description = "The SSH keys to add"
     type = string
 }

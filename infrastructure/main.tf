@@ -33,7 +33,7 @@ module "k3s_leaders" {
 
     ip_start = var.k3s_leaders_ip
     network_gateway = var.network_gateway
-    ssh_key = var.ssh_key
+    ssh_keys = var.ssh_keys
 }
 
 module "k3s_workers" {
@@ -55,7 +55,7 @@ module "k3s_workers" {
 
     ip_start = var.k3s_workers_ip
     network_gateway = var.network_gateway
-    ssh_key = var.ssh_key
+    ssh_keys = var.ssh_keys
 }
 
 resource "local_file" "k3s_hosts_cfg" {

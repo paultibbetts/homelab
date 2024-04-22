@@ -1,9 +1,12 @@
 # Global
 
-variable "ssh_key" {
-    description = "The SSH key to add"
+variable "ssh_keys" {
+    description = "The SSH keys to add"
     type = string
-    default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLiEeOqR0KLdVZ64p94nk2fSno1jyminStrv2OPVcd2 code@paultibbetts.uk"
+    default = <<-EOT
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLiEeOqR0KLdVZ64p94nk2fSno1jyminStrv2OPVcd2 code@paultibbetts.uk
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPfx70ArvHPF+9U3GgKgNEAWkXSyZMun83sn9582Pl4e code@paultibbetts.uk
+    EOT
 }
 
 variable "network_gateway" {
