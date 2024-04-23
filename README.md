@@ -4,7 +4,7 @@ An overview of my homelab.
 
 ## NAS 
 
-[Hardware](/hardware/nas/README.md)
+[Hardware](hardware/nas/README.md)
 
 ### Apps
 
@@ -21,7 +21,7 @@ Used [Truecharts clusterissuer](https://truecharts.org/charts/enterprise/cluster
 
 ## NUC
 
-[Hardware](/hardware/nuc/README.md)
+[Hardware](hardware/nuc/README.md)
 ### Apps
 
 - **Ad Block / DNS** - [PiHole](https://pi-hole.net/) - http://192.168.1.2/admin
