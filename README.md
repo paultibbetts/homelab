@@ -50,6 +50,8 @@ This needed a restart with `pihole restartdns`.
 
 ### LAN
 
+[Ubiquiti Flex 10 GbE](https://techspecs.ui.com/unifi/switching/unifi-flex-xg?s=uk)
+
 [TP-Link Managed Network Switch 8 Port Gigabit](https://www.tp-link.com/uk/business-networking/easy-smart-switch/tl-sg108e/)
 
 [D-Link Mesh](https://eu.dlink.com/uk/en/products/m15-eagle-pro-ai-ax1500-mesh-system) setup in bridge mode.
