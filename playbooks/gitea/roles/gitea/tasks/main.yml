@@ -41,14 +41,14 @@
   notify: restart gitea
 
 - name: create the gitea systemd unit file
-  template:
+  ansible.builtin.template:
     src: gitea.unit.j2
     dest: "{{ systemd_units_dir }}/gitea.service"
   when: ansible_service_mgr == "systemd"
   notify: restart gitea
 
 - name: create the gitea init.d start-up script
-  template:
+  ansible.builtin.template:
     src: gitea.init.j2
     dest: "{{ initd_conf_dir }}/gitea"
     mode: 0755
@@ -56,7 +56,7 @@
   notify: restart gitea
 
 - name: enable and start the gitea web service
-  service:
+  ansible.builtin.service:
     name: gitea
     state: started
     enabled: yes
