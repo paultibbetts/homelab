@@ -58,9 +58,16 @@ variable "storage" {
     type = string
 }
 
+variable "ip" {
+  description = "The exact IP address to use"
+  type = string
+  default = null
+}
+
 variable "ip_start" {
     description = "The starting point for IP addresses (192.168.1.10 + count.index)"
     type = string
+    default = null
 }
 
 variable "network_gateway" {
