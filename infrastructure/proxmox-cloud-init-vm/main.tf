@@ -51,7 +51,7 @@ resource "proxmox_vm_qemu" "proxmox_cloud-init_vm" {
 
     # cloud-init
 
-    ipconfig0 = var.ip != null ? "ip=${var.ip}/24,gw=${var.network_gateway}" : "ip=${var.ip_start}${count.index + 1}/24,gw=${var.network_gateway}"
+    ipconfig0 = var.ip != null ? "ip=${var.ip}/24,gw=${var.network_gateway}" : "ip=${var.ip_start}${count.index}/24,gw=${var.network_gateway}"
 
     sshkeys = <<EOF
     ${var.ssh_keys}
