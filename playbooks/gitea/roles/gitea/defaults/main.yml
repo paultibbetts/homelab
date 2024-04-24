@@ -1,0 +1,17 @@
+---
+
+# Gitea Version
+gitea_version: 1.21.7
+
+# Path to the Gitea binary
+gitea_binary: /home/gitea/bin/gitea
+
+# Path to the file containing the ENV configuration variables for gitea
+gitea_envfile: /etc/default/gitea
+
+# Gitea home directory
+gitea_working_directory: /home/gitea
+
+# Runtime user and group for the gitea service
+gitea_user: git
+gitea_group: git
