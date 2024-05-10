@@ -1,0 +1,28 @@
+---
+- name: Patch web UI
+  kubernetes.core.k8s:
+    api_version: v1
+    state: patched
+    kind: Service
+    name: argocd-server
+    namespace: "{{ argocd_namespace }}"
+    definition:
+      spec:
+        type: LoadBalancer
+
+- block: 
+  - name: Check for initial admin password
+    kubernetes.core.k8s_info:
+      api_version: v1
+      kind: Secret
+      name: argocd-initial-admin-secret
+      namespace: "{{ argocd_namespace }}"
+    register: initial_admin_secret
+  - name: Warn about initial admin password secret existing
+    debug:
+      msg: 
+      - "The initial admin secret is present"
+      - "Retrieve it with `argocd admin initial-password -n argocd`"
+      - "Update it with `argocd account update-password`"
+      - "Remove it with `kubectl delete secret argocd-initial-admin-secret -n argocd`"
+    when: initial_admin_secret.resources | length > 0

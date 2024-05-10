@@ -1,0 +1,4 @@
+---
+- import_tasks: namespace.yaml
+- import_tasks: manifests.yaml
+- import_tasks: postinstall.yaml
