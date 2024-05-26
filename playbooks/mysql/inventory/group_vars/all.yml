@@ -1,8 +1,13 @@
 ---
 mysql_databases:
+  - name: freshrss
   - name: gitea
 
 mysql_users:
+  - name: freshrss
+    host: 192.168.1.211
+    password: freshrss
+    priv: "freshrss.*:ALL"
   - name: gitea
     host: 192.168.1.211
     password: gitea
