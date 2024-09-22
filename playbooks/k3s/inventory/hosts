@@ -7,10 +7,6 @@ k3s_leader-3 ansible_host=192.168.1.222
 k3s_worker-1 ansible_host=192.168.1.230
 k3s_worker-2 ansible_host=192.168.1.231
 
-[storage]
-k3s_storer-1 ansible_host=192.168.1.240
-
 [k3s_cluster:children]
 master
 node
-storage
