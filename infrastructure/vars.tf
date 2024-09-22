@@ -149,44 +149,6 @@ variable "k3s_workers_ip_start" {
     default = "192.168.1.23" # + "${count.index}"
 }
 
-## K3s Storers
-
-variable "k3s_storers_amount" {
-    description = "How many K3s storers"
-    type = number
-    default = 1
-}
-
-variable "k3s_storers_vmid_start" {
-    description = "The starting number for K3s storers VM IDs"
-    type = number
-    default = 321
-}
-
-variable "k3s_storers_cores" {
-    description = "How many cores for K3s storers"
-    type = number
-    default = 1
-}
-
-variable "k3s_storers_memory" {
-    description = "How much RAM for K3s storers"
-    type = number
-    default = 2048
-}
-
-variable "k3s_storers_disk_size" {
-    description = "How much disk size for K3s storers"
-    type = string
-    default = "100G"
-}
-
-variable "k3s_storers_ip_start" {
-    description = "The starting point for K3s storers IPs"
-    type = string
-    default = "192.168.1.24" # + "${count.index}"
-}
-
 # MySQL
 
 variable "mysql_disk_size" {

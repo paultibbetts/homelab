@@ -58,34 +58,11 @@ module "k3s_workers" {
     ssh_keys = var.ssh_keys
 }
 
-module "k3s_storers" {
-    source = "./proxmox-cloud-init-vm"
-
-    instances = var.k3s_storers_amount
-    instance_name = "k3s-storer"
-    tags = "k3s;k3s-storer"
-
-    proxmox_host = var.proxmox_host
-    proxmox_resource_pool = var.k3s_resource_pool
-    template_name = var.cloud_init_template_name
-    vmid_start = var.k3s_storers_vmid_start
-
-    cores = var.k3s_storers_cores
-    memory = var.k3s_storers_memory
-    disk_size = var.k3s_storers_disk_size
-    storage = var.proxmox_storage
-
-    ip_start = var.k3s_storers_ip_start
-    network_gateway = var.network_gateway
-    ssh_keys = var.ssh_keys
-}
-
 resource "local_file" "k3s_hosts_cfg" {
   content = templatefile("${path.module}/templates/k3s/hosts.tpl",
     {
       k3s_leaders = module.k3s_leaders.ssh_hosts
       k3s_workers = module.k3s_workers.ssh_hosts
-      k3s_storers = module.k3s_storers.ssh_hosts
     }
   )
   filename = "../playbooks/k3s/inventory/hosts"
