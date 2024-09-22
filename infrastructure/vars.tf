@@ -90,13 +90,13 @@ variable "k3s_leaders_vmid_start" {
 variable "k3s_leaders_cores" {
     description = "How many cores for K3s leaders"
     type = number
-    default = 2
+    default = 4
 }
 
 variable "k3s_leaders_memory" {
     description = "How much RAM for K3s leaders"
     type = number
-    default = 4096
+    default = 8192
 }
 
 variable "k3s_leaders_disk_size" {
@@ -128,13 +128,13 @@ variable "k3s_workers_vmid_start" {
 variable "k3s_workers_cores" {
     description = "How many cores for K3s workers"
     type = number
-    default = 2
+    default = 4
 }
 
 variable "k3s_workers_memory" {
     description = "How much RAM for K3s workers"
     type = number
-    default = 4096
+    default = 8192
 }
 
 variable "k3s_workers_disk_size" {
