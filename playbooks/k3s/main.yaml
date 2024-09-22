@@ -30,11 +30,6 @@
     - role: k3s/node
       become: true
 
-- hosts: storage
-  roles:
-    - role: k3s/node
-      become: true
-
 - hosts: master
   roles:
     - role: k3s/post
