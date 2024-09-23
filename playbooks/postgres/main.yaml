@@ -1,0 +1,10 @@
+---
+- hosts: postgres
+  gather_facts: true
+  become: yes
+  pre_tasks:
+    - name: Update repositories cache
+      ansible.builtin.apt:
+        update_cache: yes
+  roles:
+    - role: geerlingguy.postgresql

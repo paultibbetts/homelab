@@ -90,12 +90,44 @@ module "mysql" {
 }
 
 resource "local_file" "mysql_hosts_cfg" {
-  content = templatefile("${path.module}/templates/mysql/hosts.tpl",
+  content = templatefile("${path.module}/templates/single-vm/hosts.tpl",
     {
+      name = "mysql"
       ips = module.mysql.ssh_hosts
     }
   )
   filename = "../playbooks/mysql/inventory/hosts"
+}
+
+module "postgres" {
+    source = "./proxmox-cloud-init-vm"
+
+    instances = 1
+    instance_name = "postgres"
+    tags = "database;postgres"
+
+    proxmox_host = var.proxmox_host
+    template_name = var.cloud_init_template_name
+    vmid_start = var.postgres_vmid_start
+
+    cores = var.postgres_cores
+    memory = var.postgres_memory
+    disk_size = var.postgres_disk_size
+    storage = var.proxmox_storage
+
+    ip = var.postgres_ip
+    network_gateway = var.network_gateway
+    ssh_keys = var.ssh_keys
+}
+
+resource "local_file" "postgres_hosts_cfg" {
+  content = templatefile("${path.module}/templates/single-vm/hosts.tpl",
+    {
+      name = "postgres"
+      ips = module.postgres.ssh_hosts
+    }
+  )
+  filename = "../playbooks/postgres/inventory/hosts"
 }
 
 module "gitea" {
@@ -120,8 +152,9 @@ module "gitea" {
 }
 
 resource "local_file" "gitea_hosts_cfg" {
-  content = templatefile("${path.module}/templates/gitea/hosts.tpl",
+  content = templatefile("${path.module}/templates/single-vm/hosts.tpl",
     {
+      name = "gitea"
       ips = module.gitea.ssh_hosts
     }
   )

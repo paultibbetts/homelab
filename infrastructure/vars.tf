@@ -181,6 +181,38 @@ variable "mysql_ip" {
   default = "192.168.1.201"
 }
 
+# Postgres
+
+variable "postgres_disk_size" {
+    description = "How much disk size for Postgres"
+    type = string
+    default = "10G"
+}
+
+variable "postgres_cores" {
+    description = "How many cores for Postgres"
+    type = number
+    default = 1
+}
+
+variable "postgres_memory" {
+    description = "The amount of RAM for Postgres"
+    type = number
+    default = 4096
+}
+
+variable "postgres_vmid_start" {
+    description = "The number for Postgres VM ID"
+    type = number
+    default = 202
+}
+
+variable "postgres_ip" {
+  description = "The starting point for Postgres IPs"
+  type = string
+  default = "192.168.1.202"
+}
+
 
 # Gitea
 
