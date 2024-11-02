@@ -6,18 +6,15 @@ An overview of my homelab.
 
 [Hardware](hardware/nas/README.md)
 
-### Apps
+### Storage
 
-- **Books** - [Calibre](https://calibre-ebook.com/) + [Calibre Web](https://github.com/janeczku/calibre-web) - https://books.cloud.paultibbetts.uk
-- **Dashboard** - [Heimdall](https://heimdall.site/) - https://apps.cloud.paultibbetts.uk
-- **Games** - [EmulatorJS](https://github.com/ethanaobrien/emulatorjs) - https://games.cloud.paultibbetts.uk
-- **Git** - [Gitea](https://gitea.io/en-us/) - https://git.cloud.paultibbetts.uk
-- **Ingress** - [Traefik](https://traefik.io/)
-- **Media** - [Jellyfin](https://jellyfin.org/) - https://media.cloud.paultibbetts.uk
+- **NVME** for apps, media and general storage
+- **SSD** for internal purposes
+- **HDD** for archiving and backups
 
-### TLS
+#### Object storage
 
-Used [Truecharts clusterissuer](https://truecharts.org/charts/enterprise/clusterissuer/) to add a wildcard Let's Encrypt certificate for `cloud.paultibbetts.uk`.
+- S3 compatible object storage via [Minio](https://min.io/) - http://192.168.1.4:9002/browser
 
 ## NUC
 
@@ -26,6 +23,9 @@ Used [Truecharts clusterissuer](https://truecharts.org/charts/enterprise/cluster
 
 - **Ad Block / DNS** - [PiHole](https://pi-hole.net/) - http://192.168.1.2/admin
 - **VPN** - [PiVPN](https://pivpn.io/) ([Wireguard](https://www.wireguard.com/)) - 192.168.1.8
+- **Git** - [Gitea](https://about.gitea.com/) - http://192.168.1.211:3000
+- **Kubernetes** - [K3s](https://k3s.io/) with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) - https://argocd.lab.paultibbetts.uk/
+- **Databases** - [MySQL](https://www.mysql.com/) and [Postgres](https://www.postgresql.org/)
 
 ## Network
 
