@@ -12,6 +12,10 @@ An overview of my homelab.
 - **SSD** for internal purposes
 - **HDD** for archiving and backups
 
+#### Object storage
+
+- S3 compatible object storage via [Minio](https://min.io/) - http://192.168.1.4:9002/browser
+
 ## NUC
 
 [Hardware](hardware/nuc/README.md)
