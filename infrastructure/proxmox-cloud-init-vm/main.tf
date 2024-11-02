@@ -21,6 +21,7 @@ resource "proxmox_vm_qemu" "proxmox_cloud-init_vm" {
     vmid = "${format("%g", count.index + var.vmid_start)}"
 
     oncreate = true
+    onboot = true
     agent = 1
     os_type = "cloud-init"
     cores = var.cores

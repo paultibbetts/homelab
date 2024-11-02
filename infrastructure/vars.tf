@@ -90,13 +90,13 @@ variable "k3s_leaders_vmid_start" {
 variable "k3s_leaders_cores" {
     description = "How many cores for K3s leaders"
     type = number
-    default = 2
+    default = 4
 }
 
 variable "k3s_leaders_memory" {
     description = "How much RAM for K3s leaders"
     type = number
-    default = 4096
+    default = 8192
 }
 
 variable "k3s_leaders_disk_size" {
@@ -128,13 +128,13 @@ variable "k3s_workers_vmid_start" {
 variable "k3s_workers_cores" {
     description = "How many cores for K3s workers"
     type = number
-    default = 2
+    default = 4
 }
 
 variable "k3s_workers_memory" {
     description = "How much RAM for K3s workers"
     type = number
-    default = 4096
+    default = 8192
 }
 
 variable "k3s_workers_disk_size" {
@@ -147,44 +147,6 @@ variable "k3s_workers_ip_start" {
     description = "The starting point for K3s workers IPs"
     type = string
     default = "192.168.1.23" # + "${count.index}"
-}
-
-## K3s Storers
-
-variable "k3s_storers_amount" {
-    description = "How many K3s storers"
-    type = number
-    default = 1
-}
-
-variable "k3s_storers_vmid_start" {
-    description = "The starting number for K3s storers VM IDs"
-    type = number
-    default = 321
-}
-
-variable "k3s_storers_cores" {
-    description = "How many cores for K3s storers"
-    type = number
-    default = 1
-}
-
-variable "k3s_storers_memory" {
-    description = "How much RAM for K3s storers"
-    type = number
-    default = 2048
-}
-
-variable "k3s_storers_disk_size" {
-    description = "How much disk size for K3s storers"
-    type = string
-    default = "100G"
-}
-
-variable "k3s_storers_ip_start" {
-    description = "The starting point for K3s storers IPs"
-    type = string
-    default = "192.168.1.24" # + "${count.index}"
 }
 
 # MySQL
@@ -217,6 +179,38 @@ variable "mysql_ip" {
   description = "The starting point for MySQL IPs"
   type = string
   default = "192.168.1.201"
+}
+
+# Postgres
+
+variable "postgres_disk_size" {
+    description = "How much disk size for Postgres"
+    type = string
+    default = "10G"
+}
+
+variable "postgres_cores" {
+    description = "How many cores for Postgres"
+    type = number
+    default = 1
+}
+
+variable "postgres_memory" {
+    description = "The amount of RAM for Postgres"
+    type = number
+    default = 4096
+}
+
+variable "postgres_vmid_start" {
+    description = "The number for Postgres VM ID"
+    type = number
+    default = 202
+}
+
+variable "postgres_ip" {
+  description = "The starting point for Postgres IPs"
+  type = string
+  default = "192.168.1.202"
 }
 
 
