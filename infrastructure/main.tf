@@ -65,7 +65,7 @@ resource "local_file" "k3s_hosts_cfg" {
       k3s_workers = module.k3s_workers.ssh_hosts
     }
   )
-  filename = "../playbooks/k3s/inventory/hosts"
+  filename = "../playbooks/k3s/inventory/cluster/hosts"
 }
 
 module "mysql" {
