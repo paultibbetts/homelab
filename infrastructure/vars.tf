@@ -114,9 +114,9 @@ variable "k3s_leaders_ip_start" {
 ## K3s Workers
 
 variable "k3s_workers_amount" {
-    description = "How many K3s workers"
-    type = number
-    default = 2
+  description = "How many K3s workers"
+  type        = number
+  default     = 3
 }
 
 variable "k3s_workers_vmid_start" {
