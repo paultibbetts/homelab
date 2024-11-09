@@ -1,2 +1,1 @@
-[postgres]
-postgres-1 ansible_host=192.168.1.202 ansible_user=ubuntu
+postgres ansible_host=192.168.1.202 ansible_user=ubuntu
