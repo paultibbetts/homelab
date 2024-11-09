@@ -100,7 +100,7 @@ module "mysql" {
 }
 
 resource "local_file" "mysql_hosts_cfg" {
-  content = templatefile("${path.module}/templates/single-vm/hosts.tpl",
+  content = templatefile("${path.module}/templates/vm/hosts.tpl",
     {
       name = "mysql"
       ips  = module.mysql.ssh_hosts
@@ -131,7 +131,7 @@ module "postgres" {
 }
 
 resource "local_file" "postgres_hosts_cfg" {
-  content = templatefile("${path.module}/templates/single-vm/hosts.tpl",
+  content = templatefile("${path.module}/templates/vm/hosts.tpl",
     {
       name = "postgres"
       ips  = module.postgres.ssh_hosts
@@ -162,7 +162,7 @@ module "gitea" {
 }
 
 resource "local_file" "gitea_hosts_cfg" {
-  content = templatefile("${path.module}/templates/single-vm/hosts.tpl",
+  content = templatefile("${path.module}/templates/vm/hosts.tpl",
     {
       name = "gitea"
       ips  = module.gitea.ssh_hosts
