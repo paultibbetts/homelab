@@ -1,0 +1,73 @@
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "telmate/proxmox"
+      version = "3.0.1-rc4"
+    }
+  }
+}
+
+resource "proxmox_vm_qemu" "pihole" {
+  name        = "pihole"
+  tags        = "dns"
+  target_node = var.proxmox_host
+  clone       = var.cloud_init_template_name
+  full_clone  = true
+  vm_state    = "running"
+  onboot      = true
+  agent       = 1
+  os_type     = "cloud-init"
+  cores       = var.pihole_cores
+  memory      = var.pihole_memory
+  scsihw      = "virtio-scsi-pci"
+  vmid        = 100
+
+  disks {
+    ide {
+      ide2 {
+        cloudinit {
+          storage = var.proxmox_storage
+        }
+      }
+    }
+    scsi {
+      scsi0 {
+        disk {
+          size    = var.pihole_disk_size
+          storage = var.proxmox_storage
+          format  = "qcow2"
+        }
+      }
+    }
+  }
+
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      qemu_os,
+    ]
+  }
+
+  # cloud-init
+
+  ipconfig0 = "ip=${var.pihole_ip}/24,gw=${var.network_gateway}"
+
+  sshkeys = <<EOF
+    ${var.ssh_keys}
+    EOF
+}
+
+resource "local_file" "pihole_hosts" {
+  content = templatefile("${path.root}/templates/vm/hosts.tpl",
+    {
+      name = "pihole"
+      ip   = proxmox_vm_qemu.pihole.ssh_host
+    }
+  )
+  filename = "../playbooks/pihole/inventory/hosts"
+}
+
