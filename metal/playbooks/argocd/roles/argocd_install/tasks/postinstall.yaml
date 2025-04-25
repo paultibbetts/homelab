@@ -1,15 +1,4 @@
 ---
-- name: Patch web UI
-  kubernetes.core.k8s:
-    api_version: v1
-    state: patched
-    kind: Service
-    name: argocd-server
-    namespace: "{{ argocd_namespace }}"
-    definition:
-      spec:
-        type: LoadBalancer
-
 - block: 
   - name: Check for initial admin password
     kubernetes.core.k8s_info:
