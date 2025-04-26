@@ -2,7 +2,7 @@
 
 set -e
 
-cd "$BACKUP_DIRECTORY"
+cd /var/backups/gitea
 
 PREVIOUS_BACKUP=$(ls -t *.zip 2>/dev/null | head -n 1)		
 

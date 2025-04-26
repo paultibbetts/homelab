@@ -2,9 +2,7 @@
 
 set -e
 
-BACKUP_DIRECTORY="/var/backups/mysql-dumps"
-mkdir -p "$BACKUP_DIRECTORY"
-cd "$BACKUP_DIRECTORY"
+cd /var/backups/mysql-dumps
 
 echo "Creating new backup..."
 mysqldump --all-databases | gzip > "dump.sql.gz"

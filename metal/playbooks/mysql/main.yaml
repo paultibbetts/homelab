@@ -28,6 +28,13 @@
       tags:
         - backup
       block:
+        - name: Ensure backup directory exists
+          ansible.builtin.file:
+            path: /var/backups/mysql-dumps
+            state: directory
+            owner: ubuntu
+            group: ubuntu
+            mode: "0700"
         - name: Write backup script
           ansible.builtin.copy:
             src: "{{ backup_script_name }}"

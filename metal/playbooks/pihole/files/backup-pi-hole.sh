@@ -2,12 +2,9 @@
 
 set -e
 
-BACKUP_DIR="/var/backups/pi-hole"
-
 echo "Beginning backup..."
 
-mkdir -p $BACKUP_DIR
-cd "$BACKUP_DIR" 
+cd /var/backups/pi-hole
 
 PREVIOUS_BACKUP=$(ls -t pi-hole-*.tar.gz 2>/dev/null | head -n 1)		
 

@@ -2,9 +2,7 @@
 
 set -e
 
-BACKUP_DIRECTORY="/var/backups/postgres-dumps"
-mkdir -p "$BACKUP_DIRECTORY"
-cd "$BACKUP_DIRECTORY"
+cd /var/backups/postgres-dumps
 
 echo "Creating new backup..."
 sudo -u postgres pg_dumpall > dump.sql
