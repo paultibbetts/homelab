@@ -1,0 +1,27 @@
+---
+- hosts: pihole
+  gather_facts: true
+  become: true
+  vars:
+    backup_script_directory: /usr/local/bin/
+    backup_script_name: backup-pi-hole.sh
+    backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
+  tasks:
+    - name: Configure backups
+      tags:
+        - backup
+      block:
+        - name: Write backup script
+          ansible.builtin.copy:
+            src: "{{ backup_script_name }}"
+            dest: "{{ backup_script }}"
+        - name: Make script executable
+          ansible.builtin.file:
+            path: "{{ backup_script }}"
+            mode: "0755"
+        - name: Add script to CRON
+          ansible.builtin.cron:
+            name: pi-hole backup
+            hour: 3
+            job: "{{ backup_script }}"
+      
