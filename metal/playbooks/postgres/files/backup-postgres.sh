@@ -9,7 +9,7 @@ sudo -u postgres pg_dumpall > dump.sql
 echo "Created backup."
 
 echo "Compressing..."
-gzip dump.sql
+gzip -f dump.sql
 echo "Compressed."
 
 echo "Done."
