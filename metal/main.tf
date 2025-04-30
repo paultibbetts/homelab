@@ -47,6 +47,16 @@ module "gitea" {
   cloud_init_template_name = var.cloud_init_template_name
 }
 
+module "ingress" {
+  source = "./modules/ingress"
+
+  ssh_keys        = var.ssh_keys
+  network_gateway = var.network_gateway
+  proxmox_storage = var.proxmox_storage
+  proxmox_host    = var.proxmox_host
+  lxc_template    = var.lxc_template
+}
+
 module "k3s" {
   source = "./modules/k3s"
 
@@ -63,5 +73,5 @@ resource "local_file" "longhorn_hosts" {
       hosts = module.k3s.ssh_hosts.workers
     }
   )
-  filename = "../playbooks/longhorn/inventory/hosts"
+  filename = "../bootstrap/playbooks/longhorn/inventory/hosts"
 }

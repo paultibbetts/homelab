@@ -62,12 +62,13 @@ resource "proxmox_vm_qemu" "pihole" {
 }
 
 resource "local_file" "pihole_hosts" {
-  content = templatefile("${path.root}/templates/vm/hosts.tpl",
+  content = templatefile("${path.root}/templates/host/hosts.tpl",
     {
       name = "pihole"
       ip   = proxmox_vm_qemu.pihole.ssh_host
+      user = "ubuntu"
     }
   )
-  filename = "../playbooks/pihole/inventory/hosts"
+  filename = "../bootstrap/playbooks/pihole/inventory/hosts"
 }
 

@@ -62,13 +62,14 @@ resource "proxmox_vm_qemu" "mysql" {
 }
 
 resource "local_file" "mysql_hosts" {
-  content = templatefile("${path.root}/templates/vm/hosts.tpl",
+  content = templatefile("${path.root}/templates/host/hosts.tpl",
     {
       name = "mysql"
       ip   = proxmox_vm_qemu.mysql.ssh_host
+      user = "ubuntu"
     }
   )
-  filename = "../playbooks/mysql/inventory/hosts"
+  filename = "../bootstrap/playbooks/mysql/inventory/hosts"
 }
 
 resource "proxmox_vm_qemu" "postgres" {
@@ -127,12 +128,13 @@ resource "proxmox_vm_qemu" "postgres" {
 }
 
 resource "local_file" "postgres_hosts" {
-  content = templatefile("${path.root}/templates/vm/hosts.tpl",
+  content = templatefile("${path.root}/templates/host/hosts.tpl",
     {
       name = "postgres"
       ip   = proxmox_vm_qemu.postgres.ssh_host
+      user = "ubuntu"
     }
   )
-  filename = "../playbooks/postgres/inventory/hosts"
+  filename = "../bootstrap/playbooks/postgres/inventory/hosts"
 }
 

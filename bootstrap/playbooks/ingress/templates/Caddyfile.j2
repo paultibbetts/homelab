@@ -1,0 +1,38 @@
+{
+        acme_dns cloudflare {env.CF_API_TOKEN}
+}
+
+https://truenas.cloud.paultibbetts.uk {
+        reverse_proxy 192.168.1.4:81
+}
+
+https://proxmox.cloud.paultibbetts.uk {
+        reverse_proxy 192.168.1.131:8006 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+
+}
+
+https://pihole.cloud.paultibbetts.uk {
+        rewrite * /admin{uri}
+        reverse_proxy 192.168.1.2
+}
+
+https://gitea.cloud.paultibbetts.uk {
+        reverse_proxy 192.168.1.211:3000
+}
+
+https://jellyfin.cloud.paultibbetts.uk {
+        reverse_proxy 192.168.1.6:8096
+}
+
+https://minio.cloud.paultibbetts.uk {
+	reverse_proxy 192.168.1.4:9002
+}
+
+https://uptime.cloud.paultibbetts.uk {
+        reverse_proxy 192.168.1.133:3001
+}
+

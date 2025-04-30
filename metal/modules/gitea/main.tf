@@ -62,13 +62,13 @@ resource "proxmox_vm_qemu" "gitea" {
 }
 
 resource "local_file" "hosts" {
-  content = templatefile("${path.root}/templates/vm/hosts.tpl",
+  content = templatefile("${path.root}/templates/host/hosts.tpl",
     {
       name = "gitea"
       ip   = proxmox_vm_qemu.gitea.ssh_host
+      user = "ubuntu"
     }
   )
-  filename = "../playbooks/gitea/inventory/hosts"
+  filename = "../bootstrap/playbooks/gitea/inventory/hosts"
 }
-
 

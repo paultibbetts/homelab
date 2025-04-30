@@ -66,3 +66,11 @@ variable "cloud_init_template_name" {
   default     = "ubuntu-2404-cloudinit-template"
 }
 
+# Proxmox LXC
+
+variable "lxc_template" {
+  description = "The LXC template to clone from"
+  type        = string
+  default     = "vms:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
+}
+
