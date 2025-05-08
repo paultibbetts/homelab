@@ -57,6 +57,16 @@ module "ingress" {
   lxc_template    = var.lxc_template
 }
 
+module "apps" {
+  source = "./modules/apps"
+
+  ssh_keys                 = var.ssh_keys
+  network_gateway          = var.network_gateway
+  proxmox_storage          = var.proxmox_storage
+  proxmox_host             = var.proxmox_host
+  cloud_init_template_name = var.cloud_init_template_name
+}
+
 module "k3s" {
   source = "./modules/k3s"
 

@@ -6,7 +6,7 @@ mysql_databases:
 mysql_users:
   - name: freshrss
     host: 192.168.1.%
-    password: "{{ vault_fressrss_database_password }}"
+    password: "{{ vault_freshrss_database_password }}"
     priv: "freshrss.*:ALL"
   - name: gitea
     host: 192.168.1.211

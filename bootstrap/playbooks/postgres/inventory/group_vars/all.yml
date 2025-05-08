@@ -1,12 +1,12 @@
 ---
 postgresql_databases:
   - name: mealie
+    owner: mealie
 
 postgresql_users:
   - name: mealie
     password: mealie
     db: mealie
-    priv: ALL
 
 postgresql_hba_entries:
   - { type: local, database: all, user: postgres, auth_method: peer }
