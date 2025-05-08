@@ -33,12 +33,28 @@ Provides storage and a few core apps.
 
 **Total** 24TB
 
+#### NVME
+
+2 x [2TB Crucial P3 M.2 (22x80) PCIe 3.0 (x4) NVMe SSD, 3D NAND, Read 3500MB/s, Write 3000MB/s](https://www.scan.co.uk/products/2tb-crucial-p3-m2-22x80-pcie-30-x4-nvme-ssd-tlc-3d-nand-read-3500mb-s-write-3000mb-s)
+
+**Total** 4TB
+
 
 ## Software
 
 [TrueNAS Scale](https://www.truenas.com/truenas-scale/)
 
 ### RAID
+
+#### nvme-storage
+
+Fast Pool.
+
+Raw storage: 4TB
+
+RAID: 2 x disk
+
+Usable storage: 4TB
 
 #### ssd-storage
 
