@@ -28,6 +28,14 @@ An overview of my homelab.
 - **Movies & TV** - [Jellyfin](https://jellyfin.org/) - http://192.168.1.6:8096
 - **Ingress** - [Caddy](https://caddyserver.com/) - 192.168.1.9
 
+## DeskPi
+
+[Hardware](hardware/deskpi/README.md)
+
+### Apps
+
+- **Uptime** - [Uptime Kuma](https://uptime.kuma.pet/) - http://192.168.1.133:3001
+
 ## Network
 
 ### Internet
