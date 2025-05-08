@@ -22,10 +22,11 @@ An overview of my homelab.
 ### Apps
 
 - **Ad Block / DNS** - [PiHole](https://pi-hole.net/) - http://192.168.1.2/admin
-- **VPN** - [PiVPN](https://pivpn.io/) ([Wireguard](https://www.wireguard.com/)) - 192.168.1.8
+- **VPN** - [PiVPN](https://pivpn.io/) ([Wireguard](https://www.wireguard.com/)) - 192.168.1.33
 - **Git** - [Gitea](https://about.gitea.com/) - http://192.168.1.211:3000
-- **Kubernetes** - [K3s](https://k3s.io/) with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) - https://argocd.lab.paultibbetts.uk/
 - **Databases** - [MySQL](https://www.mysql.com/) and [Postgres](https://www.postgresql.org/)
+- **Movies & TV** - [Jellyfin](https://jellyfin.org/) - http://192.168.1.6:8096
+- **Ingress** - [Caddy](https://caddyserver.com/) - 192.168.1.9
 
 ## Network
 
