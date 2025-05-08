@@ -40,15 +40,6 @@ An overview of my homelab.
 
 It also blocks adverts.
 
-Pi-hole manages the DNS for the homelab with a Dnsmasq entry:
-
-```
-# /etc/dnsmasq.d/02-homelab.conf
-address=/cloud.paultibbetts.uk/192.168.1.4
-```
-
-This needed a restart with `pihole restartdns`.
-
 ### LAN
 
 [Ubiquiti Flex 10 GbE](https://techspecs.ui.com/unifi/switching/unifi-flex-xg?s=uk)
