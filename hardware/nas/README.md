@@ -6,7 +6,8 @@ Provides storage and a few core apps.
 
 - **Case** - [Fractal Meshify 2](https://www.fractal-design.com/products/cases/meshify/meshify-2-dark-tempered-glass/black/)
 - **MOBO** - [ASRock Rack E3C236D4U](https://www.asrockrack.com/general/productdetail.asp?Model=E3C236D4U#Specifications)
-- - **NIC** - 1GBE
+- - **NIC** - 1GbE
+- - **NIC** - [Intel Dual Port PCIe 10GbE Server/Workstation Ethernet Network Adapter X540T2BLK OEM](https://www.scan.co.uk/products/2-port-intel-x540-t2-10-gigabit-server-workstation-pcie-x8-ethernet-card-oem)
 - **CPU** - [Intel Xeon CPU E3-1270 v5 @ 3.60GHz](https://ark.intel.com/content/www/us/en/ark/products/88174/intel-xeon-processor-e31270-v5-8m-cache-3-60-ghz.html)
 - **CPU Cooler** - [Noctua NH-U12S](https://noctua.at/en/nh-u12s)
 - **RAM** - [Timetec 16GB DDR4 2400 CL17 Unbuffered ECC](https://www.timetecinc.com/shop/server-memory/timetec-16gb-ddr4-2400-server-memory-2/) x 2 (32GB)
