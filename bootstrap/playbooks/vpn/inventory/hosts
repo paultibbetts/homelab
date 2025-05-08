@@ -1,0 +1,1 @@
+vpn ansible_host=192.168.1.33 ansible_user=ubuntu
