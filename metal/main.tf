@@ -76,6 +76,10 @@ module "apps" {
   cloud_init_template_name = var.cloud_init_template_name
 }
 
+module "deskpi" {
+  source = "./modules/deskpi"
+}
+
 module "k3s" {
   source = "./modules/k3s"
 
