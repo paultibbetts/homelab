@@ -16,8 +16,8 @@ https://proxmox.cloud.paultibbetts.uk {
 }
 
 https://pihole.cloud.paultibbetts.uk {
-        rewrite * /admin{uri}
-        reverse_proxy 192.168.1.2
+        redir / /admin{uri}
+        reverse_proxy 192.168.1.2:8080
 }
 
 https://gitea.cloud.paultibbetts.uk {
