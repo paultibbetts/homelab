@@ -17,7 +17,7 @@ services:
       #PUID: 1000
       #PGID: 1000
       TZ: Europe/London
-      BASE_URL: http://192.168.1.10:9000
+      BASE_URL: https://mealie.cloud.paultibbetts.uk
       # Database Settings
       DB_ENGINE: postgres
       POSTGRES_USER: mealie
