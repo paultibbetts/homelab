@@ -1,0 +1,91 @@
+- Apps:
+    - FreshRSS:
+        href: https://freshrss.cloud.paultibbetts.uk
+        icon: freshrss
+        widget:
+          type: freshrss
+          url: https://freshrss.cloud.paultibbetts.uk
+          username: "{{HOMEPAGE_VAR_FRESHRSS_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_FRESHRSS_PASSWORD}}"
+    - Mealie:
+        href: https://mealie.cloud.paultibbetts.uk
+        icon: mealie
+        widget:
+          type: mealie
+          url: https://mealie.cloud.paultibbetts.uk
+          key: "{{HOMEPAGE_VAR_MEALIE_TOKEN}}"
+          version: 2
+- Machines:
+    - Proxmox:
+        href: https://proxmox.cloud.paultibbetts.uk
+        icon: proxmox
+        widget:
+          type: proxmox
+          url: https://proxmox.cloud.paultibbetts.uk
+          username: "{{HOMEPAGE_VAR_PROXMOX_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
+          node: host1
+    - TrueNAS:
+        href: https://truenas.cloud.paultibbetts.uk
+        icon: truenas
+        widget:
+          type: truenas
+          url: https://truenas.cloud.paultibbetts.uk
+          key: "{{HOMEPAGE_VAR_TRUENAS_API_TOKEN}}" 
+          enablePools: true
+- Backup:
+    - PBS:
+        href: https://192.168.1.5:8007/
+        icon: proxmox
+        widget:
+          type: proxmoxbackupserver
+          url: https://192.168.1.5:8007/
+          username: "{{HOMEPAGE_VAR_PROXMOX_BACKUP_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_BACKUP_PASSWORD}}"
+    - PBS archive:
+        href: https://192.168.1.32:8007/
+        icon: proxmox
+        widget:
+          type: proxmoxbackupserver
+          url: https://192.168.1.32:8007/
+          username: "{{HOMEPAGE_VAR_PROXMOX_ARCHIVE_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_ARCHIVE_PASSWORD}}"
+- Services:
+    - Gitea:
+        href: https://gitea.cloud.paultibbetts.uk
+        icon: gitea
+        widget:
+          type: gitea
+          url: https://gitea.cloud.paultibbetts.uk
+          key: "{{HOMEPAGE_VAR_GITEA_API_TOKEN}}"
+    - Jellyfin:
+        href: https://jellyfin.cloud.paultibbetts.uk
+        icon: jellyfin
+        widget:
+          type: jellyfin
+          url: https://jellyfin.cloud.paultibbetts.uk
+          key: "{{HOMEPAGE_VAR_JELLYFIN_TOKEN}}"
+          enableBlocks: true # optional, defaults to false
+          enableNowPlaying: true # optional, defaults to true
+          enableUser: true # optional, defaults to false
+          showEpisodeNumber: true # optional, defaults to false
+          expandOneStreamToTwoRows: false # optional, defaults to true
+    - MinIO:
+        href: https://minio.cloud.paultibbetts.uk
+        icon: minio
+    - PiHole:
+        href: https://pihole.cloud.paultibbetts.uk
+        icon: pi-hole
+        widget:
+          type: pihole
+          url: https://pihole.cloud.paultibbetts.uk
+          version: 6
+          key: "{{HOMEPAGE_VAR_PIHOLE_TOKEN}}"
+    - Uptime:
+        href: https://uptime.cloud.paultibbetts.uk
+        icon: uptime-kuma
+        widget:
+          type: uptimekuma
+          url: https://uptime.cloud.paultibbetts.uk
+          slug: cloud
+        

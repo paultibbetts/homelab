@@ -53,6 +53,14 @@
         mode: "0600"
       loop: "{{ template_files.files }}"
 
+    - name: Docker Compose down if necessary
+      ansible.builtin.command: docker compose down
+      become: true
+      args:
+        chdir: "{{ apps_path }}/{{ item.path | basename }}"
+      loop: "{{ app_directories.files }}"
+      when: "'homepage' in item.path"
+
     - name: Docker Compose Up
       ansible.builtin.command: docker compose up -d
       become: true

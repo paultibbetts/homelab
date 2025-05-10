@@ -1,0 +1,25 @@
+theme: dark
+
+useEqualHeights: true
+
+layout:
+  Apps:
+    style: row
+    columns: 2
+  Machines:
+    style: row
+    columns: 2
+  Backup:
+    style: row
+    columns: 2
+  Services:
+    style: row
+    columns: 2
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: false
+  hideVisitURL: true
+  provider: duckduckgo
+
