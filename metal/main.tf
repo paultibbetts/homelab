@@ -80,6 +80,10 @@ module "deskpi" {
   source = "./modules/deskpi"
 }
 
+module "artpi" {
+  source = "./modules/artpi"
+}
+
 module "k3s" {
   source = "./modules/k3s"
 
