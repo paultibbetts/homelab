@@ -71,6 +71,6 @@ resource "local_file" "hosts" {
       user = "ubuntu"
     }
   )
-  filename = "../bootstrap/playbooks/vpn/inventory/hosts"
+  filename = "../bootstrap/vpn/inventory/hosts"
 }
 

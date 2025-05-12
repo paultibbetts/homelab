@@ -135,6 +135,6 @@ resource "local_file" "hosts" {
       workers = proxmox_vm_qemu.workers[*].ssh_host
     }
   )
-  filename = "../bootstrap/playbooks/k3s/inventory/cluster/hosts"
+  filename = "../bootstrap/k3s/inventory/cluster/hosts"
 }
 

@@ -6,6 +6,6 @@ resource "local_file" "deskpi_host" {
       user = "paul"
     }
   )
-  filename = "../bootstrap/playbooks/uptime/inventory/hosts"
+  filename = "../bootstrap/uptime/inventory/hosts"
 }
 

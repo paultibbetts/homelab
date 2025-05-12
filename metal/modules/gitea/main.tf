@@ -69,6 +69,6 @@ resource "local_file" "hosts" {
       user = "ubuntu"
     }
   )
-  filename = "../bootstrap/playbooks/gitea/inventory/hosts"
+  filename = "../bootstrap/gitea/inventory/hosts"
 }
 

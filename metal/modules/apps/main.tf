@@ -69,5 +69,5 @@ resource "local_file" "hosts" {
       user = "ubuntu"
     }
   )
-  filename = "../bootstrap/playbooks/apps/inventory/hosts"
+  filename = "../bootstrap/apps/inventory/hosts"
 }

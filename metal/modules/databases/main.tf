@@ -69,7 +69,7 @@ resource "local_file" "mysql_hosts" {
       user = "ubuntu"
     }
   )
-  filename = "../bootstrap/playbooks/mysql/inventory/hosts"
+  filename = "../bootstrap/mysql/inventory/hosts"
 }
 
 resource "proxmox_vm_qemu" "postgres" {
@@ -135,6 +135,6 @@ resource "local_file" "postgres_hosts" {
       user = "ubuntu"
     }
   )
-  filename = "../bootstrap/playbooks/postgres/inventory/hosts"
+  filename = "../bootstrap/postgres/inventory/hosts"
 }
 

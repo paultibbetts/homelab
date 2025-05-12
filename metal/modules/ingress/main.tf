@@ -44,5 +44,5 @@ resource "local_file" "hosts" {
       user = "root"
     }
   )
-  filename = "../bootstrap/playbooks/ingress/inventory/hosts"
+  filename = "../bootstrap/ingress/inventory/hosts"
 }

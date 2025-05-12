@@ -100,5 +100,5 @@ resource "local_file" "longhorn_hosts" {
       hosts = module.k3s.ssh_hosts.workers
     }
   )
-  filename = "../bootstrap/playbooks/longhorn/inventory/hosts"
+  filename = "../bootstrap/longhorn/inventory/hosts"
 }

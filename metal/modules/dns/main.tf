@@ -69,6 +69,6 @@ resource "local_file" "pihole_hosts" {
       user = "ubuntu"
     }
   )
-  filename = "../bootstrap/playbooks/pihole/inventory/hosts"
+  filename = "../bootstrap/pihole/inventory/hosts"
 }
 
