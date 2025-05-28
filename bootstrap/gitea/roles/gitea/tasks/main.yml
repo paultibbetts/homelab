@@ -55,6 +55,14 @@
   when: ansible_service_mgr != "systemd"
   notify: restart gitea
 
+- name: create the gitea update script
+  ansible.builtin.template:
+    src: gitea-update.sh.j2
+    dest: "{{ gitea_working_directory }}/bin/update.sh"
+    mode: 0755
+  tags:
+    - update
+
 - name: enable and start the gitea web service
   ansible.builtin.service:
     name: gitea
