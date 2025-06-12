@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.1-rc4"
@@ -63,14 +67,10 @@ resource "proxmox_vm_qemu" "vpn" {
     EOF
 }
 
-resource "local_file" "hosts" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "vpn"
-      ip   = proxmox_vm_qemu.vpn.ssh_host
-      user = "ubuntu"
-    }
-  )
-  filename = "../bootstrap/vpn/inventory/hosts"
+resource "ansible_host" "vpn-0" {
+  name   = proxmox_vm_qemu.vpn.ssh_host
+  groups = ["vpn"]
+  variables = {
+    ansible_user = "ubuntu"
+  }
 }
-

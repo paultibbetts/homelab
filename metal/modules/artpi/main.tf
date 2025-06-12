@@ -1,11 +1,16 @@
-resource "local_file" "artpi_host" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "artpi"
-      ip   = "192.168.1.132"
-      user = "pi"
+terraform {
+  required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
     }
-  )
-  filename = "../bootstrap/artpi/inventory/hosts"
+  }
 }
 
+resource "ansible_host" "artpi" {
+  name   = "192.168.1.132"
+  groups = ["pi"]
+  variables = {
+    ansible_user = "pi"
+  }
+}

@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.1-rc4"
@@ -61,14 +65,10 @@ resource "proxmox_vm_qemu" "pihole" {
     EOF
 }
 
-resource "local_file" "pihole_hosts" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "pihole"
-      ip   = proxmox_vm_qemu.pihole.ssh_host
-      user = "ubuntu"
-    }
-  )
-  filename = "../bootstrap/pihole/inventory/hosts"
+resource "ansible_host" "pihole-0" {
+  name   = proxmox_vm_qemu.pihole.ssh_host
+  groups = ["dns", "pihole"]
+  variables = {
+    ansible_user = "ubuntu"
+  }
 }
-

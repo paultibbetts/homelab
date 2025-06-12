@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.1-rc4"
@@ -61,17 +65,6 @@ resource "proxmox_vm_qemu" "mysql" {
     EOF
 }
 
-resource "local_file" "mysql_hosts" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "mysql"
-      ip   = proxmox_vm_qemu.mysql.ssh_host
-      user = "ubuntu"
-    }
-  )
-  filename = "../bootstrap/mysql/inventory/hosts"
-}
-
 resource "proxmox_vm_qemu" "postgres" {
   name        = "postgres"
   tags        = "database"
@@ -127,14 +120,18 @@ resource "proxmox_vm_qemu" "postgres" {
     EOF
 }
 
-resource "local_file" "postgres_hosts" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "postgres"
-      ip   = proxmox_vm_qemu.postgres.ssh_host
-      user = "ubuntu"
-    }
-  )
-  filename = "../bootstrap/postgres/inventory/hosts"
+resource "ansible_host" "mysql-0" {
+  name   = proxmox_vm_qemu.mysql.ssh_host
+  groups = ["database", "mysql"]
+  variables = {
+    ansible_user = "ubuntu"
+  }
 }
 
+resource "ansible_host" "postgres-0" {
+  name   = proxmox_vm_qemu.postgres.ssh_host
+  groups = ["database", "postgres"]
+  variables = {
+    ansible_user = "ubuntu"
+  }
+}

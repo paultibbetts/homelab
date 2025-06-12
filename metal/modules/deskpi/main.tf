@@ -1,11 +1,16 @@
-resource "local_file" "deskpi_host" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "deskpi"
-      ip   = "192.168.1.133"
-      user = "paul"
+terraform {
+  required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
     }
-  )
-  filename = "../bootstrap/uptime/inventory/hosts"
+  }
 }
 
+resource "ansible_host" "deskpi" {
+  name   = "192.168.1.133"
+  groups = ["deskpi", "pi"]
+  variables = {
+    ansible_user = "paul"
+  }
+}

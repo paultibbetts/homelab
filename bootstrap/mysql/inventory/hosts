@@ -1,1 +1,0 @@
-mysql ansible_host=192.168.1.201 ansible_user=ubuntu

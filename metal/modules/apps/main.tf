@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.1-rc4"
@@ -61,13 +65,10 @@ resource "proxmox_vm_qemu" "apps" {
 	EOF
 }
 
-resource "local_file" "hosts" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "apps"
-      ip   = proxmox_vm_qemu.apps.ssh_host
-      user = "ubuntu"
-    }
-  )
-  filename = "../bootstrap/apps/inventory/hosts"
+resource "ansible_host" "apps-0" {
+  name   = proxmox_vm_qemu.apps.ssh_host
+  groups = ["apps"]
+  variables = {
+    ansible_user = "ubuntu"
+  }
 }

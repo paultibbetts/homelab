@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.1-rc4"
@@ -36,13 +40,10 @@ resource "proxmox_lxc" "caddy" {
   }
 }
 
-resource "local_file" "hosts" {
-  content = templatefile("${path.root}/templates/host/hosts.tpl",
-    {
-      name = "ingress"
-      ip   = var.ip
-      user = "root"
-    }
-  )
-  filename = "../bootstrap/ingress/inventory/hosts"
+resource "ansible_host" "ingress-0" {
+  name   = var.ip
+  groups = ["ingress"]
+  variables = {
+    ansible_user = "root"
+  }
 }

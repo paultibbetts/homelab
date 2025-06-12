@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    ansible = {
+      source  = "ansible/ansible"
+      version = "1.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.1-rc4"
@@ -84,21 +88,3 @@ module "artpi" {
   source = "./modules/artpi"
 }
 
-module "k3s" {
-  source = "./modules/k3s"
-
-  ssh_keys                 = var.ssh_keys
-  network_gateway          = var.network_gateway
-  proxmox_storage          = var.proxmox_storage
-  proxmox_host             = var.proxmox_host
-  cloud_init_template_name = var.cloud_init_template_name
-}
-
-resource "local_file" "longhorn_hosts" {
-  content = templatefile("${path.root}/templates/longhorn/hosts.tpl",
-    {
-      hosts = module.k3s.ssh_hosts.workers
-    }
-  )
-  filename = "../bootstrap/longhorn/inventory/hosts"
-}
