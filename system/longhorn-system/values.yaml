@@ -1,11 +1,12 @@
-preUpgradeChecker:
-    jobEnabled: false
-defaultSettings:
-    createDefaultDiskLabeledNodes: true
-    kubernetesClusterAutoscalerEnabled: true
-    defaultDataPath: /var/lib/longhorn
-    node-down-pod-deletion-policy: delete-both-statefulset-and-deployment-pod
-persistence:
-    defaultClass: true
-    defaultFsType: ext4
-    defaultClassReplicaCount: 3
+longhorn:
+    preUpgradeChecker:
+        jobEnabled: false
+    defaultSettings:
+        createDefaultDiskLabeledNodes: true
+        kubernetesClusterAutoscalerEnabled: true
+        defaultDataPath: /var/lib/longhorn
+        node-down-pod-deletion-policy: delete-both-statefulset-and-deployment-pod
+    persistence:
+        defaultClass: true
+        defaultFsType: ext4
+        defaultClassReplicaCount: 3
