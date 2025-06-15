@@ -1,6 +1,6 @@
 gitops:
   repo: https://gitea.cloud.paultibbetts.uk/paul/homelab.git
-  revision: feat/argocd
+  revision: main
 stacks:
   - name: cluster-bootstrap
     namespace: argocd
