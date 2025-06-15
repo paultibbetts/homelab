@@ -1,0 +1,35 @@
+argo-cd:
+  server:
+    extraArgs:
+      - --insecure
+    config:
+      statusbadge.enabled: 'true'
+    ingress:
+      enabled: false
+      ingressClassName: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-staging
+        hajimari.io/appName: ArgoCD
+        hajimari.io/icon: robot
+      hosts:
+        - &host argocd.lab.paultibbetts.uk
+      tls:
+        - secretName: argocd-tls-certificate
+          hosts:
+            - *host
+    metrics: &metrics
+      enabled: false
+      serviceMonitor:
+        enabled: false
+  dex:
+    enabled: false
+  controller:
+    metrics: *metrics
+  repoServer:
+    metrics: *metrics
+  redis:
+    metrics: *metrics
+  global:
+    domain: argocd.lab.paultibbetts.uk
+  certificate:
+    enabled: true
