@@ -3,12 +3,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: librespeed
+    app.kubernetes.io/name: librespeed
   name: librespeed
 spec:
   selector:
     matchLabels:
-      app: librespeed
+      app.kubernetes.io/name: librespeed
   template:
     metadata:
       labels:

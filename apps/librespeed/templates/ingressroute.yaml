@@ -10,7 +10,6 @@ metadata:
     gethomepage.dev/description: Speed test
     # gethomepage.dev/group: Media
     gethomepage.dev/icon: librespeed.png
-    gethomepage.dev/app: librespeed # optional, may be needed if app.kubernetes.io/name != ingress metadata.name
     gethomepage.dev/name: Librespeed
 spec:
   entryPoints:
