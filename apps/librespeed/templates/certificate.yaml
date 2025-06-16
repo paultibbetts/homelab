@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: librespeed-tls-cert
+  namespace: librespeed
+spec:
+  secretName: librespeed-tls
+  dnsNames:
+    - librespeed.lab.paultibbetts.uk
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+
