@@ -17,25 +17,18 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - Developer:
-        - Github:
-            - abbr: GH
-              href: https://github.com/
+    - Cloud:
+        - Homepage:
+            - abbr: Home
+              href: https://homepage.cloud.paultibbetts.uk
+        - Gitea:
+            - abbr: Git
+              href: https://gitea.cloud.paultibbetts.uk
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
-
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
-
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
+  #  - My First Group:
+  #      - My First Service:
+  #          href: http://localhost/
+  #          description: Homepage is awesome
   widgets.yaml: |
     - kubernetes:
         cluster:
@@ -45,13 +38,13 @@ data:
           showLabel: true
           label: "cluster"
         nodes:
-          show: true
+          show: false
           cpu: true
           memory: true
           showLabel: true
     - resources:
         backend: resources
-        expanded: true
+        expanded: false
         cpu: true
         memory: true
         network: default
