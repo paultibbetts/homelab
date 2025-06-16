@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: homepage-tls-cert
+  namespace: homepage
+spec:
+  secretName: homepage-tls
+  dnsNames:
+    - homepage.lab.paultibbetts.uk
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+
+
