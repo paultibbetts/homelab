@@ -4,7 +4,7 @@ metadata:
   name: argocd-dashboard
   namespace: argocd
   annotations:
-    external-dns.alpha.kubernetes.io/target: "argocd.lab.paultibbetts.uk"
+    external-dns.alpha.kubernetes.io/hostname: "argocd.lab.paultibbetts.uk"
 spec:
   entryPoints:
     - websecure
