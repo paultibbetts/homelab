@@ -3,6 +3,8 @@ kind: IngressRoute
 metadata:
   name: argocd-dashboard
   namespace: argocd
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "argocd.lab.paultibbetts.uk"
 spec:
   entryPoints:
     - websecure
