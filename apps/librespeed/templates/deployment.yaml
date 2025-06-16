@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: librespeed
-          image: librespeed/speedtest:latest
+          image: ghcr.io/librespeed/speedtest:latest
           env:
             - name: MODE
               value: standalone
