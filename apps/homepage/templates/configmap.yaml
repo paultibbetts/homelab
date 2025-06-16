@@ -25,25 +25,28 @@ data:
             - abbr: Git
               href: https://gitea.cloud.paultibbetts.uk
   services.yaml: |
-  #  - My First Group:
-  #      - My First Service:
-  #          href: http://localhost/
-  #          description: Homepage is awesome
+    - Cloud:
+        - Uptime:
+            href: https://uptime.cloud.paultibbetts.uk
+            description: Uptime Kuma
+            widget:
+              type: uptimekuma
+              url: https://uptime.cloud.paultibbetts.uk
+              slug: cloud
   widgets.yaml: |
     - kubernetes:
         cluster:
           show: true
-          cpu: true
-          memory: true
-          showLabel: false
-          label: "cluster"
+          cpu: false
+          memory: false
+          showLabel: true
+          label: "TuringPi"
         nodes:
-          show: false
-          cpu: true
-          memory: true
+          show: true
+          cpu: false
+          memory: false
           showLabel: true
     - resources:
-        backend: resources
         expanded: false
         cpu: false
         memory: false
