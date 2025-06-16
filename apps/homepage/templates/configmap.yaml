@@ -19,7 +19,7 @@ data:
   bookmarks.yaml: |
     - Cloud:
         - Homepage:
-            - abbr: Home
+            - abbr: Hom
               href: https://homepage.cloud.paultibbetts.uk
         - Gitea:
             - abbr: Git
@@ -35,7 +35,7 @@ data:
           show: true
           cpu: true
           memory: true
-          showLabel: true
+          showLabel: false
           label: "cluster"
         nodes:
           show: false
@@ -45,9 +45,9 @@ data:
     - resources:
         backend: resources
         expanded: false
-        cpu: true
-        memory: true
-        network: default
+        cpu: false
+        memory: false
+        network: false
     - search:
         provider: duckduckgo
         target: _blank
