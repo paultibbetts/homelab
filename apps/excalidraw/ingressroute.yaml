@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: excalidraw
+  namespace: excalidraw
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "excalidraw.lab.paultibbetts.uk"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`excalidraw.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: excalidraw
+          port:
+            name: http
+  tls:
+    secretName: excalidraw-tls
+
