@@ -13,8 +13,7 @@ spec:
       kind: Rule
       services:
         - name: excalidraw
-          port:
-            name: http
+          port: http
   tls:
     secretName: excalidraw-tls
 
