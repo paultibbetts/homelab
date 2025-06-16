@@ -4,7 +4,7 @@ metadata:
   name: librespeed
   namespace: librespeed
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: "librespeed.lab.paultibbetts.uk"
+    external-dns.alpha.kubernetes.io/hostname: "test-change.lab.paultibbetts.uk"
 spec:
   entryPoints:
     - websecure
