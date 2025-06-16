@@ -42,7 +42,7 @@ data:
           showLabel: true
           label: "TuringPi"
         nodes:
-          show: true
+          show: false
           cpu: false
           memory: false
           showLabel: true
