@@ -6,4 +6,5 @@ metadata:
 data:
   server.yml: |
     # Template: https://github.com/binwiederhier/ntfy/blob/main/server/server.yml
-    base-url: https://ntfy.sh
+    base-url: https://lab.paultibbetts.uk
+    upstream-base-url: https://ntfy.sh
