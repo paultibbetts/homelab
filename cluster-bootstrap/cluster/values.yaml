@@ -5,4 +5,5 @@ stacks:
   - name: cluster-bootstrap
     namespace: argocd
   - name: system
+  - name: platform
   - name: apps

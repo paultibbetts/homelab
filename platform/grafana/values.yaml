@@ -1,0 +1,31 @@
+grafana:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-staging
+      external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+      gethomepage.dev/href: "https://grafana.lab.paultibbetts.uk"
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/description: Dashboards
+      gethomepage.dev/group: Apps
+      gethomepage.dev/icon: grafana.png
+      gethomepage.dev/name: grafana
+    hosts:
+      - &host grafana.lab.paultibbetts.uk
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - *host
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: monitoring-system
+    datasources:
+      enabled: true
+      searchNamespace: monitoring-system
+  grafana.ini:
+    server:
+      root_url: https://grafana.lab.paultibbetts.uk
+  persistence:
+    enabled: true
