@@ -8,9 +8,9 @@ grafana:
       gethomepage.dev/href: "https://grafana.lab.paultibbetts.uk"
       gethomepage.dev/enabled: "true"
       gethomepage.dev/description: Dashboards
-      gethomepage.dev/group: Apps
+      gethomepage.dev/group: Platform
       gethomepage.dev/icon: grafana.png
-      gethomepage.dev/name: grafana
+      gethomepage.dev/name: Grafana
     hosts:
       - &host grafana.lab.paultibbetts.uk
     tls:

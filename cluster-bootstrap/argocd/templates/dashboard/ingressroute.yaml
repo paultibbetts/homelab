@@ -7,8 +7,8 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://argocd.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: ArgoCD dashboard
-    gethomepage.dev/group: Admin
+    gethomepage.dev/description: Continuous Deployment
+    gethomepage.dev/group: System
     gethomepage.dev/icon: argo-cd.png
     gethomepage.dev/name: ArgoCD
     gethomepage.dev/app: argocd-server
