@@ -20,7 +20,7 @@ spec:
     - match: Host(`opengist.lab.paultibbetts.uk`)
       kind: Rule
       services:
-        - name: opengist
+        - name: opengist-http
           port: http
   tls:
     secretName: opengist-tls
