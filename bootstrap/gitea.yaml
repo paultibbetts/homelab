@@ -8,6 +8,7 @@
     backup_script_directory: /usr/local/bin/
     backup_script_name: backup-gitea.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/d17b258d-7e5e-4486-82fe-409441efc011"
   tasks:
     - name: Backup
       tags:
@@ -32,4 +33,4 @@
           ansible.builtin.cron:
             name: gitea backup
             hour: 6
-            job: "{{ backup_script }}"
+            job: "{{ backup_script }} && {{ healthcheck }}"

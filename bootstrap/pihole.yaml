@@ -6,6 +6,7 @@
     backup_script_directory: /usr/local/bin/
     backup_script_name: backup-pi-hole.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/fda782cb-8301-4e53-801b-b8d5f7b114d9"
   tasks:
     - name: Configure backups
       tags:
@@ -30,5 +31,5 @@
           ansible.builtin.cron:
             name: pi-hole backup
             hour: 3
-            job: "{{ backup_script }}"
+            job: "{{ backup_script }} && {{ healthcheck }}"
       

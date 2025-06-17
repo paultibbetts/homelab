@@ -15,6 +15,7 @@
     backup_script_name: backup-postgres.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
     backup_directory: /var/backups/postgres-dumps
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/6f1e1946-5244-4816-b857-96c82c964a3f"
 
   tasks:
     - name: Backup
@@ -40,4 +41,4 @@
           ansible.builtin.cron:
             name: postgres backup
             hour: 4
-            job: "{{ backup_script }}"
+            job: "{{ backup_script }} && {{ healthcheck }}"
