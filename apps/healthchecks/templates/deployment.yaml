@@ -27,6 +27,8 @@ spec:
             value: /data/hc.sqlite
           - name: SITE_ROOT
             value: "https://healthchecks.lab.paultibbetts.uk"
+          - name: INTEGRATIONS_ALLOW_PRIVATE_IPS
+            value: "True"
           - name: DEBUG
             value: "False"
           - name: REGISTRATION_OPEN
