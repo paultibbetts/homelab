@@ -26,9 +26,9 @@ spec:
           - name: SITE_ROOT
             value: "https://healthchecks.lab.paultibbetts.uk"
           - name: DEBUG
-            value: False
+            value: "False"
           - name: REGISTRATION_OPEN
-            value: False
+            value: "False"
           - name: SITE_NAME
             value: Healthchecks
         ports:
