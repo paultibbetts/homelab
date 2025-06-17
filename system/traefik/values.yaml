@@ -1,44 +1,41 @@
 traefik:
-  globalArguments:
-    - "--global.checknewversion=false"
+  deployment:
+    dnsConfig:
+      nameservers:
+        - 192.168.1.2
+      searches:
+        - lan
+    replicas: 3
+  ports:
+    web:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+    websecure:
+      http3:
+        enabled: true
+  ingressRoute:
+    dashboard:
+      enabled: false
+  global:
+    checkNewVersion: false
   additionalArguments:
     - "--serversTransport.insecureSkipVerify=true"
     - "--log.level=INFO"
-  deployment:
-    enabled: true
-    replicas: 3
-    annotations: {}
-    podAnnotations: {}
-    additionalContainers: []
-    initContainers: []
-    ingressRoute:
-      dashboard:
-        enabled: true
-  ports:
-    web:
-      redirectTo:
-        port: websecure
-        priority: 10
-      websecure:
-        http3:
-          enabled: true
-        advertisedPort: 4443
-        tls:
-          enabled: true
   ingressRoute:
     dashboard:
       enabled: true
-    providers:
-      kubernetesCRD:
+  providers:
+    kubernetesCRD:
+      enabled: true
+      allowExternalNameServices: true
+    kubernetesIngress:
+      enabled: true
+      allowExternalNameServices: true
+      publishedService:
         enabled: true
-        allowExternalNameServices: true
-      kubernetesIngress:
-        enabled: true
-        allowExternalNameServices: true
-        publishedService:
-          enabled: true
-  rbac:
-    enabled: true
   service:
     enabled: true
     type: LoadBalancer
