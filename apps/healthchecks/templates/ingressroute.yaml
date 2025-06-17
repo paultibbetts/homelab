@@ -1,0 +1,28 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: healthchecks
+  namespace: healthchecks
+  labels:
+    app.kubernetes.io/name: healthchecks
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://healthchecks.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Job monitoring
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: healthchecks.png
+    gethomepage.dev/name: healthchecks
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`healthchecks.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: healthchecks
+          port: http
+  tls:
+    secretName: healthchecks-tls
+
+
