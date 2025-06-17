@@ -1,0 +1,3 @@
+opengist:
+  persistence:
+    storageClass: "longhorn"
