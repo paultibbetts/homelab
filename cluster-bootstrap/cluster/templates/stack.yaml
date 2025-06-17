@@ -69,4 +69,9 @@ spec:
           kind: CustomResourceDefinition
           name: volumes.longhorn.io
           jsonPointers: ["/spec/preserveUnknownFields"]
+        - group: apps
+          kind: StatefulSet
+          jqPathExpressions:
+            - ".spec.volumeClaimTemplates[].apiVersion"
+            - ".spec.volumeClaimTemplates[].kind"
 {{- end }}
