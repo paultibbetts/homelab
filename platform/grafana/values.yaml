@@ -11,6 +11,7 @@ grafana:
       gethomepage.dev/group: Platform
       gethomepage.dev/icon: grafana.png
       gethomepage.dev/name: Grafana
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hosts:
       - &host grafana.lab.paultibbetts.uk
     tls:
