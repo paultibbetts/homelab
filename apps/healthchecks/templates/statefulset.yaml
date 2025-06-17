@@ -13,6 +13,8 @@ spec:
         app.kubernetes.io/name: healthchecks # has to match .spec.selector.matchLabels
     spec:
       terminationGracePeriodSeconds: 10
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: healthchecks
         image: healthchecks/healthchecks:latest
