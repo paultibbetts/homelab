@@ -1,13 +1,14 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: web
+  name: healthchecks
+  namespace: healthchecks
+  labels:
+    app.kubernetes.io/name: healthchecks
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: healthchecks # has to match .spec.template.metadata.labels
-  serviceName: "healthchecks"
   template:
     metadata:
       labels:
@@ -18,6 +19,7 @@ spec:
       containers:
       - name: healthchecks
         image: healthchecks/healthchecks:latest
+        imagePullPolicy: Always
         env:
           - name: DB
             value: sqlite
@@ -37,12 +39,7 @@ spec:
         volumeMounts:
         - name: healthchecks-data
           mountPath: /data
-  volumeClaimTemplates:
-  - metadata:
-      name: healthchecks-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
-
+      volumes:
+        - name: healthchecks-data
+          persistentVolumeClaim:
+            claimName: healthchecks-data

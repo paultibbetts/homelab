@@ -12,7 +12,7 @@ metadata:
     gethomepage.dev/description: Job monitoring
     gethomepage.dev/group: Apps
     gethomepage.dev/icon: healthchecks.png
-    gethomepage.dev/name: healthchecks
+    gethomepage.dev/name: Healthchecks
 spec:
   entryPoints:
     - websecure
