@@ -13,6 +13,7 @@ metadata:
     gethomepage.dev/group: System
     gethomepage.dev/icon: longhorn.png
     gethomepage.dev/name: Longhorn
+    gethomepage.dev/podSelector: ""
 spec:
   entryPoints:
     - websecure
