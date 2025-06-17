@@ -3,6 +3,13 @@ kind: IngressRoute
 metadata:
   name: traefik-dashboard
   namespace: traefik
+  annotations:
+    gethomepage.dev/href: "https://traefik.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Ingress
+    gethomepage.dev/group: Admin
+    gethomepage.dev/icon: traefik.png
+    gethomepage.dev/name: Traefik
 spec:
   entryPoints:
     - websecure
