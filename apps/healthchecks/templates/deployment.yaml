@@ -33,6 +33,9 @@ spec:
             value: "False"
           - name: SITE_NAME
             value: Healthchecks
+        envFrom:
+          - secretRef:
+              name: healthchecks-secret-env
         ports:
         - containerPort: 8000
           name: web
