@@ -9,5 +9,5 @@ spec:
     - healthchecks.lab.paultibbetts.uk
   issuerRef:
     kind: ClusterIssuer
-    name: letsencrypt-staging
+    name: letsencrypt-production
 
