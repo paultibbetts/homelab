@@ -22,7 +22,7 @@ spec:
           - name: DB
             value: sqlite
           - name: DB_NAME
-            value: sqlite:////data/hc.sqlite
+            value: /data/hc.sqlite
           - name: SITE_ROOT
             value: "https://healthchecks.lab.paultibbetts.uk"
         ports:
