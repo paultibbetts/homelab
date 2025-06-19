@@ -28,3 +28,5 @@ woodpecker:
         - &host woodpecker.lab.paultibbetts.uk
       tls:
         - secretName: woodpecker-tls
+          hosts:
+            - *host
