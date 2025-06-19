@@ -1,8 +1,10 @@
 woodpecker:
   server:
     env:
-      WOODPECKER_GITEA=true
-      WOODPECKER_GITEA_URL=https://gitea.cloud.paultibbetts.uk
+      - name: WOODPECKER_GITEA
+        value: "true"
+      - name: WOODPECKER_GITEA_URL
+        value: "https://gitea.cloud.paultibbetts.uk"
     extraSecretNamesForEnvFrom:
       - woodpecker-gitea-oauth
     ingress:
