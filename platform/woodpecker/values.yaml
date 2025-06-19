@@ -3,6 +3,7 @@ woodpecker:
     env:
       WOODPECKER_GITEA: "true"
       WOODPECKER_GITEA_URL: "https://gitea.cloud.paultibbetts.uk"
+      WOODPECKER_HOST: "https://woodpecker.lab.paultibbetts.uk"
     extraSecretNamesForEnvFrom:
       - woodpecker-gitea-oauth
     ingress:
