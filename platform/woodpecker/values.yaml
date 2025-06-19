@@ -4,6 +4,8 @@ woodpecker:
       WOODPECKER_GITEA: "true"
       WOODPECKER_GITEA_URL: "https://gitea.cloud.paultibbetts.uk"
       WOODPECKER_HOST: "https://woodpecker.lab.paultibbetts.uk"
+      WOODPECKER_OPEN: "false"
+      WOODPECKER_ADMIN: "paul"
     extraSecretNamesForEnvFrom:
       - woodpecker-gitea-oauth
     ingress:
