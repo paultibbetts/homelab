@@ -19,13 +19,13 @@ data:
   bookmarks.yaml: |
     - Cloud:
         - Homepage:
-            - abbr: Hom
+            - abbr: Ho
               href: https://homepage.cloud.paultibbetts.uk
         - Gitea:
-            - abbr: Git
+            - abbr: Gi
               href: https://gitea.cloud.paultibbetts.uk
   services.yaml: |
-    - Cloud:
+    - DeskPi:
         - Uptime:
             href: https://uptime.cloud.paultibbetts.uk
             description: Uptime Kuma
