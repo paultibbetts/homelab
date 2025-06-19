@@ -25,7 +25,9 @@ woodpecker:
       ingressClassName: 'traefik'
 
       hosts:
-        - &host woodpecker.lab.paultibbetts.uk
+        - host: &host woodpecker.lab.paultibbetts.uk
+          paths:
+            - path: /
       tls:
         - secretName: woodpecker-tls
           hosts:
