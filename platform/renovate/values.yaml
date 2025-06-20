@@ -1,4 +1,7 @@
 renovate:
+  env:
+    - name: LOG_LEVEL
+      value: debug
   cronjob:
     schedule: '0 1 * * *'  # Everyday at 01:00
   renovate:
