@@ -46,5 +46,6 @@
         - name: Add script to CRON
           ansible.builtin.cron:
             name: mysql backup
-            hour: 1
+            hour: "1"
+            minute: "0"
             job: "{{ backup_script }} && {{ healthcheck }}"
