@@ -32,5 +32,5 @@
         - name: Add script to CRON
           ansible.builtin.cron:
             name: gitea backup
-            hour: 6
+            hour: 3
             job: "{{ backup_script }} && {{ healthcheck }}"

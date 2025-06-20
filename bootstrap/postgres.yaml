@@ -40,5 +40,5 @@
         - name: Add script to CRON
           ansible.builtin.cron:
             name: postgres backup
-            hour: 4
+            hour: 2
             job: "{{ backup_script }} && {{ healthcheck }}"

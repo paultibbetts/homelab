@@ -30,6 +30,6 @@
         - name: Add script to CRON
           ansible.builtin.cron:
             name: pi-hole backup
-            hour: 3
+            hour: 4
             job: "{{ backup_script }} && {{ healthcheck }}"
       
