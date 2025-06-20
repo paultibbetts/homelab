@@ -7,7 +7,8 @@ renovate:
         "platform": "gitea",
         "endpoint": "https://gitea.cloud.paultibbetts.uk/api/v1",
         "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-        "autodiscover": true
+        "autodiscover": true,
+        "extends": ["config:recommended", ":dependencyDashboard"]
       }
   existingSecret: renovate-gitea-secret
 
