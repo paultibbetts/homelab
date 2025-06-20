@@ -13,4 +13,5 @@ renovate:
         "extends": ["config:recommended", ":dependencyDashboard"]
       }
   existingSecret: renovate-secret
-
+  redis:
+    enabled: true
