@@ -1,0 +1,13 @@
+renovate:
+  cronjob:
+    schedule: '0 1 * * *'  # Everyday at 01:00
+  renovate:
+    config: |
+      {
+        "platform": "gitea",
+        "endpoint": "https://gitea.cloud.paultibbetts.uk/api/v1",
+        "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+        "autodiscover": true
+      }
+  existingSecret: renovate-gitea-secret
+
