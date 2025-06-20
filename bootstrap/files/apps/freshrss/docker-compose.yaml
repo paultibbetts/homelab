@@ -46,7 +46,16 @@ services:
       TRUSTED_PROXY: 172.16.0.1/12 192.168.0.1/16
       # Optional parameter, set to 1 to enable OpenID Connect (only available in our Debian image)
       # Requires more environment variables. See https://freshrss.github.io/FreshRSS/en/admins/16_OpenID-Connect.html
-      OIDC_ENABLED: 0
+      OIDC_ENABLED: 1
+      OIDC_SCOPES: openid email profile
+      OIDC_REMOTE_USER_CLAIM: preferred_username
+      OIDC_X_FORWARDED_HEADERS: X-Forwarded-Host X-Forwarded-Port X-Forwarded-Proto
+      OIDC_SCOPES: openid email profile
+      OIDC_REMOTE_USER_CLAIM: preferred_username
+      OIDC_PROVIDER_METADATA_URL: https://auth.lab.paultibbetts.uk/oauth2/openid/freshrss/.well-known/openid-configuration
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      OIDC_CLIENT_CRYPTO_KEY: ${OIDC_CLIENT_CRYPTO_KEY}
       FRESHRSS_INSTALL: |-
         --api-enabled
         --base-url ${BASE_URL}
