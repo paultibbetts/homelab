@@ -12,5 +12,5 @@ renovate:
         "autodiscover": true,
         "extends": ["config:recommended", ":dependencyDashboard"]
       }
-  existingSecret: renovate-gitea-secret
+  existingSecret: renovate-secret
 
