@@ -19,7 +19,7 @@ woodpecker:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/description: Continuous Integration
         gethomepage.dev/group: Platform
-        gethomepage.dev/icon: woodpecker-ci.png
+        gethomepage.dev/icon: woodpecker-ci.svg
         gethomepage.dev/name: woodpecker
         gethomepage.dev/app: server
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
