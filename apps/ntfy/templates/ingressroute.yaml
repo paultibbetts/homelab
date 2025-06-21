@@ -10,7 +10,7 @@ metadata:
     gethomepage.dev/href: "https://ntfy.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Notifications
-    gethomepage.dev/group: Apps
+    gethomepage.dev/group: Platform
     gethomepage.dev/icon: ntfy.png
     gethomepage.dev/name: ntfy
 spec:

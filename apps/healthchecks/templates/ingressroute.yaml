@@ -10,7 +10,7 @@ metadata:
     gethomepage.dev/href: "https://healthchecks.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Job monitoring
-    gethomepage.dev/group: Apps
+    gethomepage.dev/group: Platform
     gethomepage.dev/icon: healthchecks.png
     gethomepage.dev/name: Healthchecks
 spec:
