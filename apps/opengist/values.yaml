@@ -1,3 +1,4 @@
 opengist:
+  configExistingSecret: opengist-config
   persistence:
     storageClass: "longhorn"
