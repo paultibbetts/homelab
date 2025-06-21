@@ -23,6 +23,8 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
         seccompProfile:
           type: RuntimeDefault
       serviceAccountName: homepage
@@ -39,9 +41,15 @@ spec:
               drop:
                 - ALL
             runAsNonRoot: true
+            runAsUser: 1001
+            runAsGroup: 1001
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: homepage.lab.paultibbetts.uk # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+            - name: PUID
+              value: "1001"
+            - name: PGID
+              value: "1001"
           ports:
             - name: http
               containerPort: 3000
