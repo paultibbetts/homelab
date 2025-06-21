@@ -27,21 +27,21 @@ grafana:
       searchNamespace: monitoring-system
   grafana.ini:
     auth.generic_oauth:
-      enabled = true
-      name = Kanidm
-      client_id = $__file{/etc/secrets/auth_generic_oauth/client_id}
-      client_secret = $__file{/etc/secrets/auth_generic_oauth/client_secret}
-      scopes = openid,profile,email,groups
-      auth_url = https://auth.lab.paultibbetts.uk/ui/oauth2
-      token_url = https://auth.lab.paultibbetts.uk/oauth2/token
-      api_url = https://auth.lab.paultibbetts.uk/oauth2/openid/grafana/userinfo
-      use_pkce = true
-      use_refresh_token = true
-      allow_sign_up = true
-      login_attribute_path = preferred_username
-      groups_attribute_path = groups
-      role_attribute_path = contains(grafana_role[*], 'GrafanaAdmin') && 'GrafanaAdmin' || contains(grafana_role[*], 'Admin') && 'Admin' || contains(grafana_role[*], 'Editor') && 'Editor' || 'Viewer'
-      allow_assign_grafana_admin = true
+      enabled: true
+      name: Kanidm
+      client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+      client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+      scopes: openid,profile,email,groups
+      auth_url: https://auth.lab.paultibbetts.uk/ui/oauth2
+      token_url: https://auth.lab.paultibbetts.uk/oauth2/token
+      api_url: https://auth.lab.paultibbetts.uk/oauth2/openid/grafana/userinfo
+      use_pkce: true
+      use_refresh_token: true
+      allow_sign_up: true
+      login_attribute_path: preferred_username
+      groups_attribute_path: groups
+      role_attribute_path: contains(grafana_role[*], 'GrafanaAdmin') && 'GrafanaAdmin' || contains(grafana_role[*], 'Admin') && 'Admin' || contains(grafana_role[*], 'Editor') && 'Editor' || 'Viewer'
+      allow_assign_grafana_admin: true
     server:
       root_url: https://grafana.lab.paultibbetts.uk
   extraSecretMounts:
