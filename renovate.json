@@ -1,0 +1,12 @@
+{
+  "argocd": {
+    "managerFilePatterns": ["/.*\\/.*\\/Chart\\.ya?ml$/"]
+  },
+  "helm-values": {
+    "managerFilePatterns": ["/values\\.ya?ml$/"]
+  },
+  "kubernetes": {
+    "managerFilePatterns": ["/\\.ya?ml$/"]
+  }
+}
+
