@@ -17,9 +17,9 @@ woodpecker:
         external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
         gethomepage.dev/href: "https://woodpecker.lab.paultibbetts.uk"
         gethomepage.dev/enabled: "true"
-        gethomepage.dev/description: CI
+        gethomepage.dev/description: Continuous Integration
         gethomepage.dev/group: Platform
-        gethomepage.dev/icon: woodpecker.png
+        gethomepage.dev/icon: woodpecker-ci.png
         gethomepage.dev/name: woodpecker
         gethomepage.dev/app: server
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
