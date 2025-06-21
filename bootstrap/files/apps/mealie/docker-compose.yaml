@@ -31,6 +31,5 @@ services:
       OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
       OIDC_PROVIDER_NAME: "Kanidm"
 
-
 volumes:
   mealie-data:
