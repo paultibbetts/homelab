@@ -26,9 +26,9 @@ data:
               href: https://gitea.cloud.paultibbetts.uk
   services.yaml: |
     - DeskPi:
-        - Uptime:
+        - Uptime Kuma:
             href: https://uptime.cloud.paultibbetts.uk
-            description: Security fix for reloader 3
+            description: Uptime
             icon: uptime-kuma
             widget:
               type: uptimekuma
