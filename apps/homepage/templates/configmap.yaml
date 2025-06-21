@@ -28,7 +28,7 @@ data:
     - DeskPi:
         - Uptime:
             href: https://uptime.cloud.paultibbetts.uk
-            description: Security fix for reloader
+            description: Security fix for reloader 2
             icon: uptime-kuma
             widget:
               type: uptimekuma
