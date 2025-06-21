@@ -29,6 +29,7 @@ data:
         - Uptime:
             href: https://uptime.cloud.paultibbetts.uk
             description: Uptime Kuma
+            icon: uptime-kuma
             widget:
               type: uptimekuma
               url: https://uptime.cloud.paultibbetts.uk
