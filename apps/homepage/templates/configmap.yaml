@@ -33,7 +33,7 @@ data:
             widget:
               type: uptimekuma
               url: https://uptime.cloud.paultibbetts.uk
-              slug: lab
+              slug: third
   widgets.yaml: |
     - kubernetes:
         cluster:
