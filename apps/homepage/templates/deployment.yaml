@@ -21,6 +21,10 @@ spec:
       labels:
         app.kubernetes.io/name: homepage
     spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: homepage
       automountServiceAccountToken: true
       dnsPolicy: ClusterFirst
@@ -29,6 +33,12 @@ spec:
         - name: homepage
           image: "ghcr.io/gethomepage/homepage:latest"
           imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: homepage.lab.paultibbetts.uk # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
