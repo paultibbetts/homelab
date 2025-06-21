@@ -19,10 +19,10 @@ data:
   bookmarks.yaml: |
     - Cloud:
         - Homepage:
-            - abbr: Ho
+            - abbr: Home
               href: https://homepage.cloud.paultibbetts.uk
         - Gitea:
-            - abbr: Gi
+            - abbr: Git
               href: https://gitea.cloud.paultibbetts.uk
   services.yaml: |
     - DeskPi:
