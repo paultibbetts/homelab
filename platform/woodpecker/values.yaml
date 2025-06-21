@@ -21,6 +21,7 @@ woodpecker:
         gethomepage.dev/group: Platform
         gethomepage.dev/icon: woodpecker.png
         gethomepage.dev/name: woodpecker
+        gethomepage.dev/app: server
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       # -- Defines which ingress controller will implement the resource
       ingressClassName: 'traefik'
