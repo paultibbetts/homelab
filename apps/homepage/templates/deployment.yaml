@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: homepage
   namespace: homepage
+  annotations:
+    configmap.reloader.stakater.com/reload: "homepage"
+    reloader.stakater.com/rollout-strategy: "restart"
   labels:
     app.kubernetes.io/name: homepage
 spec:
