@@ -16,9 +16,6 @@ traefik:
     websecure:
       http3:
         enabled: true
-  ingressRoute:
-    dashboard:
-      enabled: false
   global:
     checkNewVersion: false
   additionalArguments:
