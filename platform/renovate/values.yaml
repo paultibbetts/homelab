@@ -2,7 +2,7 @@ renovate:
   env:
     LOG_LEVEL: debug
   cronjob:
-    schedule: '0 1 * * *'  # Everyday at 01:00
+    schedule: '0 */6 * * *'  # Every 6 hours / 4 times per day
   renovate:
     config: |
       {
