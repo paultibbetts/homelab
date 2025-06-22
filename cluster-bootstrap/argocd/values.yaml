@@ -4,7 +4,7 @@ argo-cd:
       create: true
       oidc.config: |
         name: Kanidm
-        issuer: https://auth.lab.paultibbetts.uk/oauth2/openid/argocd/.well-known/openid-configuration
+        issuer: https://auth.lab.paultibbetts.uk/oauth2/openid/argocd
         clientID: argocd
         clientSecret: $argocd-sso-secret:oidc.clientSecret
         requestedIDTokenClaims:
