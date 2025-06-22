@@ -22,7 +22,6 @@ argo-cd:
         create: true
         annotations: {}
         policy.default: ''
-        policy.csv: ''
         # Policy rules are in the form:
         #  p, subject, resource, action, object, effect
         # Role definitions and bindings are in the form:
