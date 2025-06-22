@@ -11,39 +11,70 @@ terraform {
   }
 }
 
-resource "proxmox_lxc" "caddy" {
-  hostname     = "ingress"
-  target_node  = var.proxmox_host
-  ostemplate   = var.lxc_template
-  unprivileged = true
-  vmid         = 303
-  start        = true
-  onboot       = true
-  memory       = var.memory
-  cores        = 1
+resource "proxmox_vm_qemu" "ingress" {
+  name        = "ingress"
+  target_node = var.proxmox_host
+  clone       = var.cloud_init_template_name
+  full_clone  = true
+  vm_state    = "running"
+  onboot      = true
+  agent       = 1
+  os_type     = "cloud-init"
+  memory      = var.memory
+  scsihw      = "virtio-scsi-pci"
+  bootdisk    = "scsi0"
+  vmid        = 303
 
-  ssh_public_keys = <<EOT
-		${var.ssh_keys}
-		EOT
+  cpu {
+    cores = var.cores
+  }
 
-  rootfs {
-    storage = var.proxmox_storage
-    size    = "10G"
+  disks {
+    ide {
+      ide2 {
+        cloudinit {
+          storage = var.proxmox_storage
+        }
+      }
+    }
+    scsi {
+      scsi0 {
+        disk {
+          size    = var.disk_size
+          storage = var.proxmox_storage
+          format  = "qcow2"
+        }
+      }
+    }
   }
 
   network {
-    name     = "eth0"
-    bridge   = "vmbr0"
-    gw       = var.network_gateway
-    ip       = "${var.ip}/24"
-    firewall = true
+    id     = 0
+    model  = "virtio"
+    bridge = "vmbr0"
   }
+
+  lifecycle {
+    ignore_changes = [
+      qemu_os,
+    ]
+  }
+
+  # cloud-init
+
+  ipconfig0 = "ip=${var.ip}/24,gw=${var.network_gateway}"
+
+  sshkeys = <<EOF
+	${var.ssh_keys}
+	EOF
 }
 
 resource "ansible_host" "ingress-0" {
-  name   = var.ip
+  name   = proxmox_vm_qemu.ingress.ssh_host
   groups = ["ingress"]
   variables = {
-    ansible_user = "root"
+    ansible_user = "ubuntu"
   }
 }
+
+

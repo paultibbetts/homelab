@@ -54,11 +54,11 @@ module "gitea" {
 module "ingress" {
   source = "./modules/ingress"
 
-  ssh_keys        = var.ssh_keys
-  network_gateway = var.network_gateway
-  proxmox_storage = var.proxmox_storage
-  proxmox_host    = var.proxmox_host
-  lxc_template    = var.lxc_template
+  ssh_keys                 = var.ssh_keys
+  network_gateway          = var.network_gateway
+  proxmox_storage          = var.proxmox_storage
+  proxmox_host             = var.proxmox_host
+  cloud_init_template_name = var.cloud_init_template_name
 }
 
 module "vpn" {
