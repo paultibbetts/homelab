@@ -21,10 +21,13 @@ resource "proxmox_vm_qemu" "pihole" {
   onboot      = true
   agent       = 1
   os_type     = "cloud-init"
-  cores       = var.pihole_cores
   memory      = var.pihole_memory
   scsihw      = "virtio-scsi-pci"
   vmid        = 100
+
+  cpu {
+    cores = var.pihole_cores
+  }
 
   disks {
     ide {
@@ -46,6 +49,7 @@ resource "proxmox_vm_qemu" "pihole" {
   }
 
   network {
+    id     = 0
     model  = "virtio"
     bridge = "vmbr0"
   }

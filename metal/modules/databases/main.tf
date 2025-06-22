@@ -21,10 +21,14 @@ resource "proxmox_vm_qemu" "mysql" {
   onboot      = true
   agent       = 1
   os_type     = "cloud-init"
-  cores       = var.mysql_cores
   memory      = var.mysql_memory
   scsihw      = "virtio-scsi-pci"
   vmid        = 201
+  hastate     = "ignored"
+
+  cpu {
+    cores = var.mysql_cores
+  }
 
   disks {
     ide {
@@ -46,6 +50,7 @@ resource "proxmox_vm_qemu" "mysql" {
   }
 
   network {
+    id     = 0
     model  = "virtio"
     bridge = "vmbr0"
   }
@@ -75,11 +80,14 @@ resource "proxmox_vm_qemu" "postgres" {
   onboot      = true
   agent       = 1
   os_type     = "cloud-init"
-  cores       = var.postgres_cores
   memory      = var.postgres_memory
   scsihw      = "virtio-scsi-pci"
   bootdisk    = "scsi0"
   vmid        = 202
+
+  cpu {
+    cores = var.postgres_cores
+  }
 
   disks {
     ide {
@@ -101,6 +109,7 @@ resource "proxmox_vm_qemu" "postgres" {
   }
 
   network {
+    id     = 0
     model  = "virtio"
     bridge = "vmbr0"
   }

@@ -20,11 +20,14 @@ resource "proxmox_vm_qemu" "gitea" {
   onboot      = true
   agent       = 1
   os_type     = "cloud-init"
-  cores       = var.cores
   memory      = var.memory
   scsihw      = "virtio-scsi-pci"
   bootdisk    = "scsi0"
   vmid        = 301
+
+  cpu {
+    cores = var.cores
+  }
 
   disks {
     ide {
@@ -46,6 +49,7 @@ resource "proxmox_vm_qemu" "gitea" {
   }
 
   network {
+    id     = 0
     model  = "virtio"
     bridge = "vmbr0"
   }
