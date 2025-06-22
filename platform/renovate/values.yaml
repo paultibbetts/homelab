@@ -15,9 +15,8 @@ renovate:
         "labels": ["dependencies"],
         "packageRules": [
           {
-            "matchUpdateTypes": ["minor", "patch"],
-            "groupName": "minor and patch updates",
-            "labels": ["patch"]
+            "matchUpdateTypes": ["patch"],
+            "groupName": "patches",
           }
         ]
       }
