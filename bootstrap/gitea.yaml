@@ -8,7 +8,7 @@
     backup_script_directory: /usr/local/bin/
     backup_script_name: backup-gitea.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
-    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/d17b258d-7e5e-4486-82fe-409441efc011"
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/9b6585c7-dc2f-4ac7-b2f0-207cd4a59522"
   tasks:
     - name: Backup
       tags:
