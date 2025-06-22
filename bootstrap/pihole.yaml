@@ -6,7 +6,7 @@
     backup_script_directory: /usr/local/bin/
     backup_script_name: backup-pi-hole.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
-    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/fda782cb-8301-4e53-801b-b8d5f7b114d9"
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/8e2a6174-df12-4267-afcf-970a005c27ee"
   tasks:
     - name: Configure backups
       tags:

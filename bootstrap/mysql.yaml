@@ -12,7 +12,7 @@
     backup_script_directory: /usr/local/bin/
     backup_script_name: backup-mysql.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
-    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/4953f5e2-a87e-4a62-8c1c-8e6aea370830"
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/e23647d8-0942-486d-942a-85afc84f944f"
   tasks:
     - name: Allow passwordless MySQL commands
       ansible.builtin.copy:
