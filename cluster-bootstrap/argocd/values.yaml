@@ -14,7 +14,7 @@ argo-cd:
           - openid
           - profile
           - email
-        enablePKCEAuthentication: true
+        enablePKCEAuthentication: false
         enableUserInfoGroups: true
         userInfoPath: /userinfo
         userInfoCacheExpiration: "5m"
