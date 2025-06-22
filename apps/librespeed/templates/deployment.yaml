@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: librespeed
-          image: ghcr.io/librespeed/speedtest:latest
+          image: ghcr.io/librespeed/speedtest@sha256:f17410ec8819a42f09fdc677c473fd033197a79a37ce7340766c8b77cdca4399
           env:
             - name: MODE
               value: standalone
