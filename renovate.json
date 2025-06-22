@@ -7,6 +7,16 @@
   },
   "kubernetes": {
     "managerFilePatterns": ["/\\.ya?ml$/"]
+  },
+  "packageRules": [
+    {
+      "matchCategories": ["docker"], "pinDigests": true
+    },
+    {
+     "matchDatasources": ["docker"],
+     "matchPackageNames": ["ghcr.io/librespeed/speedtest"],
+     "schedule": ["* * * * 0"]
   }
+ ]
 }
 
