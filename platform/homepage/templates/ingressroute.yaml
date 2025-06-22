@@ -9,7 +9,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/description: Dynamically Detected Homepage
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/group: Cluster Management
+    gethomepage.dev/group: Platform
     gethomepage.dev/icon: homepage.png
     gethomepage.dev/name: Homepage
 spec:
