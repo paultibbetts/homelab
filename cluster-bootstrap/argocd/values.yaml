@@ -27,12 +27,7 @@ argo-cd:
         # Role definitions and bindings are in the form:
         #  g, subject, inherited-subject
         policy.csv: |
-          p, role:orgadmin, applications, *, */*, allow
-          p, role:orgadmin, clusters, get, *, allow
-          p, role:orgadmin, repositories, *, *, allow
-          p, role:orgadmin, logs, get, *, allow
-          p, role:orgadmin, exec, create, */*, allow
-          g, orgadmins, role:orgadmin
+          g, admins, role:admin
 
         # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
         # The scope value can be a string, or a list of strings.
