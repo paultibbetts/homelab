@@ -1,6 +1,6 @@
 roles:
 - src: geerlingguy.mysql
-  version: 4.3.5
+  version: 5.0.2
 - src: geerlingguy.postgresql
   version: 3.5.2
 collections:
