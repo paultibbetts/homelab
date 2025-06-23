@@ -29,7 +29,8 @@ app-template:
                 periodSeconds: 5
 
   configMaps:
-    kanidm-config:
+    kanidm:
+      forceRename: kanidm-config
       enabled: true
       data:
         server.toml: |
