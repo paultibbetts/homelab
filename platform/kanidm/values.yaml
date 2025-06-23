@@ -87,6 +87,7 @@ app-template:
     config:
       enabled: true
       type: configMap
+      name: kanidm-config
       globalMounts:
         - path: /data/server.toml
           subPath: server.toml
