@@ -40,7 +40,7 @@ app-template:
           domain = "auth.lab.paultibbetts.uk"
           origin = "https://auth.lab.paultibbetts.uk"
   service:
-    server:
+    app:
       controller: server
       ports:
         http:
@@ -72,9 +72,8 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                identifier: server
-                name: main
-                port: 443
+                identifier: app
+                port: https
       tls:
         - hosts:
             - *host
