@@ -60,8 +60,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: main
-                port: https
+                name: https
       tls:
         - hosts:
             - *host
