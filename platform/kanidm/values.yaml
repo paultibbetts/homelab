@@ -1,5 +1,7 @@
 # https://github.com/llajas/homelab/blob/6d74d1ddef078097fb2fa9ed03724eda9157c2f0/platform/kanidm/values.yaml
 app-template:
+  defaultPodOptions:
+    enableServiceLinks: true
   controllers:
     server:
       type: statefulset
