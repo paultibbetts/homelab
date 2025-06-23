@@ -33,6 +33,7 @@ app-template:
       ports:
         http:
           enabled: false
+          port: 80
         https:
           port: 443
           protocol: HTTPS
