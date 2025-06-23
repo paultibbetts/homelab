@@ -1,10 +1,10 @@
 # https://github.com/llajas/homelab/blob/6d74d1ddef078097fb2fa9ed03724eda9157c2f0/platform/kanidm/values.yaml
 app-template:
   controllers:
-    main:
+    server:
       type: statefulset
       containers:
-        main:
+        server:
           image:
             repository: docker.io/kanidm/server
             tag: 1.6.4
@@ -15,6 +15,18 @@ app-template:
             globalMounts:
               - path: /data
             accessMode: "ReadWriteOnce"
+
+          probes:
+            liveness:
+              enabled: true
+            readiness:
+              enabled: true
+            startup:
+              enabled: true
+              spec:
+                failureThreshold: 30
+                periodSeconds: 5
+
   configMaps:
     config:
       enabled: true
@@ -29,11 +41,11 @@ app-template:
           domain = "auth.lab.paultibbetts.uk"
           origin = "https://auth.lab.paultibbetts.uk"
   service:
-    main:
+    server:
+      controller: server
       ports:
         http:
           enabled: false
-          port: 80
         https:
           port: 443
           protocol: HTTPS
@@ -41,7 +53,7 @@ app-template:
           port: 636
           protocol: TCP
   ingress:
-    main:
+    server:
       enabled: true
       className: traefik
       annotations:
@@ -61,8 +73,8 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: main
-                port: 443
+                identifier: server
+                port: https
       tls:
         - hosts:
             - *host
