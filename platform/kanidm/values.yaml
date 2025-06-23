@@ -61,7 +61,6 @@ app-template:
               pathType: Prefix
               service:
                 name: kanidm
-                identifier: main
                 port: 443
       tls:
         - hosts:
