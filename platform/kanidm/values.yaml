@@ -43,8 +43,6 @@ app-template:
     app:
       controller: server
       ports:
-        http:
-          enabled: false
         https:
           port: 443
           protocol: HTTPS
