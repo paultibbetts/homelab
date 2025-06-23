@@ -29,7 +29,7 @@ app-template:
                 periodSeconds: 5
 
   configMaps:
-    kanidm:
+    kanidm-config:
       enabled: true
       data:
         server.toml: |
