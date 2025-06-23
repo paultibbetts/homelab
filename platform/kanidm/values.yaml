@@ -3,10 +3,17 @@ app-template:
   defaultPodOptions:
     enableServiceLinks: true
   controllers:
-    server:
+    main:
       type: statefulset
+      statefulset:
+        volumeClaimTemplates:
+          - name: data
+            size: 1Gi
+            globalMounts:
+              - path: /data
+            accessMode: "ReadWriteOnce"
       containers:
-        server:
+        main:
           image:
             repository: docker.io/kanidm/server
             tag: 1.6.4
@@ -20,13 +27,6 @@ app-template:
               spec:
                 failureThreshold: 30
                 periodSeconds: 5
-      statefulset:
-        volumeClaimTemplates:
-          - name: data
-            size: 1Gi
-            globalMounts:
-              - path: /data
-            accessMode: "ReadWriteOnce"
 
   configMaps:
     config:
@@ -42,9 +42,14 @@ app-template:
           domain = "auth.lab.paultibbetts.uk"
           origin = "https://auth.lab.paultibbetts.uk"
   service:
-    app:
-      controller: server
+    main:
+      enabled: true
+      controller: main
+      type: ClusterIP
       ports:
+        http:
+          port: 80
+          enabled: false
         https:
           port: 443
           protocol: HTTPS
@@ -52,7 +57,7 @@ app-template:
           port: 636
           protocol: TCP
   ingress:
-    server:
+    main:
       enabled: true
       className: traefik
       annotations:
@@ -72,8 +77,9 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                identifier: app
-                port: https
+                name: main
+                identifier: main
+                port: 443
       tls:
         - hosts:
             - *host
