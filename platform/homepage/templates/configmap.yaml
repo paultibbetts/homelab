@@ -9,11 +9,10 @@ data:
   kubernetes.yaml: |
     mode: cluster
     traefik: true
-  settings.yaml: ""
-  #settings.yaml: |
-  #  providers:
-  #    longhorn:
-  #      url: https://longhorn.my.network
+  settings.yaml: |
+    providers:
+      longhorn:
+        url: https://longhorn.lab.paultibbetts.uk
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -52,6 +51,11 @@ data:
         cpu: false
         memory: false
         network: false
+    - longhorn:
+        expanded: true
+        total: true
+        labels: true
+        nodes: true
     - search:
         provider: duckduckgo
         target: _blank
