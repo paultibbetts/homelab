@@ -29,7 +29,7 @@ app-template:
                 periodSeconds: 5
 
   configMaps:
-    config:
+    kanidm:
       enabled: true
       data:
         server.toml: |
@@ -87,7 +87,6 @@ app-template:
     config:
       enabled: true
       type: configMap
-      name: kanidm
       globalMounts:
         - path: /data/server.toml
           subPath: server.toml
