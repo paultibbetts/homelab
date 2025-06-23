@@ -8,14 +8,6 @@ app-template:
           image:
             repository: docker.io/kanidm/server
             tag: 1.6.4
-      statefulset:
-        volumeClaimTemplates:
-          - name: data
-            size: 1Gi
-            globalMounts:
-              - path: /data
-            accessMode: "ReadWriteOnce"
-
           probes:
             liveness:
               enabled: true
@@ -26,6 +18,13 @@ app-template:
               spec:
                 failureThreshold: 30
                 periodSeconds: 5
+      statefulset:
+        volumeClaimTemplates:
+          - name: data
+            size: 1Gi
+            globalMounts:
+              - path: /data
+            accessMode: "ReadWriteOnce"
 
   configMaps:
     config:
@@ -74,7 +73,8 @@ app-template:
               pathType: Prefix
               service:
                 identifier: server
-                port: https
+                name: main
+                port: 443
       tls:
         - hosts:
             - *host
