@@ -26,7 +26,10 @@ homebox:
       gethomepage.dev/name: Homebox
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hosts:
-      - &host homebox.lab.paultibbetts.uk
+      - host: &host homebox.lab.paultibbetts.uk
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
     tls:
       - secretName: homebox-tls
         hosts:
