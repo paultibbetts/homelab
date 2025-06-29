@@ -35,8 +35,18 @@ securityContext:
      - ALL
    readOnlyRootFilesystem: true
    runAsNonRoot: true
-   runAsUser: 0
+   runAsUser: 1001
 
+
+env:
+  - name: PUID
+    value: 1001
+  - name: PGID
+    value: 1001
+  - name: TZ
+    value: Europe/London
+  - name: DOCKER_MODS
+    value: linuxserver/mods:universal-calibre
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
@@ -105,6 +115,7 @@ volumeMounts:
  - name: books
    mountPath: "/books"
    subPath: books
+   readOnly: true
  - name: config
    mountPath: "/config"
    subPath: config
