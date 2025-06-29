@@ -35,7 +35,7 @@ securityContext:
      - ALL
    readOnlyRootFilesystem: true
    runAsNonRoot: true
-   runAsUser: 1001
+   runAsUser: 0
 
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
