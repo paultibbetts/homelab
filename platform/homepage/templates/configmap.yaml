@@ -27,9 +27,11 @@ data:
     - Cloud:
         - Homepage:
             - abbr: Home
+              icon: homepage
               href: https://homepage.cloud.paultibbetts.uk
         - Gitea:
             - abbr: Git
+              icon: gitea
               href: https://gitea.cloud.paultibbetts.uk
   services.yaml: |
     - DeskPi:
