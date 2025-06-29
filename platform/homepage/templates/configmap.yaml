@@ -13,8 +13,11 @@ data:
     bookmarksStyle: icons
     layout:
       Apps:
+        icon: si-appstore
       Platform:
+        icon: mdi-layers
       System:
+        icon: mdi-chip
     providers:
       longhorn:
         url: https://longhorn.lab.paultibbetts.uk
