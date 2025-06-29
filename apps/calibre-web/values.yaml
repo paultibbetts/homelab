@@ -39,14 +39,10 @@ securityContext:
 
 
 env:
-  - name: PUID
-    value: 1001
-  - name: PGID
-    value: 1001
-  - name: TZ
-    value: Europe/London
-  - name: DOCKER_MODS
-    value: linuxserver/mods:universal-calibre
+  PUID: 1001
+  PGID: 1001
+  TZ: Europe/London
+  DOCKER_MODS: linuxserver/mods:universal-calibre
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
