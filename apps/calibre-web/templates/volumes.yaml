@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: nfs-books
 spec:
+  storageClassName: ""
   capacity:
     storage: 100Gi
   accessModes:
@@ -17,6 +18,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: nfs-books-pvc
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
@@ -29,6 +31,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: calibre-web-config
 spec:
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
