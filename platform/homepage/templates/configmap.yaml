@@ -10,6 +10,11 @@ data:
     mode: cluster
     traefik: true
   settings.yaml: |
+    bookmarksStyle: icons
+    layout:
+      Apps:
+      Platform:
+      System:
     providers:
       longhorn:
         url: https://longhorn.lab.paultibbetts.uk
