@@ -70,6 +70,16 @@ module "vpn" {
   cloud_init_template_name = var.cloud_init_template_name
 }
 
+module "tunnel" {
+  source = "./modules/tunnel"
+
+  ssh_keys                 = var.ssh_keys
+  proxmox_storage          = var.proxmox_storage
+  proxmox_host             = var.proxmox_host
+  cloud_init_template_name = var.cloud_init_template_name
+}
+
+
 module "apps" {
   source = "./modules/apps"
 
