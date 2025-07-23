@@ -3,5 +3,5 @@ name: homebox
 version: 0.0.0
 dependencies:
   - name: homebox
-    version: 0.1.1
+    version: 0.1.2
     repository: https://bythehugo.github.io/homebox-helm/
