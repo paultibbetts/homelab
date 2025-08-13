@@ -33,6 +33,7 @@ data:
             - abbr: Git
               icon: gitea
               href: https://gitea.cloud.paultibbetts.uk
+  proxmox.yaml: ""
   services.yaml: |
     - DeskPi:
         - Uptime Kuma:
