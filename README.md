@@ -2,7 +2,7 @@
 
 An overview of my homelab.
 
-## NAS 
+## NAS
 
 [Hardware](hardware/nas/README.md)
 
@@ -19,11 +19,15 @@ An overview of my homelab.
 ## NUC
 
 [Hardware](hardware/nuc/README.md)
+
 ### Apps
 
 - **Ad Block / DNS** - [PiHole](https://pi-hole.net/) - http://192.168.1.2/admin
 - **VPN** - [PiVPN](https://pivpn.io/) ([Wireguard](https://www.wireguard.com/)) - 192.168.1.33
 - **Git** - [Gitea](https://about.gitea.com/) - http://192.168.1.211:3000
+- **RSS** - [FreshRSS](https://https://www.freshrss.org/) - http://192.168.1.10:8080
+- **Dashboard** [Homepage](https://gethomepage.dev) - http://192.168.1.10:3000
+- **Recipe Management** [Mealie](https://mealie.io) - http://192.168.1.10:9000
 - **Databases** - [MySQL](https://www.mysql.com/) and [Postgres](https://www.postgresql.org/)
 - **Movies & TV** - [Jellyfin](https://jellyfin.org/) - http://192.168.1.6:8096
 - **Ingress** - [Caddy](https://caddyserver.com/) - 192.168.1.9
