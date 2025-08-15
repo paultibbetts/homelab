@@ -39,6 +39,7 @@ An overview of my homelab.
 ### Apps
 
 - **Uptime** - [Uptime Kuma](https://uptime.kuma.pet/) - http://192.168.1.133:3001
+- **Monitoring** - [Beszel](https://www.beszel.dev/) - http://192.168.1.133:8090
 
 ## Network
 
