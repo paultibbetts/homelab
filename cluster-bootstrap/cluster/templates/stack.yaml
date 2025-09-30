@@ -11,8 +11,8 @@ spec:
         repoURL: {{ $.Values.gitops.repo }}
         revision: {{ $.Values.gitops.revision }}
         directories:
-           - path: {{ $stack.name }}/*
-        exclude:
+          - path: {{ $stack.name }}/*
+            exclude:
               - {{ $stack.name }}/longhorn-system/*
   template:
     metadata:
