@@ -11,8 +11,8 @@ terraform {
   }
 }
 
-resource "proxmox_vm_qemu" "tunnel" {
-  name        = "tunnel"
+resource "proxmox_vm_qemu" "newt" {
+  name        = "newt"
   target_node = var.proxmox_host
   clone       = var.cloud_init_template_name
   full_clone  = true
@@ -71,10 +71,22 @@ resource "proxmox_vm_qemu" "tunnel" {
     EOF
 }
 
-resource "ansible_host" "tunnel-0" {
-  name   = proxmox_vm_qemu.tunnel.ssh_host
-  groups = ["tunnel"]
+// add Pi here
+// import it
+
+resource "ansible_host" "newt-0" {
+  name   = "192.168.1.149"
+  groups = ["tunnel", "newt"]
   variables = {
     ansible_user = "ubuntu"
+  }
+}
+
+resource "ansible_host" "pangolin-0" {
+  name   = "ssh.pangolin.hostedpi.com"
+  groups = ["tunnel", "pangolin"]
+  variables = {
+    ansible_user = "ansible"
+    ansible_port = 5310
   }
 }
