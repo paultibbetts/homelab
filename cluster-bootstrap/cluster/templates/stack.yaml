@@ -6,14 +6,16 @@ metadata:
   name: {{ $stack.name }}
   namespace: {{ $.Release.Namespace }}
 spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: true
   generators:
     - git:
         repoURL: {{ $.Values.gitops.repo }}
         revision: {{ $.Values.gitops.revision }}
         directories:
           - path: {{ $stack.name }}/*
-            exclude:
-              - {{ $stack.name }}/longhorn-system/*
+          - path: {{ $stack.name }}/longhorn-system/*
+            exclude: true
   template:
     metadata:
       name: '{{ `{{path.basename}}` }}'
@@ -29,7 +31,6 @@ spec:
         path: '{{ `{{path}}` }}'
         targetRevision: {{ $.Values.gitops.revision }}
       syncPolicy:
-        preserveResourcesOnDeletion: true
         automated:
           prune: true
           selfHeal: true
