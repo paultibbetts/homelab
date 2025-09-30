@@ -6,16 +6,12 @@ metadata:
   name: {{ $stack.name }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  syncPolicy:
-    preserveResourcesOnDeletion: true
   generators:
     - git:
         repoURL: {{ $.Values.gitops.repo }}
         revision: {{ $.Values.gitops.revision }}
         directories:
           - path: {{ $stack.name }}/*
-          - path: {{ $stack.name }}/longhorn-system/*
-            exclude: true
   template:
     metadata:
       name: '{{ `{{path.basename}}` }}'
