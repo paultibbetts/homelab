@@ -1,0 +1,18 @@
+---
+- hosts: deskpi
+  become: true
+  roles:
+     - beszel_hub
+  tags:
+    - beszel
+    - beszel_hub
+    - hub
+
+- hosts: all,!deskpi,!artpi
+  become: true
+  roles:
+    - beszel_agent
+  tags:
+    - beszel
+    - beszel_agent
+    - agent

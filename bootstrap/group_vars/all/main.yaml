@@ -1,0 +1,4 @@
+beszel_agent: true
+beszel_agent_autoupdate: true
+beszel_agent_ssh_port: 45876
+
