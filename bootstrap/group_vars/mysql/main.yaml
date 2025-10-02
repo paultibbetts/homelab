@@ -1,4 +1,6 @@
 ---
+mysql_disable_log_bin: true
+
 mysql_databases:
   - name: freshrss
   - name: gitea
