@@ -47,7 +47,7 @@ podLabels: {}
 
 podSecurityContext:
   fsGroup: 3003
-  fsGroupChangePolicy: "OnRootMismatch"
+  fsGroupChangePolicy: "Always"
   supplementalGroups: [3003]
 
 securityContext:
