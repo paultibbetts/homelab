@@ -106,9 +106,6 @@ s6:
   initImage: busybox:1.36
 
 volumes:
-  - name: run
-    emptyDir:
-      medium: Memory
   - name: books
     persistentVolumeClaim:
       claimName: nfs-books-pvc
@@ -117,10 +114,6 @@ volumes:
       claimName: calibre-web-config
 
 volumeMounts:
-  - name: run
-    mountPath: /run
-  - name: run
-    mountPath: /var/run
   - name: books
     mountPath: /books
     readOnly: true
