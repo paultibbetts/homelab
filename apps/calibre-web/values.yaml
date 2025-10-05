@@ -30,22 +30,31 @@ podSecurityContext: {}
   # fsGroup: 2000
 
 securityContext:
-  capabilities:
-    drop: [ALL]
-  readOnlyRootFilesystem: true
+  # s6 must start as root
   runAsNonRoot: false
   runAsUser: 0
   runAsGroup: 0
+
+  capabilities:
+    drop: ["ALL"]
+    add: ["SETUID", "SETGID"]
+
+  # Rootfs must be RW for this image (ImageMagick policy, cache, etc.)
+  readOnlyRootFilesystem: false
+
   allowPrivilegeEscalation: false
+
   seccompProfile:
     type: RuntimeDefault
 
+# Give the pod a group that can write the PVC (NFS-friendly)
+podSecurityContext:
+  fsGroup: 1001
+  fsGroupChangePolicy: "OnRootMismatch"
+
 env:
-  PUID: 1000
-  PGID: 1000
   TZ: Europe/London
   DOCKER_MODS: linuxserver/mods:universal-calibre
-  S6_READ_ONLY_ROOT: 1
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
