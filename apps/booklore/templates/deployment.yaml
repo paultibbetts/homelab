@@ -72,8 +72,8 @@ spec:
                 /var/lib/nginx/tmp/uwsgi
               : > /var/lib/nginx/logs/error.log
           volumeMounts:
-            - { name: nginx-logs, mountPath: /var/lib/nginx/logs }
-            - { name: nginx-tmp,  mountPath: /var/lib/nginx/tmp }
+            - { name: nginx-state, mountPath: /var/lib/nginx }
+            - { name: nginx-log,  mountPath: /var/log/nginx }
 
       containers:
         - name: {{ .Chart.Name }}
