@@ -68,7 +68,7 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-staging
+      cert-manager.io/cluster-issuer: letsencrypt-production
       external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
       gethomepage.dev/href: "https://calibre-web.lab.paultibbetts.uk"
       gethomepage.dev/enabled: "true"
