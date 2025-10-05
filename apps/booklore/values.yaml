@@ -107,12 +107,14 @@ resources: {}
   #   memory: 128Mi
 
 # # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-livenessProbe:
-  tcpSocket:
-    port: http
-readinessProbe:
-  tcpSocket:
-    port: http
+livenessProbe:  { httpGet: { path: /actuator/health, port: 8080 } }
+readinessProbe: { httpGet: { path: /actuator/health, port: 8080 } }
+#livenessProbe:
+#  tcpSocket:
+#    port: http
+#readinessProbe:
+#  tcpSocket:
+#    port: http
 
 # If you want to bring your own persistence (such as a hostPath),
 # disable these and do so in extraVolumes/extraVolumeMounts

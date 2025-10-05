@@ -77,6 +77,20 @@ spec:
                   name: {{ .Release.Name }}-mariadb
                   {{- end }}
                   key: mariadb-password
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -lc
+                  - |
+                    mkdir -p /var/lib/nginx/logs \
+                             /var/lib/nginx/tmp/client_body \
+                             /var/lib/nginx/tmp/fastcgi \
+                             /var/lib/nginx/tmp/proxy \
+                             /var/lib/nginx/tmp/scgi \
+                             /var/lib/nginx/tmp/uwsgi
+                    : > /var/lib/nginx/logs/error.log
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
