@@ -21,7 +21,7 @@ redlib:
     useHLS: "off"
     hideHLSNotification: "off"
     autoplayVideos: "off"
-    subscriptions: "homelab+selfhosted"
+    subscriptions: "homelab+homeserver+selfhosted+sysadmin+truenas"
     hideAwards: "off"
     disableVisitRedditConfirmation: "off"
     hideScore: "off"
@@ -62,7 +62,7 @@ ingress:
   enabled: true
   className: traefik
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-production
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://redlib.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
