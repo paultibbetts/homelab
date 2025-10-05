@@ -26,8 +26,9 @@ podAnnotations: {}
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 911
+  fsGroupChangePolicy: "OnRootMismatch"
 
 securityContext:
   # s6 must start as root
@@ -37,7 +38,7 @@ securityContext:
 
   capabilities:
     drop: ["ALL"]
-    add: ["SETUID", "SETGID"]
+    add: ["SETUID", "SETGID", "CHOWN", "FOWNER"]
 
   # Rootfs must be RW for this image (ImageMagick policy, cache, etc.)
   readOnlyRootFilesystem: false
@@ -128,7 +129,6 @@ volumeMounts:
     readOnly: true
   - name: config
     mountPath: /config
-    subPath: config
 
 nodeSelector: {}
 
