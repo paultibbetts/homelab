@@ -133,8 +133,8 @@ extraVolumes:
     emptyDir: {}
 
 extraVolumeMounts:
-  - { name: nginx-var, mountPath: /var/lib/nginx }
-  - { name: nginx-log, mountPath: /var/log/nginx }
+  - { name: nginx-logs, mountPath: /var/lib/nginx/logs }
+  - { name: nginx-tmp,  mountPath: /var/lib/nginx/tmp }
 
 nodeSelector: {}
 
