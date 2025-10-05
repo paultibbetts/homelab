@@ -126,9 +126,15 @@ persistence:
     size: 10Gi
     existingClaim: "nfs-books-pvc"
 
-extraVolumes: []
+extraVolumes:
+  - name: nginx-var
+    emptyDir: {}
+  - name: nginx-log
+    emptyDir: {}
 
-extraVolumeMounts: []
+extraVolumeMounts:
+  - { name: nginx-var, mountPath: /var/lib/nginx }
+  - { name: nginx-log, mountPath: /var/log/nginx }
 
 nodeSelector: {}
 
