@@ -30,14 +30,14 @@ podSecurityContext: {}
   # fsGroup: 2000
 
 securityContext:
-   capabilities:
-     drop:
-     - ALL
-   readOnlyRootFilesystem: true
-   runAsNonRoot: true
-   runAsUser: 1000
-   allowPrivilegeEscalation: false
-   seccompProfile:
+  capabilities:
+    drop: [ALL]
+  readOnlyRootFilesystem: true
+  runAsNonRoot: false
+  runAsUser: 0
+  runAsGroup: 0
+  allowPrivilegeEscalation: false
+  seccompProfile:
     type: RuntimeDefault
 
 env:
@@ -100,28 +100,28 @@ readinessProbe:
     path: /
     port: http
 
-# Additional volumes on the output Deployment definition.
 volumes:
- - name: run
-   emptyDir: {}
- - name: books
-   persistentVolumeClaim:
-     claimName: nfs-books-pvc
- - name: config
-   persistentVolumeClaim:
-     claimName: calibre-web-config
+  - name: run
+    emptyDir:
+      medium: Memory
+  - name: books
+    persistentVolumeClaim:
+      claimName: nfs-books-pvc
+  - name: config
+    persistentVolumeClaim:
+      claimName: calibre-web-config
 
-
-# Additional volumeMounts on the output Deployment definition.
 volumeMounts:
- - name: run
-   mountPath: /run
- - name: books
-   mountPath: "/books"
-   readOnly: true
- - name: config
-   mountPath: "/config"
-   subPath: config
+  - name: run
+    mountPath: /run
+  - name: run
+    mountPath: /var/run
+  - name: books
+    mountPath: /books
+    readOnly: true
+  - name: config
+    mountPath: /config
+    subPath: config
 
 nodeSelector: {}
 
