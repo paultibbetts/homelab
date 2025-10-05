@@ -49,6 +49,18 @@ spec:
             limits:
               cpu: 50m
               memory: 32Mi
+        - name: fix-nginx-perms
+          image: busybox:1.36
+          securityContext: { runAsUser: 0 }
+          command:
+            - sh
+            - -lc
+            - |
+              mkdir -p /var/lib/nginx/tmp/client_body /var/log/nginx
+              chown -R 2001:3002 /var/lib/nginx /var/log/nginx
+          volumeMounts:
+            - { name: nginx-var, mountPath: /var/lib/nginx }
+            - { name: nginx-log, mountPath: /var/log/nginx }
       containers:
         - name: {{ .Chart.Name }}
           {{- with .Values.securityContext }}
