@@ -6,6 +6,7 @@ mariadb:
   enabled: true
   image:
     tag: 11.8.3
+    repository: bitnamilegacy/mariadb
   auth:
     database: booklore
     username: booklore-user
@@ -126,7 +127,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-mariadb:
-  image:
-    repository: bitnamilegacy/mariadb
