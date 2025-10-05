@@ -126,3 +126,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+mariadb:
+  image:
+    repository: bitnamilegacy/mariadb
