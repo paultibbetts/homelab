@@ -8,6 +8,7 @@ mariadb:
     tag: 11.8.3
     repository: bitnamilegacy/mariadb
   auth:
+    existingSecret: booklore-mariadb
     database: booklore
     username: booklore-user
 
