@@ -112,7 +112,7 @@ readinessProbe:
 
 s6:
   runTmpfs:
-    enabled: true
+    enabled: false
   initImage: busybox:1.36
 
 volumes:
