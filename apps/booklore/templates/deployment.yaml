@@ -71,7 +71,6 @@ spec:
               /var/lib/nginx/tmp/scgi \
               /var/lib/nginx/tmp/uwsgi
             : > /var/lib/nginx/logs/error.log
-            # make writable by ANY runtime user (some images drop to uid 101/nginx)
             chmod -R 0777 /var/lib/nginx
             mkdir -p /var/log/nginx && chmod 0777 /var/log/nginx
         volumeMounts:
