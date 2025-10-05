@@ -88,6 +88,10 @@ spec:
               containerPort: {{ .Values.service.port }}
               #protocol: TCP
           env:
+            - name: USER_ID
+              value: "3003"
+            - name: GROUP_ID
+              value: "3002"
             - name: BOOKLORE_PORT
               value: "6060"
             - name: DATABASE_URL
