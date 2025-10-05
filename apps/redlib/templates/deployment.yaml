@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "redlib.fullname" . }}
+  labels:
+    {{- include "redlib.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "redlib.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "redlib.labels" . | nindent 8 }}
+	{{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          env:
+            - name: PORT
+              value: "{{ .Values.service.port }}"
+            {{- with .Values.redlib.settings }}
+            - name: SFW_ONLY
+              value: "{{ .sfwOnly }}"
+            - name: BANNER
+              value: "{{ .banner }}"
+            - name: ROBOTS_DISABLE_INDEXING
+              value: "{{ .robotsDisableIndexing }}"
+            - name: PUSHSHIFT_FRONTEND
+              value: "{{ .pushshiftFrontend }}"
+            - name: ENABLE_RSS
+              value: "{{ .enableRSS }}"
+            - name: FULL_URL
+              value: "{{ .fullURL }}"
+            {{- end }}
+            {{- with .Values.redlib.userSettings }}
+            - name: REDLIB_DEFAULT_THEME
+              value: "{{ .theme }}"
+            - name: REDLIB_DEFAULT_FRONT_PAGE
+              value: "{{ .frontPage }}"
+            - name: REDLIB_DEFAULT_LAYOUT
+              value: "{{ .layout }}"
+            - name: REDLIB_DEFAULT_WIDE
+              value: "{{ .wide }}"
+            - name: REDLIB_DEFAULT_POST_SORT
+              value: "{{ .postSort }}"
+            - name: REDLIB_DEFAULT_COMMENT_SORT
+              value: "{{ .commentSort }}"
+            - name: REDLIB_DEFAULT_BLUR_SPOILER
+              value: "{{ .blurSpoiler }}"
+            - name: REDLIB_DEFAULT_SHOW_NSFW
+              value: "{{ .showNSFW }}"
+            - name: REDLIB_DEFAULT_BLUR_NSFW
+              value: "{{ .blurNSFW }}"
+            - name: REDLIB_DEFAULT_USE_HLS
+              value: "{{ .useHLS }}"
+            - name: REDLIB_DEFAULT_HIDE_HLS_NOTIFICATION
+              value: "{{ .hideHLSNotification }}"
+            - name: REDLIB_DEFAULT_AUTOPLAY_VIDEOS
+              value: "{{ .autoplayVideos }}"
+            {{- with .subscriptions }}
+            - name: REDLIB_DEFAULT_SUBSCRIPTIONS
+              value: "{{ . }}"
+            {{- end }}
+            - name: REDLIB_DEFAULT_HIDE_AWARDS
+              value: "{{ .hideAwards }}"
+            - name: REDLIB_DEFAULT_DISABLE_VISIT_REDDIT_CONFIRMATION
+              value: "{{ .disableVisitRedditConfirmation }}"
+            - name: REDLIB_DEFAULT_HIDE_SCORE
+              value: "{{ .hideScore }}"
+            - name: REDLIB_DEFAULT_HIDE_SIDEBAR_AND_SUMMARY
+              value: "{{ .hideSidebarAndSummary }}"
+            - name: REDLIB_DEFAULT_FIXED_NAVBAR
+              value: "{{ .fixedNavbar }}"
+            {{- end }}
+          command: ["redlib"]
+          {{- with .Values.redlib.address }}
+          args: ["-a", "{{ . }}"]
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
