@@ -89,9 +89,9 @@ spec:
               #protocol: TCP
           env:
             - name: USER_ID
-              value: "3003"
+              value: "2001"
             - name: GROUP_ID
-              value: "3002"
+              value: "3003"
             - name: BOOKLORE_PORT
               value: "6060"
             - name: DATABASE_URL
