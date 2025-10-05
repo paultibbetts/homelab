@@ -127,9 +127,9 @@ persistence:
     existingClaim: "nfs-books-pvc"
 
 extraVolumes:
-  - name: nginx-var
+  - name: nginx-logs
     emptyDir: {}
-  - name: nginx-log
+  - name: nginx-tmp
     emptyDir: {}
 
 extraVolumeMounts:
