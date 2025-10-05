@@ -100,6 +100,11 @@ readinessProbe:
     path: /
     port: http
 
+s6:
+  runTmpfs:
+    enabled: true
+  initImage: busybox:1.36
+
 volumes:
   - name: run
     emptyDir:
