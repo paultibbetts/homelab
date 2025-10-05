@@ -44,8 +44,11 @@ podAnnotations: {}
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  runAsUser: 2001        # UID of TrueNAS 'booklore'
+  runAsGroup: 3003       # GID of 'booksapps'
+  fsGroup: 3003
+  fsGroupChangePolicy: "OnRootMismatch"
 
 securityContext: {}
   # capabilities:
