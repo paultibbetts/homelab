@@ -59,6 +59,9 @@ securityContext:
     add:
     - SETUID
     - SETGID
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
