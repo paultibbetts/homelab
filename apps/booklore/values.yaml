@@ -138,6 +138,7 @@ extraVolumes:
 extraVolumeMounts:
   - { name: nginx-state, mountPath: /var/lib/nginx }
   - { name: nginx-log,  mountPath: /var/log/nginx }
+  - { name: books, mountPath: /bookdrop, subPath: bookdrop }
 
 nodeSelector: {}
 
