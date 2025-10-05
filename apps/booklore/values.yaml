@@ -45,17 +45,20 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext:
-  fsGroup: 101
+  fsGroup: 3003
   fsGroupChangePolicy: "Always"
   supplementalGroups: [3003]
 
 securityContext:
-  runAsUser: 101
-  runAsGroup: 101
+  runAsUser: 0
+  runAsGroup: 0
   allowPrivilegeEscalation: false
   capabilities:
     drop:
     - ALL
+    add:
+    - SETUID
+    - SETGID
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
