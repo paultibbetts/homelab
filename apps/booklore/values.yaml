@@ -45,15 +45,20 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext:
-  runAsUser: 2001        # UID of TrueNAS 'booklore'
-  runAsGroup: 3003       # GID of 'booksapps'
   fsGroup: 3003
   fsGroupChangePolicy: "OnRootMismatch"
+  supplementalGroups: [3003]
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
+securityContext:
+  runAsUser: 0
+  runAsGroup: 0
+  allowPrivilegeEscalation: true
+  capabilities:
+    drop:
+    - ALL
+    add:
+      - SETGID
+      - SETUID
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
