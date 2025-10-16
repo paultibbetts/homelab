@@ -16,7 +16,7 @@ app-template:
         main:
           image:
             repository: docker.io/kanidm/server
-            tag: 1.7.3
+            tag: 1.7.4
           probes:
             liveness:
               enabled: true
