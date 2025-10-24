@@ -65,9 +65,7 @@ resource "proxmox_vm_qemu" "mysql" {
 
   ipconfig0 = "ip=${var.mysql_ip}/24,gw=${var.network_gateway}"
 
-  sshkeys = <<EOF
-    ${var.ssh_keys}
-    EOF
+  sshkeys = var.ssh_keys
 }
 
 resource "proxmox_vm_qemu" "postgres" {
@@ -124,9 +122,7 @@ resource "proxmox_vm_qemu" "postgres" {
 
   ipconfig0 = "ip=${var.postgres_ip}/24,gw=${var.network_gateway}"
 
-  sshkeys = <<EOF
-    ${var.ssh_keys}
-    EOF
+  sshkeys = var.ssh_keys
 }
 
 resource "ansible_host" "mysql-0" {

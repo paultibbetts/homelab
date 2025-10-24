@@ -67,9 +67,7 @@ resource "proxmox_vm_qemu" "newt" {
   skip_ipv6     = true
   agent_timeout = 180
 
-  sshkeys = <<EOF
-    ${var.ssh_keys}
-    EOF
+  sshkeys = var.ssh_keys
 }
 
 // add Pi here

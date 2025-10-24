@@ -65,9 +65,7 @@ resource "proxmox_vm_qemu" "gitea" {
 
   ipconfig0 = "ip=${var.ip}/24,gw=${var.network_gateway}"
 
-  sshkeys = <<EOF
-    ${var.ssh_keys}
-    EOF
+  sshkeys = var.ssh_keys
 }
 
 resource "ansible_host" "gitea-0" {

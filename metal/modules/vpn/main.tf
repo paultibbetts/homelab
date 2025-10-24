@@ -67,9 +67,7 @@ resource "proxmox_vm_qemu" "vpn" {
   skip_ipv6     = true
   agent_timeout = 180
 
-  sshkeys = <<EOF
-    ${var.ssh_keys}
-    EOF
+  sshkeys = var.ssh_keys
 }
 
 resource "ansible_host" "vpn-0" {

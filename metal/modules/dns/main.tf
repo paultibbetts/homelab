@@ -64,9 +64,7 @@ resource "proxmox_vm_qemu" "pihole" {
 
   ipconfig0 = "ip=${var.pihole_ip}/24,gw=${var.network_gateway}"
 
-  sshkeys = <<EOF
-    ${var.ssh_keys}
-    EOF
+  sshkeys = var.ssh_keys
 }
 
 resource "ansible_host" "pihole-0" {
