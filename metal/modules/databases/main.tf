@@ -13,7 +13,7 @@ terraform {
 
 resource "proxmox_vm_qemu" "mysql" {
   name        = "mysql"
-  tags        = "database"
+  tags        = "database;tf"
   target_node = var.proxmox_host
   clone       = var.cloud_init_template_name
   full_clone  = true
@@ -72,7 +72,7 @@ resource "proxmox_vm_qemu" "mysql" {
 
 resource "proxmox_vm_qemu" "postgres" {
   name        = "postgres"
-  tags        = "database"
+  tags        = "database;tf"
   target_node = var.proxmox_host
   clone       = var.cloud_init_template_name
   full_clone  = true

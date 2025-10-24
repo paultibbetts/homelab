@@ -13,7 +13,7 @@ terraform {
 
 resource "proxmox_vm_qemu" "pihole" {
   name        = "pihole"
-  tags        = "dns"
+  tags        = "dns;tf"
   target_node = var.proxmox_host
   clone       = var.cloud_init_template_name
   full_clone  = true

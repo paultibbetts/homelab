@@ -13,6 +13,7 @@ terraform {
 
 resource "proxmox_vm_qemu" "apps" {
   name        = "apps"
+  tags        = "tf"
   target_node = var.proxmox_host
   clone       = var.cloud_init_template_name
   full_clone  = true
