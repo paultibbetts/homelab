@@ -61,6 +61,22 @@ module "ingress" {
   cloud_init_template_name = var.cloud_init_template_name
 }
 
+module "jellyfin" {
+  source = "./modules/jellyfin"
+
+  ssh_keys        = var.ssh_keys
+  network_gateway = var.network_gateway
+  proxmox_storage = var.proxmox_storage
+  proxmox_host    = var.proxmox_host
+  lxc_template    = var.lxc_template # optional; not used post-import
+
+  # Jellyfin specifics
+  memory       = 8192
+  cores        = 2
+  ip           = "192.168.1.6"
+  unprivileged = true
+}
+
 module "vpn" {
   source = "./modules/vpn"
 
