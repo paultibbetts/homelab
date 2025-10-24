@@ -9,6 +9,8 @@ provider "proxmox" {
   pm_api_token_secret = var.proxmox_api_token_secret
   pm_tls_insecure     = var.proxmox_tls_insecure
 
+  pm_parallel = 1
+
   pm_log_enable = var.enable_debug
   pm_log_file   = "terraform-plugin-proxmox.log"
   pm_debug      = var.enable_debug
