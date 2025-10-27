@@ -1,0 +1,11 @@
+#SPDX-License-Identifier: MIT-0
+---
+# Directories (under app_src) to copy recursively if they exist
+app_asset_dirs:
+  - static
+  - config
+  - tls
+  - files
+
+# Individual files (under app_src) to copy if they exist
+app_asset_files: []     # e.g. ["index.html", "bookmarks.yaml"]
