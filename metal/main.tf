@@ -61,6 +61,16 @@ module "ingress" {
   cloud_init_template_name = var.cloud_init_template_name
 }
 
+module "auth" {
+  source = "./modules/auth"
+
+  ssh_keys                 = var.ssh_keys
+  network_gateway          = var.network_gateway
+  proxmox_storage          = var.proxmox_storage
+  proxmox_host             = var.proxmox_host
+  cloud_init_template_name = var.cloud_init_template_name
+}
+
 module "jellyfin" {
   source = "./modules/jellyfin"
 
