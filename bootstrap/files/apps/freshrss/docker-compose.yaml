@@ -7,10 +7,10 @@ services:
   freshrss:
     image: freshrss/freshrss:1.27.0
     # Optional build section if you want to build the image locally:
-    build:
+    # build:
       # Pick #latest (stable release) or #edge (rolling release) or a specific release like #1.21.0
-      context: https://github.com/FreshRSS/FreshRSS.git#1.27.0
-      dockerfile: Docker/Dockerfile-Alpine
+      # context: https://github.com/FreshRSS/FreshRSS.git#1.27.0
+      # dockerfile: Docker/Dockerfile-Alpine
     container_name: freshrss
     restart: unless-stopped
     logging:
