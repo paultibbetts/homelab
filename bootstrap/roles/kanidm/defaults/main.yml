@@ -2,5 +2,15 @@
 ---
 kanidm_app_name: kanidm
 kanidm_app_path: "/srv/www/apps/{{ kanidm_app_name }}"
-kanidm_app_asset_dirs: ["static"]
+kanidm_app_asset_dirs: []
 kanidm_app_asset_files: []
+kanidm_domain: auth.cloud.paultibbetts.uk
+kanidm_origin: "https://{{ kanidm_domain }}"
+kanidm_https_port: 8443
+kanidm_ldap_port: 8636
+kanidm_tls_chain_path: "{{ kanidm_app_path }}/data/chain.pem"
+kanidm_tls_key_path: "{{ kanidm_app_path }}/data/key.pem"
+kanidm_tls_generate: true
+kanidm_tls_validity_days: 365
+kanidm_tls_subject_alt_names:
+  - "DNS:{{ kanidm_domain }}"
