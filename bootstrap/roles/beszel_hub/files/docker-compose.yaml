@@ -10,7 +10,7 @@ services:
       - ./beszel_socket:/beszel_socket
 
   beszel-agent:
-    image: henrygd/beszel-agent:latest@sha256:f55bfffe70db38c7d5d9b9958ef8fd42bd99545a4e18f7e6a341a2acb2daccee
+    image: henrygd/beszel-agent:latest@sha256:dee59d68ac327a755aec7651dd31b9f9a6d7db3da6f093e16e8c36c1f71a18cd
     container_name: beszel-agent
     restart: unless-stopped
     network_mode: host
