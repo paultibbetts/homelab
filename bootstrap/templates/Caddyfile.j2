@@ -44,11 +44,23 @@ https://homepage.cloud.paultibbetts.uk {
 }
 
 https://freshrss.cloud.paultibbetts.uk {
-	reverse_proxy 192.168.1.10:8080
+	reverse_proxy 192.168.1.10:8080 {
+    header_up Host {host}
+    header_up X-Forwarded-Host {host}
+    header_up X-Forwarded-Proto {scheme}
+    header_up X-Forwarded-Port 443
+  }
 }
 
 https://mealie.cloud.paultibbetts.uk {
 	reverse_proxy 192.168.1.10:9000
 }
 
-
+https://auth.cloud.paultibbetts.uk {
+	reverse_proxy https://192.168.1.7:8443 {
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}

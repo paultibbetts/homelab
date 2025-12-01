@@ -1,14 +1,14 @@
 services:
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:v3.5.0@sha256:7f776bbb5457db7f58951c11e3aa881f0167675a78459d7a7f2cd5e42d181fa5 # 
+    image: ghcr.io/mealie-recipes/mealie:v3.5.0@sha256:7f776bbb5457db7f58951c11e3aa881f0167675a78459d7a7f2cd5e42d181fa5 #
     container_name: mealie
     restart: always
     ports:
-        - "9000:9000" # 
+        - "9000:9000"
     deploy:
       resources:
         limits:
-          memory: 1000M # 
+          memory: 1000M
     volumes:
       - mealie-data:/app/data/
     environment:
@@ -26,7 +26,7 @@ services:
       POSTGRES_PORT: 5432
       POSTGRES_DB: mealie
       OIDC_AUTH_ENABLED: true
-      OIDC_CONFIGURATION_URL: https://auth.lab.paultibbetts.uk/oauth2/openid/mealie/.well-known/openid-configuration
+      OIDC_CONFIGURATION_URL: https://auth.cloud.paultibbetts.uk/oauth2/openid/mealie/.well-known/openid-configuration
       OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
       OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
       OIDC_PROVIDER_NAME: "Kanidm"

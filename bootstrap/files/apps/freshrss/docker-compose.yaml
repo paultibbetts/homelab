@@ -7,10 +7,10 @@ services:
   freshrss:
     image: freshrss/freshrss:1.27.0
     # Optional build section if you want to build the image locally:
-    build:
+    # build:
       # Pick #latest (stable release) or #edge (rolling release) or a specific release like #1.21.0
-      context: https://github.com/FreshRSS/FreshRSS.git#1.27.0
-      dockerfile: Docker/Dockerfile-Alpine
+      # context: https://github.com/FreshRSS/FreshRSS.git#1.27.0
+      # dockerfile: Docker/Dockerfile-Alpine
     container_name: freshrss
     restart: unless-stopped
     logging:
@@ -25,6 +25,8 @@ services:
       #- ./config.custom.php:/var/www/FreshRSS/data/config.custom.php
       # Optional file providing custom user settings (used before a new user is created)
       #- ./config-user.custom.php:/var/www/FreshRSS/data/config-user.custom.php
+      # OIDC PKCE fix: FreshRSS image doesn't expose OIDCPKCEMethod
+      - ./freshrss-oidc.conf:/etc/apache2/conf-enabled/zz-oidc-pkce.conf:ro
     ports:
       # If you want to open a port 8080 on the local machine:
       - "8080:80"
@@ -50,7 +52,7 @@ services:
       OIDC_X_FORWARDED_HEADERS: X-Forwarded-Host X-Forwarded-Port X-Forwarded-Proto
       OIDC_SCOPES: openid email profile
       OIDC_REMOTE_USER_CLAIM: preferred_username
-      OIDC_PROVIDER_METADATA_URL: https://auth.lab.paultibbetts.uk/oauth2/openid/freshrss/.well-known/openid-configuration
+      OIDC_PROVIDER_METADATA_URL: https://auth.cloud.paultibbetts.uk/oauth2/openid/freshrss/.well-known/openid-configuration
       OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
       OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
       OIDC_CLIENT_CRYPTO_KEY: ${OIDC_CLIENT_CRYPTO_KEY}

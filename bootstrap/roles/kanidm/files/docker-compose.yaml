@@ -1,0 +1,17 @@
+services:
+  kanidm:
+    image: "${KANIDM_IMAGE:-kanidm/server:latest}"
+    container_name: kanidm
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${KANIDM_HTTPS_PORT:-8443}:443"
+      - "${KANIDM_LDAP_PORT:-8636}:636"
+    environment:
+      KANIDM_DOMAIN: "${KANIDM_DOMAIN}"
+      KANIDM_ORIGIN: "${KANIDM_ORIGIN}"
+      KANIDM_ADMIN_USER: "${KANIDM_ADMIN_USER}"
+      KANIDM_ADMIN_PASSWORD: "${KANIDM_ADMIN_PASSWORD}"
+    volumes:
+      - ./data:/data
