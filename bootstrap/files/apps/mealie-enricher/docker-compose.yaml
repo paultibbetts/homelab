@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  parser:
+    image: gitea.cloud.paultibbetts.uk/paul/ingredient-parser-api:alpha
+
+  app:
+    image: gitea.cloud.paultibbetts.uk/paul/mealie-enricher:alpha
+    environment:
+      MEALIE_ENRICHER_MEALIE_BASE_URL: "https://mealie.cloud.paultibbetts.uk/api"
+      MEALIE_ENRICHER_MEALIE_TOKEN: "${MEALIE_TOKEN}"
+      MEALIE_ENRICHER_PARSER_BASE_URL: "http://parser:8000"
+    ports:
+      - "9001:8080"
+    depends_on:
+      - parser
+

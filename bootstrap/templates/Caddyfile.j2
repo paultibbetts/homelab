@@ -56,6 +56,10 @@ https://mealie.cloud.paultibbetts.uk {
 	reverse_proxy 192.168.1.10:9000
 }
 
+https://mealie-enricher.cloud.paultibbetts.uk {
+	reverse_proxy 192.168.1.10:9001
+}
+
 https://auth.cloud.paultibbetts.uk {
 	reverse_proxy https://192.168.1.7:8443 {
 		transport http {
