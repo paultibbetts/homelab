@@ -1,6 +1,6 @@
 services:
   newt:
-    image: fosrl/newt@sha256:48b63f43d5edff31dddd004c6b222450a6374b09812d9e57a91a0aa16cff4b48
+    image: fosrl/newt@sha256:044248ba66a65cee5d161da7763d89e208c7dc9658e8a7d935708d2cf5763c8c
     container_name: newt
     restart: unless-stopped
     environment:
