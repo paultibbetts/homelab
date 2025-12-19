@@ -13,6 +13,14 @@ renovate:
         "extends": ["config:recommended", ":dependencyDashboard"],
         "prHourlyLimit": 10,
         "labels": ["dependencies"],
+        "hostRules": [
+          {
+            "hostType": "docker",
+            "matchHost": "docker.io",
+            "username": "{{ env.DOCKERHUB_USERNAME }}",
+            "password": "{{ env.DOCKERHUB_TOKEN }}"
+          }
+        ],
         "packageRules": [
           {
             "matchUpdateTypes": ["patch"],
