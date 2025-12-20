@@ -63,11 +63,9 @@ resource "proxmox_vm_qemu" "newt" {
 
   # cloud-init
 
-  ipconfig0     = "ip=dhcp"
-  skip_ipv6     = true
-  agent_timeout = 180
-
-  sshkeys = var.ssh_keys
+  ipconfig0  = "ip=192.168.1.149/24,gw=192.168.1.1"
+  nameserver = "192.168.1.2"
+  sshkeys    = var.ssh_keys
 }
 
 // add Pi here

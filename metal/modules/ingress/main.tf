@@ -64,8 +64,7 @@ resource "proxmox_vm_qemu" "ingress" {
   # cloud-init
 
   ipconfig0 = "ip=${var.ip}/24,gw=${var.network_gateway}"
-
-  sshkeys = var.ssh_keys
+  sshkeys   = var.ssh_keys
 }
 
 resource "ansible_host" "ingress-0" {
