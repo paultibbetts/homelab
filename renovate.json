@@ -17,6 +17,15 @@
      "matchPackageNames": ["ghcr.io/librespeed/speedtest"],
      "schedule": ["* * * * 0"]
   }
- ]
+ ],
+ "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["^group_vars/.+\\.ya?ml$"],
+      "matchStrings": ["newt_version:\\s*(?<currentValue>[^\\s]+)"],
+      "depNameTemplate": "fosrl/newt",
+      "datasourceTemplate": "github-releases"
+    }
+  ]
 }
 

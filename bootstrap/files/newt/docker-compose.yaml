@@ -1,9 +1,0 @@
-services:
-  newt:
-    image: fosrl/newt@sha256:044248ba66a65cee5d161da7763d89e208c7dc9658e8a7d935708d2cf5763c8c
-    container_name: newt
-    restart: unless-stopped
-    environment:
-      - PANGOLIN_ENDPOINT=${PANGOLIN_ENDPOINT}
-      - NEWT_ID=${NEWT_ID}
-      - NEWT_SECRET=${NEWT_SECRET}

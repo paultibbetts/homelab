@@ -1,38 +1,55 @@
-Role Name
+Newt
 =========
 
-Installs Newt as a docker container.
+Installs the Newt binary and wires it into a systemd service using a small
+wrapper script and an environment file for credentials.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Debian-family host (Ubuntu/Debian) on x86_64/amd64.
+- systemd available (the role installs a unit under `/etc/systemd/system`).
 
 Role Variables
 --------------
 
-`apps_path` is the root directory where the docker compose setup is placed.
+Defaults in `defaults/main.yml`:
+
+- `newt_repo`: GitHub repo that hosts Newt releases. Default: `fosrl/newt`.
+- `newt_version`: Release tag to install. Default: `1.8.0`.
+- `newt_bin_path`: Install path for the Newt binary. Default: `/usr/local/bin/newt`.
+- `newt_wrapper_path`: Wrapper script path. Default: `/usr/local/bin/newt-run`.
+- `newt_service_name`: systemd unit name. Default: `newt`.
+- `newt_env_file`: Environment file path. Default: `/etc/default/newt`.
+
+Required vars you need to set:
+
+- `newt_endpoint`: Newt endpoint URL.
+- `newt_id`: Newt ID.
+- `newt_secret`: Newt secret.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    - hosts: newt_hosts
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: newt
+          vars:
+            newt_endpoint: "https://app.pangolin.net"
+            newt_id: "{{ vault_newt_id }}"
+            newt_secret: "{{ vault_newt_secret }}"
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Paul Tibbetts

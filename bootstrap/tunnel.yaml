@@ -1,17 +1,21 @@
 ---
-# - hosts: pangolin
-#   gather_facts: true
-#   become: true
-#   roles:
-#     - common
-#     - pangolin
-#   tags:
-#     - pangolin
+#- hosts: pangolin
+#  gather_facts: true
+#  become: true
+#  roles:
+#    - common
+#    - pangolin
+#  tags:
+#    - pangolin
 
 - hosts: newt
   become: true
+  vars:
+    newt_endpoint: "https://app.pangolin.net"
+    newt_id: "{{ vault_newt_id }}"
+    newt_secret: "{{ vault_newt_secret }}"
   roles:
-    - common
+#    - common
     - newt
   tags:
     - newt

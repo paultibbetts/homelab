@@ -1,0 +1,24 @@
+---
+- name: Assert supported platform (Ubuntu/Debian on x86_64)
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.os_family == "Debian"
+      - ansible_facts.architecture in ["x86_64", "amd64"]
+    fail_msg: >-
+      This role currently supports Debian-family x86_64 only.
+      Got os_family={{ ansible_facts.os_family }}, arch={{ ansible_facts.architecture }}.
+
+- name: Download pinned newt binary (linux_amd64)
+  ansible.builtin.get_url:
+    url: "https://github.com/{{ newt_repo }}/releases/download/{{ newt_version }}/newt_linux_amd64"
+    dest: "{{ newt_bin_path }}"
+    owner: root
+    group: root
+    mode: "0755"
+    force: true
+  register: newt_download
+
+- name: Verify newt binary runs
+  ansible.builtin.command: "{{ newt_bin_path }} --version"
+  register: newt_version_out
+  changed_when: false

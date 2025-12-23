@@ -1,0 +1,14 @@
+[Unit]
+Description=Newt
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart={{ newt_wrapper_path }}
+Restart=on-failure
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
