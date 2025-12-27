@@ -16,6 +16,7 @@ https://proxmox.cloud.paultibbetts.uk {
 }
 
 https://pihole.cloud.paultibbetts.uk {
+        redir / /admin{uri} 308
         reverse_proxy 192.168.1.2:8080
 }
 
