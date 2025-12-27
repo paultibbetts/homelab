@@ -12,17 +12,17 @@ terraform {
 }
 
 resource "proxmox_lxc" "jellyfin" {
-  hostname     = "jellyfin"
-  target_node  = var.proxmox_host
-  vmid         = 302
+  hostname    = "jellyfin"
+  target_node = var.proxmox_host
+  vmid        = 302
 
   unprivileged = var.unprivileged
   start        = true
   onboot       = true
   memory       = var.memory
-  swap = 2048
+  swap         = 2048
   cores        = var.cores
-  nameserver = var.pihole_ip
+  nameserver   = var.pihole_ip
 
   ostemplate = var.lxc_template
 
@@ -43,7 +43,7 @@ resource "proxmox_lxc" "jellyfin" {
     name     = "eth0"
     bridge   = "vmbr0"
     ip       = "${var.ip}/24"
-    ip6 = "auto"
+    ip6      = "auto"
     gw       = var.network_gateway
     firewall = true
   }
@@ -73,11 +73,11 @@ resource "proxmox_lxc" "jellyfin" {
     prevent_destroy = true
 
     ignore_changes = [
-      rootfs, # this would force a new LXC
+      rootfs,          # this would force a new LXC
       ssh_public_keys, # this would force a new LXC
-      cmode, # not worth managing with Terraform
-      ostemplate, # this LXC was created before and imported into TF
-      mountpoint, # only changeable by root@pam - use TF to create the LXC and edit manually I guess?
+      cmode,           # not worth managing with Terraform
+      ostemplate,      # this LXC was created before and imported into TF
+      mountpoint,      # only changeable by root@pam - use TF to create the LXC and edit manually I guess?
     ]
   }
 
