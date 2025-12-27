@@ -2,16 +2,20 @@
 - hosts: deskpi
   become: true
   roles:
-     - beszel_hub
+     - community.beszel.hub
   tags:
     - beszel
     - beszel_hub
     - hub
 
-- hosts: all,!deskpi,!artpi
+- hosts: all,!artpi,!pangolin
   become: true
   roles:
-    - beszel_agent
+    - community.beszel.agent
+  vars:
+    agent_public_key: "{{ vault_beszel_hub_public_key }}"
+    agent_token: "{{ vault_beszel_agent_token }}"
+    agent_hub_url: "{{ vault_beszel_agent_hub_url }}"
   tags:
     - beszel
     - beszel_agent
