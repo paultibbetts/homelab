@@ -30,6 +30,13 @@ services:
     ports:
       # If you want to open a port 8080 on the local machine:
       - "8080:80"
+    healthcheck:
+      test: ["CMD", "cli/health.php"]
+      timeout: 10s
+      start_period: 60s
+      start_interval: 11s
+      interval: 75s
+      retries: 3
     environment:
       # A timezone http://php.net/timezones (default is UTC)
       TZ: Europe/London
