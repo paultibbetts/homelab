@@ -67,10 +67,11 @@ resource "proxmox_vm_qemu" "pihole" {
   sshkeys = var.ssh_keys
 }
 
-resource "ansible_host" "pihole-0" {
-  name   = proxmox_vm_qemu.pihole.ssh_host
-  groups = ["dns", "pihole"]
+resource "ansible_host" "dns" {
+  name   = "dns.infra.home.arpa"
+  groups = ["dns"]
   variables = {
+    ansible_host = proxmox_vm_qemu.pihole.ssh_host
     ansible_user = "ubuntu"
   }
 }

@@ -1,29 +1,27 @@
 ---
-- hosts: gitea
+- hosts: dns
   gather_facts: true
-  become: yes
-  roles:
-    - role: gitea
+  become: true
   vars:
     backup_script_directory: /usr/local/bin/
-    backup_script_name: backup-gitea.sh
+    backup_script_name: backup-pi-hole.sh
     backup_script: "{{ backup_script_directory }}{{ backup_script_name }}"
-    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/9b6585c7-dc2f-4ac7-b2f0-207cd4a59522"
+    healthcheck: "curl -fsS -m 10 --retry 5 -o /dev/null https://healthchecks.lab.paultibbetts.uk/ping/8e2a6174-df12-4267-afcf-970a005c27ee"
   tasks:
-    - name: Backup
+    - name: Configure backups
       tags:
         - backup
       block:
         - name: Ensure backup directory exists
           ansible.builtin.file:
-            path: /var/backups/gitea
+            path: /var/backups/pi-hole
             state: directory
-            owner: git
-            group: git
+            owner: ubuntu
+            group: ubuntu
             mode: "0700"
         - name: Write backup script
           ansible.builtin.copy:
-            src: "backups/{{ backup_script_name }}"
+            src: "{{ playbook_dir }}/files/backups/{{ backup_script_name }}"
             dest: "{{ backup_script }}"
         - name: Make script executable
           ansible.builtin.file:
@@ -31,7 +29,8 @@
             mode: "0755"
         - name: Add script to CRON
           ansible.builtin.cron:
-            name: gitea backup
-            hour: "3"
+            name: pi-hole backup
+            hour: "4"
             minute: "0"
             job: "{{ backup_script }} && {{ healthcheck }}"
+

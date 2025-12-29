@@ -70,10 +70,11 @@ resource "proxmox_vm_qemu" "vpn" {
   sshkeys = var.ssh_keys
 }
 
-resource "ansible_host" "vpn-0" {
-  name   = proxmox_vm_qemu.vpn.ssh_host
+resource "ansible_host" "vpn" {
+  name   = "vpn.infra.home.arpa"
   groups = ["vpn"]
   variables = {
+    ansible_host = proxmox_vm_qemu.vpn.ssh_host
     ansible_user = "ubuntu"
   }
 }

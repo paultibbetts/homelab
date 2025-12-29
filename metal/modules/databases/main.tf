@@ -125,18 +125,20 @@ resource "proxmox_vm_qemu" "postgres" {
   sshkeys = var.ssh_keys
 }
 
-resource "ansible_host" "mysql-0" {
-  name   = proxmox_vm_qemu.mysql.ssh_host
+resource "ansible_host" "mysql" {
+  name   = "mysql.infra.home.arpa"
   groups = ["database", "mysql"]
   variables = {
+    ansible_host = proxmox_vm_qemu.mysql.ssh_host
     ansible_user = "ubuntu"
   }
 }
 
-resource "ansible_host" "postgres-0" {
-  name   = proxmox_vm_qemu.postgres.ssh_host
+resource "ansible_host" "postgres" {
+  name   = "postgres.infra.home.arpa"
   groups = ["database", "postgres"]
   variables = {
+    ansible_host = proxmox_vm_qemu.postgres.ssh_host
     ansible_user = "ubuntu"
   }
 }

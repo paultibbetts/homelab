@@ -68,9 +68,10 @@ resource "proxmox_vm_qemu" "ingress" {
 }
 
 resource "ansible_host" "ingress-0" {
-  name   = proxmox_vm_qemu.ingress.ssh_host
+  name   = "ingress.infra.home.arpa"
   groups = ["ingress"]
   variables = {
+    ansible_host = proxmox_vm_qemu.ingress.ssh_host
     ansible_user = "ubuntu"
   }
 }

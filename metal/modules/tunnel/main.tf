@@ -71,18 +71,20 @@ resource "proxmox_vm_qemu" "newt" {
 // add Pi here
 // import it
 
-resource "ansible_host" "newt-0" {
-  name   = "192.168.1.149"
-  groups = ["tunnel", "newt"]
+resource "ansible_host" "tunnel_home" {
+  name   = "tunnel.infra.home.arpa"
+  groups = ["tunnel", "site_home"]
   variables = {
+    ansible_host = "192.168.1.149"
     ansible_user = "ubuntu"
   }
 }
 
-resource "ansible_host" "pangolin-0" {
-  name   = "ssh.pangolin.hostedpi.com"
-  groups = ["tunnel", "pangolin"]
+resource "ansible_host" "tunnel_edge" {
+  name   = "pangolin.hostedpi.com"
+  groups = ["tunnel", "site_edge"]
   variables = {
+    ansible_host = "ssh.pangolin.hostedpi.com"
     ansible_user = "ansible"
     ansible_port = 5310
   }

@@ -8,9 +8,10 @@ terraform {
 }
 
 resource "ansible_host" "deskpi" {
-  name   = "192.168.1.133"
+  name   = "deskpi.infra.home.arpa"
   groups = ["deskpi", "pi"]
   variables = {
+    ansible_host = "192.168.1.133"
     ansible_user = "paul"
   }
 }

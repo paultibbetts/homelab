@@ -68,10 +68,11 @@ resource "proxmox_vm_qemu" "auth" {
   sshkeys = var.ssh_keys
 }
 
-resource "ansible_host" "auth-0" {
-  name   = proxmox_vm_qemu.auth.ssh_host
+resource "ansible_host" "auth" {
+  name   = "auth.infra.home.arpa"
   groups = ["auth"]
   variables = {
+    ansible_host = proxmox_vm_qemu.auth.ssh_host
     ansible_user = "ubuntu"
   }
 }

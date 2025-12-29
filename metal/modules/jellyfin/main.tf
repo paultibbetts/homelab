@@ -84,9 +84,10 @@ resource "proxmox_lxc" "jellyfin" {
 }
 
 resource "ansible_host" "jellyfin-0" {
-  name   = var.ip
+  name   = "jellyfin.infra.home.arpa"
   groups = ["jellyfin"]
   variables = {
+    ansible_host = var.ip
     ansible_user = "root"
   }
 }

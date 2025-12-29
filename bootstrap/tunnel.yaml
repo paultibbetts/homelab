@@ -1,5 +1,5 @@
 ---
-#- hosts: pangolin
+#- hosts: tunnel:&site_edge
 #  gather_facts: true
 #  become: true
 #  roles:
@@ -8,7 +8,7 @@
 #  tags:
 #    - pangolin
 
-- hosts: newt
+- hosts: tunnel:&site_home
   become: true
   vars:
     newt_endpoint: "https://app.pangolin.net"

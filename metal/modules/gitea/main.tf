@@ -68,10 +68,11 @@ resource "proxmox_vm_qemu" "gitea" {
   sshkeys = var.ssh_keys
 }
 
-resource "ansible_host" "gitea-0" {
-  name   = proxmox_vm_qemu.gitea.ssh_host
-  groups = ["gitea"]
+resource "ansible_host" "git" {
+  name   = "git.infra.home.arpa"
+  groups = ["git"]
   variables = {
+    ansible_host = proxmox_vm_qemu.gitea.ssh_host
     ansible_user = "ubuntu"
   }
 }
