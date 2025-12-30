@@ -4,6 +4,10 @@ terraform {
       source  = "ansible/ansible"
       version = "1.3.0"
     }
+    pihole = {
+      source  = "lukaspustina/pihole"
+      version = "0.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.2-rc05"
@@ -125,8 +129,17 @@ resource "proxmox_vm_qemu" "postgres" {
   sshkeys = var.ssh_keys
 }
 
+locals {
+  mysql = {
+    fqdn = "mysql.infra.home.arpa"
+  }
+  postgres = {
+    fqdn = "postgres.infra.home.arpa"
+  }
+}
+
 resource "ansible_host" "mysql" {
-  name   = "mysql.infra.home.arpa"
+  name   = local.mysql.fqdn
   groups = ["database", "mysql"]
   variables = {
     ansible_host = proxmox_vm_qemu.mysql.ssh_host
@@ -134,11 +147,22 @@ resource "ansible_host" "mysql" {
   }
 }
 
+resource "pihole_dns_record" "mysql" {
+  domain = local.mysql.fqdn
+  ip     = proxmox_vm_qemu.mysql.ssh_host
+}
+
 resource "ansible_host" "postgres" {
-  name   = "postgres.infra.home.arpa"
+  name   = local.postgres.fqdn
   groups = ["database", "postgres"]
   variables = {
     ansible_host = proxmox_vm_qemu.postgres.ssh_host
     ansible_user = "ubuntu"
   }
 }
+
+resource "pihole_dns_record" "postgres" {
+  domain = local.postgres.fqdn
+  ip     = proxmox_vm_qemu.postgres.ssh_host
+}
+

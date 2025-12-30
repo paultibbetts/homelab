@@ -21,3 +21,8 @@ provider "proxmox" {
 
 }
 
+provider "pihole" {
+  url      = "http://192.168.1.2:8080"
+  password = var.pihole_admin_password
+}
+

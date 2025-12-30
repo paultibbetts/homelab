@@ -47,3 +47,8 @@ variable "pihole_ip" {
   default     = "192.168.1.2"
 }
 
+variable "bootstrap" {
+  description = "Is this the first run?"
+  type        = bool
+  default     = false
+}

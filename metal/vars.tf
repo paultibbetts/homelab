@@ -74,3 +74,10 @@ variable "lxc_template" {
   default     = "vms:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
 }
 
+# Pi-hole
+variable "pihole_admin_password" {
+  description = "The admin password for Pi-hole"
+  type        = string
+  sensitive   = true
+}
+

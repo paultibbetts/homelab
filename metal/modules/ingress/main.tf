@@ -4,6 +4,10 @@ terraform {
       source  = "ansible/ansible"
       version = "1.3.0"
     }
+    pihole = {
+      source  = "lukaspustina/pihole"
+      version = "0.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.2-rc05"
@@ -67,8 +71,12 @@ resource "proxmox_vm_qemu" "ingress" {
   sshkeys   = var.ssh_keys
 }
 
-resource "ansible_host" "ingress-0" {
-  name   = "ingress.infra.home.arpa"
+locals {
+  fqdn = "ingress.infra.home.arpa"
+}
+
+resource "ansible_host" "ingress" {
+  name   = local.fqdn
   groups = ["ingress"]
   variables = {
     ansible_host = proxmox_vm_qemu.ingress.ssh_host
@@ -76,4 +84,8 @@ resource "ansible_host" "ingress-0" {
   }
 }
 
+resource "pihole_dns_record" "ingress" {
+  domain = local.fqdn
+  ip     = proxmox_vm_qemu.ingress.ssh_host
+}
 

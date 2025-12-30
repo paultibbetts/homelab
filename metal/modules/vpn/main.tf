@@ -4,6 +4,10 @@ terraform {
       source  = "ansible/ansible"
       version = "1.3.0"
     }
+    pihole = {
+      source  = "lukaspustina/pihole"
+      version = "0.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.2-rc05"
@@ -70,11 +74,21 @@ resource "proxmox_vm_qemu" "vpn" {
   sshkeys = var.ssh_keys
 }
 
+locals {
+  fqdn = "vpn.infra.home.arpa"
+}
+
 resource "ansible_host" "vpn" {
-  name   = "vpn.infra.home.arpa"
+  name   = local.fqdn
   groups = ["vpn"]
   variables = {
     ansible_host = proxmox_vm_qemu.vpn.ssh_host
     ansible_user = "ubuntu"
   }
 }
+
+resource "pihole_dns_record" "vpn" {
+  domain = local.fqdn
+  ip     = proxmox_vm_qemu.vpn.ssh_host
+}
+

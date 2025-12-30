@@ -4,6 +4,10 @@ terraform {
       source  = "ansible/ansible"
       version = "1.3.0"
     }
+    pihole = {
+      source  = "lukaspustina/pihole"
+      version = "0.3.0"
+    }
     proxmox = {
       source  = "telmate/proxmox"
       version = "3.0.2-rc05"
@@ -83,12 +87,21 @@ resource "proxmox_lxc" "jellyfin" {
 
 }
 
-resource "ansible_host" "jellyfin-0" {
-  name   = "jellyfin.infra.home.arpa"
+locals {
+  fqdn = "jellyfin.infra.home.arpa"
+}
+
+resource "ansible_host" "jellyfin" {
+  name   = local.fqdn
   groups = ["jellyfin"]
   variables = {
     ansible_host = var.ip
     ansible_user = "root"
   }
+}
+
+resource "pihole_dns_record" "jellyfin" {
+  domain = local.fqdn
+  ip     = var.ip
 }
 
