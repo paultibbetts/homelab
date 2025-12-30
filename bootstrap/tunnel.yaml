@@ -11,7 +11,7 @@
 - hosts: tunnel:&site_home
   become: true
   vars:
-    newt_endpoint: "https://app.pangolin.net"
+    newt_endpoint: "{{ vault_newt_endpoint }}"
     newt_id: "{{ vault_newt_id }}"
     newt_secret: "{{ vault_newt_secret }}"
   roles:
