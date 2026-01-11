@@ -15,6 +15,15 @@
           url: https://mealie.cloud.paultibbetts.uk
           key: "{{HOMEPAGE_VAR_MEALIE_TOKEN}}"
           version: 2
+    - HomeBox:
+        href: https://homebox.cloud.paultibbetts.uk
+        icon: homebox
+        widget:
+          type: homebox
+          url: https://homebox.cloud.paultibbetts.uk
+          username: "{{HOMEPAGE_VAR_HOMEBOX_USER}}"
+          password: "{{HOMEPAGE_VAR_HOMEBOX_PASSWORD}}"
+          fields: ["items", "labels", "totalValue"]
 - Machines:
     - Proxmox:
         href: https://proxmox.cloud.paultibbetts.uk
