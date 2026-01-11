@@ -5,14 +5,14 @@ useEqualHeights: true
 layout:
   Apps:
     style: row
+    columns: 3
+  Services:
+    style: row
     columns: 2
   Machines:
     style: row
     columns: 2
   Backup:
-    style: row
-    columns: 2
-  Services:
     style: row
     columns: 2
 
