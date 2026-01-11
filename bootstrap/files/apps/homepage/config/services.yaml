@@ -1,3 +1,7 @@
+- Status:
+    - Cloud:
+        href: https://uptime.cloud.paultibbetts.uk/status/cloud
+        icon: mdi-cloud
 - Apps:
     - FreshRSS:
         href: https://freshrss.cloud.paultibbetts.uk
@@ -7,14 +11,6 @@
           url: https://freshrss.cloud.paultibbetts.uk
           username: "{{HOMEPAGE_VAR_FRESHRSS_USERNAME}}"
           password: "{{HOMEPAGE_VAR_FRESHRSS_PASSWORD}}"
-    - Mealie:
-        href: https://mealie.cloud.paultibbetts.uk
-        icon: mealie
-        widget:
-          type: mealie
-          url: https://mealie.cloud.paultibbetts.uk
-          key: "{{HOMEPAGE_VAR_MEALIE_TOKEN}}"
-          version: 2
     - HomeBox:
         href: https://homebox.cloud.paultibbetts.uk
         icon: homebox
@@ -24,6 +20,14 @@
           username: "{{HOMEPAGE_VAR_HOMEBOX_USER}}"
           password: "{{HOMEPAGE_VAR_HOMEBOX_PASSWORD}}"
           fields: ["items", "labels", "totalValue"]
+    - Mealie:
+        href: https://mealie.cloud.paultibbetts.uk
+        icon: mealie
+        widget:
+          type: mealie
+          url: https://mealie.cloud.paultibbetts.uk
+          key: "{{HOMEPAGE_VAR_MEALIE_TOKEN}}"
+          version: 2
 - Services:
     - Beszel:
         href: https://beszel.cloud.paultibbetts.uk
@@ -53,9 +57,15 @@
           enableUser: true # optional, defaults to false
           showEpisodeNumber: true # optional, defaults to false
           expandOneStreamToTwoRows: false # optional, defaults to true
+    - Kanidm:
+        href: https://auth.cloud.paultibbetts.uk
+        icon: kanidm
     - MinIO:
         href: https://minio.cloud.paultibbetts.uk
         icon: minio
+    - Pangolin:
+        href: https://pangolin.paultibbetts.uk
+        icon: pangolin
     - PiHole:
         href: https://pihole.cloud.paultibbetts.uk
         icon: pi-hole

@@ -3,6 +3,9 @@ theme: dark
 useEqualHeights: true
 
 layout:
+  Status:
+    style: row
+    columns: 1
   Apps:
     style: row
     columns: 3
