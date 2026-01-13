@@ -12,20 +12,19 @@ terraform {
 }
 
 locals {
-  fqdn = "deskpi.infra.home.arpa"
+  fqdn = "monpi.infra.home.arpa"
   ip   = "192.168.1.133"
 }
 
-resource "ansible_host" "deskpi" {
+resource "ansible_host" "monpi" {
   name   = local.fqdn
-  groups = ["deskpi", "pi"]
+  groups = ["monpi", "pi"]
   variables = {
     ansible_host = local.ip
-    ansible_user = "paul"
   }
 }
 
-resource "pihole_dns_record" "deskpi" {
+resource "pihole_dns_record" "monpi" {
   domain = local.fqdn
   ip     = local.ip
 }
