@@ -63,6 +63,9 @@
     - MinIO:
         href: https://minio.cloud.paultibbetts.uk
         icon: minio
+    - ntfy:
+        href: https://ntfy.cloud.paultibbetts.uk
+        icon: ntfy
     - Pangolin:
         href: https://pangolin.paultibbetts.uk
         icon: pangolin

@@ -32,6 +32,28 @@ https://minio.cloud.paultibbetts.uk {
 	reverse_proxy 192.168.1.4:9002
 }
 
+ntfy.cloud.paultibbetts.uk {
+  encode zstd gzip
+
+  reverse_proxy apps.infra.home.arpa:8093
+
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    Referrer-Policy "no-referrer"
+  }
+
+    # Redirect HTTP to HTTPS, but only for GET topic addresses, since we want
+    # it to work with curl without the annoying https:// prefix
+    @httpget {
+        protocol http
+        method GET
+        path_regexp ^/([-_a-z0-9]{0,64}$|docs/|static/)
+    }
+    redir @httpget https://{host}{uri}
+}
+
 https://uptime.cloud.paultibbetts.uk {
         reverse_proxy 192.168.1.133:3001
 }
