@@ -1,0 +1,3 @@
+---
+- ansible.builtin.import_playbook: beszel.yaml
+- ansible.builtin.import_playbook: uptime.yaml
