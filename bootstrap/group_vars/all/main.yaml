@@ -10,5 +10,6 @@ common_users:
     pubkeys:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPfx70ArvHPF+9U3GgKgNEAWkXSyZMun83sn9582Pl4e"
 
+ops_user: "ops"
 docker_users:
-  - "{{ ansible_user }}"
+  - "{{ ops_user }}"

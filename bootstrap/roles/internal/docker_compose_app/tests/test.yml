@@ -2,5 +2,10 @@
 ---
 - hosts: localhost
   remote_user: root
+  check_mode: true
   roles:
-    - docker_compose_app
+    - role: docker_compose_app
+      vars:
+        app_name: docker-compose-app-test
+        app_path: /tmp/docker-compose-app-test
+        compose_src: "{{ playbook_dir }}/../../uptime_kuma/files/docker-compose.yaml"

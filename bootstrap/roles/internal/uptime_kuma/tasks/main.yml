@@ -1,38 +1,19 @@
 #SPDX-License-Identifier: MIT-0
 ---
-- name: Add ansible user to docker group
-  ansible.builtin.user:
-    name: "{{ ansible_user }}"
-    groups: docker
-    append: yes
+- name: Deploy {{ uptime_kuma_app_name }}
+  ansible.builtin.include_tasks: "{{ role_path }}/../common/tasks/deploy_compose_app.yml"
+  vars:
+    app_name: "{{ uptime_kuma_app_name }}"
+    app_path: "{{ uptime_kuma_app_path }}"
+    compose_src: "{{ role_path }}/files/docker-compose.yaml"
+    volume_dirs:
+      - uptime-kuma-data
+    enforce_volume_ownership: "{{ uptime_kuma_enforce_volume_ownership }}"
+  when: not ansible_check_mode
 
-- name: Write apps to variable
-  ansible.builtin.find:
-    paths: "{{ playbook_dir }}/files"
-    file_type: directory
-    pattern: uptime-kuma
-    depth: 1
-  register: app_directories
-  delegate_to: localhost
-  become: false
-
-- name: Create directory for apps
-  ansible.builtin.file:
-    path: "{{ apps_path }}"
-    state: directory
-    mode: "0755"
-
-- name: Write app files
-  ansible.builtin.copy:
-    src: "{{ playbook_dir }}/files/{{ item.path | basename }}/"
-    dest: "{{ apps_path }}/{{ item.path | basename }}"
-    mode: "0644"
-  loop: "{{ app_directories.files }}"
-
-- name: Docker Compose Up
-  ansible.builtin.command: docker compose up -d
-  become: true
-  args:
-    chdir: "{{ apps_path }}/{{ item.path | basename }}"
-  loop: "{{ app_directories.files }}"
-
+- name: Uptime Kuma check mode reminder
+  ansible.builtin.debug:
+    msg: >
+      Uptime Kuma role skipped runtime changes in check mode. Apply without --check to stage assets
+      and manage the docker compose deployment.
+  when: ansible_check_mode

@@ -1,2 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
+uptime_kuma_app_name: uptime-kuma
+uptime_kuma_app_path: "{{ apps_path }}/{{ uptime_kuma_app_name }}"
+uptime_kuma_enforce_volume_ownership: true

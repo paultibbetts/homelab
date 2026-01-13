@@ -1,9 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
-- name: Capture Kanidm role path
-  ansible.builtin.set_fact:
-    kanidm_resolved_role_path: "{{ role_path }}"
-
 - name: Ensure Kanidm app directory
   ansible.builtin.file:
     path: "{{ kanidm_app_path }}"
@@ -53,14 +49,14 @@
   when: not ansible_check_mode
 
 - name: Deploy {{ kanidm_app_name }}
-  ansible.builtin.include_role:
-    name: docker_compose_app
+  ansible.builtin.include_tasks: "{{ role_path }}/../common/tasks/deploy_compose_app.yml"
   vars:
     app_name: "{{ kanidm_app_name }}"
     app_path: "{{ kanidm_app_path }}"
-    src_role_path: "{{ kanidm_resolved_role_path }}"
-    app_asset_dirs: "{{ kanidm_app_asset_dirs }}"
-    app_asset_files: "{{ kanidm_app_asset_files }}"
+    compose_src: "{{ role_path }}/files/docker-compose.yaml"
+    env_template: "{{ role_path }}/templates/.env.j2"
+    volume_dirs:
+      - data
   when: not ansible_check_mode
 
 - name: Kanidm check mode reminder
