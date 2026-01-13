@@ -1,6 +1,6 @@
 #SPDX-License-Identifier: MIT-0
 ---
-- name: Validate required variables
+- name: "{{ app_name }}: Validate required variables"
   ansible.builtin.assert:
     that:
       - app_name | default('') | length > 0
@@ -8,7 +8,7 @@
       - compose_src | default('') | length > 0
     fail_msg: "You must set app_name, app_path, and compose_src when including deploy_compose_app."
 
-- name: Deploy compose app
+- name: "{{ app_name }}: Deploy compose app"
   vars:
     compose_app_user: "{{ app_user | default(ops_user | default(ansible_facts['user_id'])) }}"
     compose_app_group: "{{ app_group | default(app_user | default(ops_user | default(ansible_facts['user_id']))) }}"
@@ -16,7 +16,7 @@
     compose_app_volume_paths: >-
       {{ volume_dirs | default([]) | map('regex_replace', '^(?!/)', app_path ~ '/') | list }}
   block:
-    - name: Ensure app directory and volume roots
+    - name: "{{ app_name }}: Ensure app directory and volume roots"
       become: "{{ compose_app_become_fs }}"
       ansible.builtin.file:
         path: "{{ item }}"
@@ -26,7 +26,7 @@
         mode: "0755"
       loop: "{{ [app_path] + compose_app_volume_paths }}"
 
-    - name: Copy docker-compose.yaml
+    - name: "{{ app_name }}: Copy docker-compose.yaml"
       become: "{{ compose_app_become_fs }}"
       ansible.builtin.copy:
         src: "{{ compose_src }}"
@@ -35,7 +35,7 @@
         group: "{{ compose_app_group }}"
         mode: "0644"
 
-    - name: Render .env from template
+    - name: "{{ app_name }}: Render .env from template"
       become: "{{ compose_app_become_fs }}"
       ansible.builtin.template:
         src: "{{ env_template }}"
@@ -43,16 +43,18 @@
         owner: "{{ compose_app_user }}"
         group: "{{ compose_app_group }}"
         mode: "0600"
-      when: env_template is defined
+      when:
+        - env_template is defined
+        - env_template != omit
 
-    - name: Docker compose up -d
+    - name: "{{ app_name }}: Docker compose up -d"
       community.docker.docker_compose_v2:
         project_src: "{{ app_path }}"
         project_name: "{{ app_name }}"
         remove_orphans: true
       when: not ansible_check_mode
 
-    - name: Enforce ownership on volume roots (post-compose)
+    - name: "{{ app_name }}: Enforce ownership on volume roots (post-compose)"
       become: "{{ compose_app_become_fs }}"
       ansible.builtin.file:
         path: "{{ item }}"

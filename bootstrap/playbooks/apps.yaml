@@ -2,6 +2,27 @@
 - hosts: apps
   vars:
     apps_path: /srv/www/apps
+    app_definitions:
+      freshrss:
+        env_template: "{{ playbook_dir }}/../templates/apps/freshrss/.env.j2"
+        extra_copy_files:
+          - freshrss-oidc.conf
+      homepage:
+        env_template: "{{ playbook_dir }}/../templates/apps/homepage/.env.j2"
+        volume_dirs:
+          - config
+        extra_copy_dirs:
+          - config
+      homebox:
+        env_template: "{{ playbook_dir }}/../templates/apps/homebox/.env.j2"
+      mealie:
+        env_template: "{{ playbook_dir }}/../templates/apps/mealie/.env.j2"
+      mealie-enricher:
+        env_template: "{{ playbook_dir }}/../templates/apps/mealie-enricher/.env.j2"
+      ntfy:
+        env_template: "{{ playbook_dir }}/../templates/apps/ntfy/.env.j2"
+        volume_dirs:
+          - data
   tasks:
     - name: Install Docker
       ansible.builtin.import_role:
@@ -15,55 +36,42 @@
         append: yes
       become: true
 
-    - name: Write apps to variable
-      ansible.builtin.find:
-        paths: "{{ playbook_dir }}/../files/apps"
-        file_type: directory
-        depth: 1
-      register: app_directories
-      delegate_to: localhost
-      become: false
-
-    - name: Find app env templates
-      ansible.builtin.find:
-        paths: "{{ playbook_dir }}/../templates/apps"
-        patterns: ".env.j2"
-        recurse: true
-        hidden: true
-      register: env_template_files
-      delegate_to: localhost
-      become: false
-
-    - name: Map app env templates
-      ansible.builtin.set_fact:
-        env_template_map: >-
-          {{ env_template_map | default({}) | combine({ (item.path | dirname | basename): item.path }) }}
-      loop: "{{ env_template_files.files }}"
-      loop_control:
-        label: "{{ item.path | dirname | basename }}"
-
-    - name: Deploy compose apps
+    - name: Deploy compose app
       ansible.builtin.include_tasks: "{{ playbook_dir }}/../roles/internal/common/tasks/deploy_compose_app.yml"
       vars:
-        app_name: "{{ app_dir.path | basename }}"
-        app_path: "{{ apps_path }}/{{ app_dir.path | basename }}"
-        compose_src: "{{ playbook_dir }}/../files/apps/{{ app_dir.path | basename }}/docker-compose.yaml"
+        app_name: "{{ app_def.key }}"
+        app_path: "{{ apps_path }}/{{ app_def.key }}"
+        compose_src: "{{ playbook_dir }}/../files/apps/{{ app_def.key }}/docker-compose.yaml"
         app_user: "{{ ansible_user }}"
-        env_template: >-
-          {{ env_template_map[app_dir.path | basename]
-             if env_template_map is defined and (app_dir.path | basename) in env_template_map else omit }}
-      loop: "{{ app_directories.files }}"
+        env_template: "{{ app_def.value.env_template | default(omit) }}"
+        volume_dirs: "{{ app_def.value.volume_dirs | default([]) }}"
+        enforce_volume_ownership: "{{ app_def.value.enforce_volume_ownership | default(false) }}"
+      loop: "{{ app_definitions | dict2items }}"
       loop_control:
-        loop_var: app_dir
-        label: "{{ app_dir.path | basename }}"
+        loop_var: app_def
+        label: "{{ app_def.key }}"
 
-    - name: Copy Homepage config directory
+    - name: Copy app extra directories
       become: true
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/../files/apps/homepage/config/"
-        dest: "{{ apps_path }}/homepage/config/"
-        owner: "{{ ops_user | default(ansible_facts['user_id']) }}"
-        group: "{{ ops_user | default(ansible_facts['user_id']) }}"
+        src: "{{ playbook_dir }}/../files/apps/{{ item.0.key }}/{{ item.1 }}/"
+        dest: "{{ apps_path }}/{{ item.0.key }}/{{ item.1 }}/"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
         mode: "0644"
         directory_mode: "0755"
-      when: "'homepage' in (app_directories.files | map(attribute='path') | map('basename') | list)"
+      loop: "{{ app_definitions | dict2items | subelements('value.extra_copy_dirs', skip_missing=True) }}"
+      loop_control:
+        label: "{{ item.0.key }}/{{ item.1 }}"
+
+    - name: Copy app extra files
+      become: true
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../files/apps/{{ item.0.key }}/{{ item.1 }}"
+        dest: "{{ apps_path }}/{{ item.0.key }}/{{ item.1 }}"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0644"
+      loop: "{{ app_definitions | dict2items | subelements('value.extra_copy_files', skip_missing=True) }}"
+      loop_control:
+        label: "{{ item.0.key }}/{{ item.1 }}"
