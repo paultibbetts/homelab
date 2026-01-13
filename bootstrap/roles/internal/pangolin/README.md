@@ -1,7 +1,7 @@
-Role Name
+Pangolin
 =========
 
-A brief description of the role goes here.
+Configures the Pangolin stack. WIP.
 
 Requirements
 ------------

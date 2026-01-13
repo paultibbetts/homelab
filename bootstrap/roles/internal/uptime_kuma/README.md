@@ -1,7 +1,7 @@
-Role Name
+Uptime Kuma
 =========
 
-A brief description of the role goes here.
+Installs Uptime Kuma as a Docker Compose stack. WIP
 
 Requirements
 ------------
