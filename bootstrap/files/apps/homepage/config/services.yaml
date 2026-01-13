@@ -2,6 +2,10 @@
     - Cloud:
         href: https://uptime.cloud.paultibbetts.uk/status/cloud
         icon: mdi-cloud
+        widget:
+          type: uptimekuma
+          url: https://uptime.cloud.paultibbetts.uk
+          slug: cloud
 - Apps:
     - FreshRSS:
         href: https://freshrss.cloud.paultibbetts.uk
@@ -80,10 +84,6 @@
     - Uptime:
         href: https://uptime.cloud.paultibbetts.uk
         icon: uptime-kuma
-        widget:
-          type: uptimekuma
-          url: https://uptime.cloud.paultibbetts.uk
-          slug: cloud
 - Machines:
     - Proxmox:
         href: https://proxmox.cloud.paultibbetts.uk
