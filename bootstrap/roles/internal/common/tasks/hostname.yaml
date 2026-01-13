@@ -1,4 +1,17 @@
 ---
-- name: Ensure hostname is set
+- name: Derive hostname values from inventory
+  ansible.builtin.set_fact:
+    host_short: "{{ hostname_short | default(inventory_hostname_short) }}"
+    host_fqdn: "{{ hostname_fqdn | default(inventory_hostname) }}"
+
+- name: Set system hostname (short)
   ansible.builtin.hostname:
-    name: "{{ inventory_hostname }}"
+    name: "{{ host_short }}"
+
+- name: Ensure /etc/hosts has hostname entries (Debian/Ubuntu)
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1\s+'
+    line: "127.0.1.1 {{ host_fqdn }} {{ host_short }}"
+    create: true
+  when: ansible_os_family == "Debian"
