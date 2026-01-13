@@ -11,4 +11,3 @@ collections:
   - name: community.general
   - name: community.beszel
     version: 0.6.0
-  - name: kubernetes.core

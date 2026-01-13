@@ -1,4 +1,3 @@
 github3.py
 jsonpatch
-kubernetes
 PyYAML
