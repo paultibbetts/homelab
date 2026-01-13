@@ -1,5 +1,5 @@
 ---
-- hosts: deskpi
+- hosts: monpi
   become: true
   roles:
      - community.beszel.hub
@@ -8,7 +8,7 @@
     - beszel_hub
     - hub
 
-- hosts: all,!artpi,!pangolin
+- hosts: all,!artpi,!pangolin.hostedpi.com
   become: true
   roles:
     - community.beszel.agent
@@ -20,3 +20,16 @@
     - beszel
     - beszel_agent
     - agent
+  tasks:
+    - name: Reload systemd daemon
+      ansible.builtin.systemd:
+        daemon_reload: true
+      tags:
+        - restart
+
+    - name: Restart beszel-agent to pick up updated token
+      ansible.builtin.systemd:
+        name: beszel-agent
+        state: restarted
+      tags:
+        - restart
