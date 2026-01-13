@@ -68,6 +68,7 @@ resource "proxmox_vm_qemu" "pihole" {
 
   ipconfig0 = "ip=${var.pihole_ip}/24,gw=${var.network_gateway}"
 
+  ciuser  = "ops"
   sshkeys = var.ssh_keys
 }
 
@@ -80,7 +81,7 @@ resource "ansible_host" "dns" {
   groups = ["dns"]
   variables = {
     ansible_host = proxmox_vm_qemu.pihole.ssh_host
-    ansible_user = "ubuntu"
+    ansible_user = "ops"
   }
 }
 

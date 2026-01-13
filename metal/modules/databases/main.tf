@@ -69,6 +69,7 @@ resource "proxmox_vm_qemu" "mysql" {
 
   ipconfig0 = "ip=${var.mysql_ip}/24,gw=${var.network_gateway}"
 
+  ciuser  = "ops"
   sshkeys = var.ssh_keys
 }
 
@@ -126,6 +127,7 @@ resource "proxmox_vm_qemu" "postgres" {
 
   ipconfig0 = "ip=${var.postgres_ip}/24,gw=${var.network_gateway}"
 
+  ciuser  = "ops"
   sshkeys = var.ssh_keys
 }
 
@@ -143,7 +145,7 @@ resource "ansible_host" "mysql" {
   groups = ["database", "mysql"]
   variables = {
     ansible_host = proxmox_vm_qemu.mysql.ssh_host
-    ansible_user = "ubuntu"
+    ansible_user = "ops"
   }
 }
 
@@ -157,7 +159,7 @@ resource "ansible_host" "postgres" {
   groups = ["database", "postgres"]
   variables = {
     ansible_host = proxmox_vm_qemu.postgres.ssh_host
-    ansible_user = "ubuntu"
+    ansible_user = "ops"
   }
 }
 

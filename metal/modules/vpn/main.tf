@@ -71,6 +71,7 @@ resource "proxmox_vm_qemu" "vpn" {
   skip_ipv6     = true
   agent_timeout = 180
 
+  ciuser  = "ops"
   sshkeys = var.ssh_keys
 }
 
@@ -83,7 +84,7 @@ resource "ansible_host" "vpn" {
   groups = ["vpn"]
   variables = {
     ansible_host = proxmox_vm_qemu.vpn.ssh_host
-    ansible_user = "ubuntu"
+    ansible_user = "ops"
   }
 }
 

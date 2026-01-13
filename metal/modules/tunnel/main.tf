@@ -70,6 +70,7 @@ resource "proxmox_vm_qemu" "newt" {
   ipconfig0  = "ip=192.168.1.149/24,gw=192.168.1.1"
   nameserver = "192.168.1.2"
 
+  ciuser  = "ops"
   sshkeys = var.ssh_keys
 }
 
@@ -93,7 +94,7 @@ resource "ansible_host" "home" {
   groups = ["tunnel", "site_home"]
   variables = {
     ansible_host = local.home.ip
-    ansible_user = "ubuntu"
+    ansible_user = "ops"
   }
 }
 

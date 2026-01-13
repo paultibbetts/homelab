@@ -69,6 +69,7 @@ resource "proxmox_vm_qemu" "apps" {
 
   ipconfig0 = "ip=${var.ip}/24,gw=${var.network_gateway}"
 
+  ciuser  = "ops"
   sshkeys = var.ssh_keys
 }
 
@@ -81,7 +82,7 @@ resource "ansible_host" "apps" {
   groups = ["apps"]
   variables = {
     ansible_host = proxmox_vm_qemu.apps.ssh_host
-    ansible_user = "ubuntu"
+    ansible_user = "ops"
   }
 }
 

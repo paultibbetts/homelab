@@ -21,6 +21,7 @@ resource "ansible_host" "monpi" {
   groups = ["monpi", "pi"]
   variables = {
     ansible_host = local.ip
+    ansible_user = "ops"
   }
 }
 
