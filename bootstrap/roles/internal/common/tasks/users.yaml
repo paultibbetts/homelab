@@ -31,7 +31,7 @@
     label: "{{ item.name }}"
 
 - name: Authorize SSH keys
-  ansible.builtin.authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ item.0.name }}"
     key: "{{ item.1 }}"
     state: present

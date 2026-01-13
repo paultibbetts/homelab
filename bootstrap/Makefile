@@ -1,14 +1,20 @@
-.PHONY: deps apply
+.PHONY: setup deps deps-upgrade site
 
-deps:
-	ansible-galaxy role install -r requirements.yaml -p roles/galaxy
+GALAXY_FLAGS ?=
+PLAYBOOK_FLAGS ?=
 
-apply:
-	ansible-playbook site.yaml
-<<<<<<< HEAD
-||||||| parent of 7691c97 (refactor: move roles and install galaxy to local to repo dir)
-=======
+setup:
+	@command -v uv >/dev/null || \
+		(echo "uv is not installed" && exit 1)
+	uv sync
 
-hash-password:
-	python3 -c 'import crypt, getpass; print(crypt.crypt(getpass.getpass(), crypt.mksalt(crypt.METHOD_SHA512)))'
->>>>>>> 7691c97 (refactor: move roles and install galaxy to local to repo dir)
+deps: setup
+	uv run ansible-galaxy role install -r requirements.yaml -p roles/galaxy $(GALAXY_FLAGS)
+	uv run ansible-galaxy collection install -r requirements.yaml $(GALAXY_FLAGS)
+
+deps-upgrade: setup
+	uv run ansible-galaxy role install -r requirements.yaml -p roles/galaxy --force $(GALAXY_FLAGS)
+	uv run ansible-galaxy collection install -r requirements.yaml --force $(GALAXY_FLAGS)
+
+site: deps
+	uv run ansible-playbook site.yaml $(PLAYBOOK_FLAGS)
