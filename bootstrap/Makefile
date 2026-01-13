@@ -1,4 +1,4 @@
-.PHONY: setup deps deps-upgrade site
+.PHONY: setup deps deps-upgrade site upgrade
 
 GALAXY_FLAGS ?=
 PLAYBOOK_FLAGS ?=
@@ -18,3 +18,6 @@ deps-upgrade: setup
 
 site: deps
 	uv run ansible-playbook site.yaml $(PLAYBOOK_FLAGS)
+
+upgrade: deps
+	uv run ansible-playbook playbooks/system-upgrade.yaml $(PLAYBOOK_FLAGS)
