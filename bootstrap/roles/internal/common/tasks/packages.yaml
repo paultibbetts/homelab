@@ -1,0 +1,9 @@
+---
+- name: Ensure baseline packages
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+

@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Beszel Agent role. Originally taken from their website, it has been replaced by a [community collection](https://www.beszel.dev/guide/advanced-deployment#ansible).
+A brief description of the role goes here.
 
 Requirements
 ------------

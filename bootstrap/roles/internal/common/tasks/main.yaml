@@ -1,0 +1,19 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Debian/Ubuntu only
+  ansible.builtin.assert:
+    that: ansible_facts.os_family == "Debian"
+    fail_msg: "This base role targets Debian/Ubuntu."
+
+- name: Ensure apt cache is fresh
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- ansible.builtin.import_tasks: hostname.yaml
+- ansible.builtin.import_tasks: packages.yaml
+- ansible.builtin.import_tasks: ssh.yaml
+- ansible.builtin.import_tasks: time.yaml
+- ansible.builtin.import_tasks: updates.yaml
+- ansible.builtin.import_tasks: users.yaml
+

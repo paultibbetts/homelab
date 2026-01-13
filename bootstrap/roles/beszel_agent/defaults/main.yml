@@ -1,7 +1,0 @@
-#SPDX-License-Identifier: MIT-0
----
-beszel_agent: true
-beszel_agent_autoupdate: true
-beszel_agent_ssh_key: 'ssh-ed25519 lalalala'
-beszel_agent_ssh_port: 45876
-

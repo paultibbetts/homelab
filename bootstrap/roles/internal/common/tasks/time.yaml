@@ -1,0 +1,6 @@
+---
+- name: Ensure systemd-timesyncd running
+  ansible.builtin.systemd:
+    name: systemd-timesyncd
+    state: started
+    enabled: true

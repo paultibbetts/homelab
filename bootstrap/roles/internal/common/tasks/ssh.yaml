@@ -1,0 +1,33 @@
+---
+- name: Ensure OpenSSH server is installed
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+    update_cache: true
+
+- name: Ensure sshd drop-in directory exists
+  ansible.builtin.file:
+    path: /etc/ssh/sshd_config.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Disable SSH password authentication
+  ansible.builtin.copy:
+    dest: /etc/ssh/sshd_config.d/10-disable-passwords.conf
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      # Managed by Ansible (common role)
+      PasswordAuthentication no
+      ChallengeResponseAuthentication no
+  notify: Reload ssh
+
+- name: Ensure SSH daemon enabled and running
+  ansible.builtin.systemd:
+    name: ssh
+    state: started
+    enabled: true
+
