@@ -2,5 +2,13 @@ beszel_agent: true
 beszel_agent_autoupdate: true
 beszel_agent_ssh_port: 45876
 
+common_users:
+  - name: paul
+    sudo: true
+    sudo_nopasswd: false
+    password: "{{ vault_user_paul_password }}"
+    pubkeys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPfx70ArvHPF+9U3GgKgNEAWkXSyZMun83sn9582Pl4e"
+
 docker_users:
   - "{{ ansible_user }}"
