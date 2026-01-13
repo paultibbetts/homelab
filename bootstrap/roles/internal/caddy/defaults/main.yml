@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+caddy_bin_path: /usr/local/bin/caddy
+caddy_download_url: https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare
+caddy_group_name: caddy
+caddy_user_name: caddy
+caddy_user_home_directory: /var/lib/caddy
+caddy_config_path: /etc/caddy
+caddy_log_path: /var/log/caddy
+

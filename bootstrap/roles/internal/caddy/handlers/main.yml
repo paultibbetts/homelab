@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Reload Caddy
+  ansible.builtin.service:
+    name: caddy
+    state: reloaded
+
+- name: Restart Caddy
+  listen: service modified
+  ansible.builtin.service:
+    name: caddy
+    state: restarted
+
+

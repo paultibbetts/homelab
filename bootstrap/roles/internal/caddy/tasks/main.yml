@@ -1,0 +1,84 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Check if Caddy is installed
+  ansible.builtin.stat:
+    path: "{{ caddy_bin_path }}"
+  register: caddy_stat
+
+- ansible.builtin.set_fact:
+    caddy_needs_installing: "{{ not caddy_stat.stat.exists }}"
+
+- name: Install Caddy
+  block:
+    - name: Download custom Caddy build
+      ansible.builtin.get_url:
+        url: "{{ caddy_download_url }}"
+        dest: "/tmp/caddy"
+        mode: '0644'
+
+    - name: Install Caddy binary
+      ansible.builtin.copy:
+        src: "/tmp/caddy"
+        dest: "{{ caddy_bin_path }}"
+        mode: '0755'
+        remote_src: true
+      notify: Restart Caddy
+
+    - name: Delete tmp file
+      ansible.builtin.file:
+        path: "/tmp/caddy"
+        state: absent
+
+  when: caddy_needs_installing
+
+- name: Check Caddy binary works
+  ansible.builtin.command: "{{ caddy_bin_path }} version"
+  register: caddy_version_check
+  failed_when: caddy_version_check.rc != 0
+  changed_when: false
+
+- name: Add Caddy group
+  ansible.builtin.group:
+    name: "{{ caddy_group_name }}"
+
+- name: Add Caddy user
+  ansible.builtin.user:
+    name: "{{ caddy_user_name }}"
+    group: "{{ caddy_group_name }}"
+    home: "{{ caddy_user_home_directory }}"
+    create_home: true
+    shell: "/usr/sbin/nologin"
+    system: true
+
+- name: Create Caddy systemd unit file
+  ansible.builtin.template:
+    src: caddy.service.j2
+    dest: /etc/systemd/system/caddy.service
+    mode: "0644"
+  notify: service modified
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: "{{ caddy_config_path }}"
+    state: directory
+    mode: "0755"
+
+- name: Create log directory
+  ansible.builtin.file:
+    path: "{{ caddy_log_path }}"
+    state: directory
+    mode: 0755
+    owner: "{{ caddy_user_name }}"
+
+- name: Add Caddyfile
+  ansible.builtin.template:
+    src: Caddyfile.j2
+    dest: "{{ caddy_config_path }}/Caddyfile"
+    mode: "0644"
+  notify: Reload Caddy
+
+- name: Enable and start Caddy service
+  ansible.builtin.service:
+    name: caddy.service
+    state: started
+    enabled: true
