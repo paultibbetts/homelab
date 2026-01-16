@@ -16,16 +16,13 @@ services:
       NTFY_AUTH_FILE: /var/cache/ntfy/auth.db
       NTFY_AUTH_DEFAULT_ACCESS: deny-all
       NTFY_ENABLE_LOGIN: true
-      NTFY_AUTH_USERS: ${NTFY_AUTH_USERS}
       # iOS
       NTFY_UPSTREAM_BASE_URL: https://ntfy.sh
       # Web Push
-      NTFY_WEB_PUSH_PUBLIC_KEY: ${NTFY_WEB_PUSH_PUBLIC_KEY}
-      NTFY_WEB_PUSH_PRIVATE_KEY: ${NTFY_WEB_PUSH_PRIVATE_KEY}
       NTFY_WEB_PUSH_FILE: /var/cache/ntfy/webpush.db
       NTFY_WEB_PUSH_EMAIL_ADDRESS: code@paultibbetts.uk
-      # debugging
-      LOG_LEVEL: debug
+    env_file:
+      - .env
     user: 1004:1004
     volumes:
       - ./data:/var/cache/ntfy
