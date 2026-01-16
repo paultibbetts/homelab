@@ -3,6 +3,11 @@ variable "ssh_keys" {
   type        = string
 }
 
+variable "ssh_key" {
+  description = "The SSH key of the admin user"
+  type        = string
+}
+
 variable "proxmox_storage" {
   description = "The storage on the host to use"
   type        = string
@@ -36,3 +41,20 @@ variable "memory" {
   default     = 2048
 }
 
+# cloudflare
+
+variable "cloudflare_api_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "zone_name" {
+  type    = string
+  default = "paultibbetts.uk"
+}
+
+# subdomains
+
+variable "subdomains" {
+  type = list(string)
+}

@@ -34,3 +34,6 @@ dns: deps
 
 ingress: deps
 	uv run ansible-playbook playbooks/ingress.yaml $(PLAYBOOK_FLAGS)
+
+tunnel: deps
+	bash ./scripts/pangolin/provision.sh

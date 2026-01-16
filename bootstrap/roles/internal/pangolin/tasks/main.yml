@@ -1,3 +1,13 @@
 #SPDX-License-Identifier: MIT-0
 ---
-# tasks file for pangolin
+- name: Validate Pangolin configuration
+  ansible.builtin.include_tasks: assert.yml
+
+- name: Create Pangolin directory structure
+  ansible.builtin.include_tasks: directories.yml
+
+- name: Render Pangolin env file
+  ansible.builtin.include_tasks: env.yml
+
+- name: Render Pangolin config files
+  ansible.builtin.include_tasks: config.yml

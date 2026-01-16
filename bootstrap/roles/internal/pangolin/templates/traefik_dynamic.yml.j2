@@ -1,0 +1,161 @@
+http:
+  middlewares:
+    badger:
+      plugin:
+        badger:
+          disableForwardAuth: true
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+    security-headers:
+      headers:
+        contentTypeNosniff: true
+        customFrameOptionsValue: SAMEORIGIN
+        customResponseHeaders:
+          Server: ""
+          X-Forwarded-Proto: https
+          X-Powered-By: ""
+        forceSTSHeader: true
+        hostsProxyHeaders:
+          - X-Forwarded-Host
+        referrerPolicy: strict-origin-when-cross-origin
+        sslProxyHeaders:
+          X-Forwarded-Proto: https
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 63072000
+    default-whitelist:
+      ipWhiteList:
+        sourceRange:
+          - 10.0.0.0/8
+          - 192.168.0.0/16
+          - 172.16.0.0/12
+{% if pangolin_enable_crowdsec | bool %}
+    crowdsec:
+      plugin:
+        crowdsec:
+          clientTrustedIPs:
+{% if pangolin_crowdsec_client_trusted_ips | length == 0 %}
+            []
+{% else %}
+{% for cidr in pangolin_crowdsec_client_trusted_ips %}
+            - "{{ cidr }}"
+{% endfor %}
+{% endif %}
+          crowdsecAppsecBodyLimit: {{ pangolin_crowdsec_appsec_body_limit }}
+          crowdsecAppsecEnabled: {{ pangolin_crowdsec_appsec_enabled | bool | ternary('true', 'false') }}
+          crowdsecAppsecFailureBlock: {{ pangolin_crowdsec_appsec_failure_block | bool | ternary('true', 'false') }}
+          crowdsecAppsecHost: "{{ pangolin_crowdsec_appsec_host }}"
+          crowdsecAppsecUnreachableBlock: {{ pangolin_crowdsec_appsec_unreachable_block | bool | ternary('true', 'false') }}
+          crowdsecLapiHost: "{{ pangolin_crowdsec_lapi_host }}"
+          crowdsecLapiKey: "{{ pangolin_crowdsec_lapi_key }}"
+          crowdsecLapiScheme: "{{ pangolin_crowdsec_lapi_scheme }}"
+          crowdsecMode: "{{ pangolin_crowdsec_mode }}"
+          defaultDecisionSeconds: {{ pangolin_crowdsec_default_decision_seconds }}
+          enabled: {{ pangolin_crowdsec_enabled | bool | ternary('true', 'false') }}
+          forwardedHeadersTrustedIPs:
+{% if pangolin_crowdsec_forwarded_headers_trusted_ips | length == 0 %}
+            []
+{% else %}
+{% for cidr in pangolin_crowdsec_forwarded_headers_trusted_ips %}
+            - "{{ cidr }}"
+{% endfor %}
+{% endif %}
+          httpTimeoutSeconds: {{ pangolin_crowdsec_http_timeout_seconds }}
+          logLevel: "{{ pangolin_crowdsec_log_level }}"
+          updateIntervalSeconds: {{ pangolin_crowdsec_update_interval_seconds }}
+          updateMaxFailure: {{ pangolin_crowdsec_update_max_failure }}
+{% endif %}
+  routers:
+    api-router:
+      entryPoints:
+        - websecure
+      middlewares:
+{% if pangolin_enable_crowdsec | bool %}
+        - security-headers
+        - badger
+{% else %}
+        - badger
+{% endif %}
+      rule: "Host(`{{ pangolin_dashboard_domain }}`) && PathPrefix(`/api/v1`)"
+      service: api-service
+      tls:
+        certResolver: letsencrypt
+    main-app-router-redirect:
+      entryPoints:
+        - web
+      middlewares:
+        - redirect-to-https
+{% if not pangolin_enable_crowdsec | bool %}
+        - badger
+{% endif %}
+      rule: "Host(`{{ pangolin_dashboard_domain }}`)"
+      service: next-service
+    next-router:
+      entryPoints:
+        - websecure
+      middlewares:
+{% if pangolin_enable_crowdsec | bool %}
+        - security-headers
+        - badger
+{% else %}
+        - badger
+{% endif %}
+      rule: "Host(`{{ pangolin_dashboard_domain }}`) && !PathPrefix(`/api/v1`)"
+      service: next-service
+      tls:
+        certResolver: letsencrypt
+    ws-router:
+      entryPoints:
+        - websecure
+      middlewares:
+{% if pangolin_enable_crowdsec | bool %}
+        - security-headers
+        - badger
+{% else %}
+        - badger
+{% endif %}
+      rule: "Host(`{{ pangolin_dashboard_domain }}`)"
+      service: api-service
+      tls:
+        certResolver: letsencrypt
+{% if pangolin_enable_integration_api | bool %}
+    int-api-router-redirect:
+      rule: "Host(`{{ pangolin_integration_api_domain }}`)"
+      service: int-api-service
+      entryPoints:
+        - web
+      middlewares:
+        - redirect-to-https
+        - badger
+    int-api-router:
+      rule: "Host(`{{ pangolin_integration_api_domain }}`)"
+      service: int-api-service
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+{% endif %}
+  services:
+    api-service:
+      loadBalancer:
+        servers:
+          - url: "http://pangolin:3000"
+    next-service:
+      loadBalancer:
+        servers:
+          - url: "http://pangolin:3002"
+{% if pangolin_enable_integration_api | bool %}
+    int-api-service:
+      loadBalancer:
+        servers:
+          - url: "http://pangolin:{{ pangolin_integration_api_port }}"
+{% endif %}
+tcp:
+  serversTransports:
+    pp-transport-v1:
+      proxyProtocol:
+        version: 1
+    pp-transport-v2:
+      proxyProtocol:
+        version: 2

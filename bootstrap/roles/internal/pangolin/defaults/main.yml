@@ -1,3 +1,94 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # defaults file for pangolin
+
+# Core domains and identity for the Pangolin stack (base app, dashboard, TLS).
+pangolin_base_domain: ""
+pangolin_dashboard_domain: ""
+pangolin_letsencrypt_email: ""
+
+# Runtime and feature toggles for the deployment (container engine + optional services).
+pangolin_runtime: "docker"
+pangolin_enable_ipv6: true
+pangolin_install_gerbil: true
+pangolin_enable_geoblocking: false
+pangolin_enable_crowdsec: false
+
+# Filesystem layout and ownership for Pangolin data/config.
+# - config/traefik/logs: Traefik access logs.
+# - config/letsencrypt: Traefik ACME certificates.
+# - config/GeoLite2: GeoLite2 databases for geoblocking/geoip updates.
+# - config/crowdsec/db: CrowdSec local database (when enabled).
+pangolin_project_dir: "/srv/pangolin"
+pangolin_owner_user: "ops"
+pangolin_owner_group: "ops"
+
+# Default permissions for Pangolin directories and rendered files (avoid world-readable access).
+pangolin_dir_mode: "0750"
+pangolin_file_mode: "0640"
+pangolin_secret_file_mode: "0600"
+
+# Email (SMTP) settings for Pangolin notifications and outbound mail.
+pangolin_enable_email: false
+pangolin_smtp_host: ""
+pangolin_smtp_port: ""
+pangolin_smtp_user: ""
+pangolin_smtp_pass: ""
+pangolin_email_no_reply: ""
+
+# Networking / proxies trusted to send client IP headers.
+pangolin_trusted_proxy_cidrs: []
+
+# Integration API exposure (off by default).
+pangolin_enable_integration_api: false
+pangolin_integration_api_domain: ""
+pangolin_integration_api_port: 3003
+
+# Secrets / env file management for Pangolin.
+pangolin_env_file_path: "{{ pangolin_project_dir }}/.env"
+pangolin_manage_env_file: true
+pangolin_env_extra: {}
+
+# Apply the compose stack automatically after rendering config/templates.
+pangolin_apply_compose: true
+
+# MaxMind credentials used for GeoLite2 database updates.
+pangolin_maxmind_account_id: ""
+pangolin_maxmind_license_key: ""
+
+# Pangolin server secret used for signing and session security.
+pangolin_server_secret: ""
+
+# Pangolin application configuration (sane defaults; override in inventory/group_vars).
+pangolin_gerbil_start_port: 51820
+pangolin_app_log_level: "info"
+pangolin_telemetry_anonymous_usage: true
+pangolin_disable_signup_without_invite: true
+pangolin_disable_user_create_org: false
+pangolin_allow_raw_resources: true
+
+# CrowdSec middleware configuration for Traefik dynamic config (plugin settings).
+pangolin_crowdsec_client_trusted_ips: []
+pangolin_crowdsec_forwarded_headers_trusted_ips: []
+pangolin_crowdsec_appsec_body_limit: 10485760
+pangolin_crowdsec_appsec_enabled: true
+pangolin_crowdsec_appsec_failure_block: true
+pangolin_crowdsec_appsec_host: "crowdsec:7422"
+pangolin_crowdsec_appsec_unreachable_block: true
+pangolin_crowdsec_lapi_host: "crowdsec:8080"
+pangolin_crowdsec_lapi_key: ""
+pangolin_crowdsec_lapi_scheme: "http"
+pangolin_crowdsec_mode: "live"
+pangolin_crowdsec_default_decision_seconds: 15
+pangolin_crowdsec_enabled: true
+pangolin_crowdsec_http_timeout_seconds: 10
+pangolin_crowdsec_log_level: "INFO"
+pangolin_crowdsec_update_interval_seconds: 15
+pangolin_crowdsec_update_max_failure: 0
+
+# Container image versions (no :latest); set to pinned release tags.
+pangolin_image_tag: "0.0.0"
+gerbil_image_tag: "0.0.0"
+traefik_image_tag: "0.0.0"
+crowdsec_image_tag: "0.0.0"
+geoipupdate_image_tag: "0.0.0"

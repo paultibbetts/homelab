@@ -8,7 +8,7 @@
     - beszel_hub
     - hub
 
-- hosts: all,!artpi,!pangolin.hostedpi.com
+- hosts: all,!artpi,!pangolin.hcloud
   become: true
   roles:
     - community.beszel.agent

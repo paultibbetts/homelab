@@ -1,20 +1,3 @@
-terraform {
-  required_providers {
-    ansible = {
-      source  = "ansible/ansible"
-      version = "1.3.0"
-    }
-    pihole = {
-      source  = "lukaspustina/pihole"
-      version = "0.3.0"
-    }
-    proxmox = {
-      source  = "telmate/proxmox"
-      version = "3.0.2-rc05"
-    }
-  }
-}
-
 resource "proxmox_vm_qemu" "newt" {
   name        = "newt"
   tags        = "tf"
@@ -74,42 +57,30 @@ resource "proxmox_vm_qemu" "newt" {
   sshkeys = var.ssh_keys
 }
 
-// add Pi here
-// import it
+resource "hcloud_primary_ip" "edge" {
+  name          = "pangolin"
+  location      = "nbg1"
+  type          = "ipv4"
+  assignee_type = "server"
+  auto_delete   = true
+}
 
 locals {
-  home = {
-    fqdn = "tunnel.infra.home.arpa"
-    ip   = "192.168.1.149"
-  }
-  edge = {
-    fqdn = "pangolin.hostedpi.com"
-    host = "ssh.pangolin.hostedpi.com"
-    port = 5310
-  }
+  ops_pubkey = trimspace(var.ssh_key)
 }
 
-resource "ansible_host" "home" {
-  name   = local.home.fqdn
-  groups = ["tunnel", "site_home"]
-  variables = {
-    ansible_host = local.home.ip
-    ansible_user = "ops"
-  }
-}
-
-resource "pihole_dns_record" "home" {
-  domain = local.home.fqdn
-  ip     = local.home.ip
-}
-
-resource "ansible_host" "edge" {
-  name   = local.edge.fqdn
-  groups = ["tunnel", "site_edge"]
-  variables = {
-    ansible_host = local.edge.host
-    ansible_user = "ansible"
-    ansible_port = local.edge.port
+resource "hcloud_server" "edge" {
+  name        = "pangolin"
+  image       = "ubuntu-24.04"
+  server_type = "cax11" # cheapest ARM
+  location    = "nbg1"  # Nuremberg
+  user_data = templatefile("${path.root}/bootstrap/cloud-init.ubuntu24.tftpl", {
+    ops_pubkey = local.ops_pubkey
+  })
+  public_net {
+    ipv4_enabled = true
+    ipv6_enabled = true
+    ipv4         = hcloud_primary_ip.edge.id
   }
 }
 

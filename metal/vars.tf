@@ -1,5 +1,21 @@
 ## Provider
 
+### Hetzner
+
+variable "hetzner_api_token" {
+  description = "Hetzner API token"
+  type        = string
+  sensitive   = true
+}
+
+variable "ssh_key" {
+  description = "The SSH key of the ops user"
+  type        = string
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC5cSqQNVmTIWz9901r8HB+DiwmnFYRWYXChyqigkzAA"
+}
+
+### Proxmox
+
 variable "proxmox_api_url" {
   description = "Proxmox API URL"
   type        = string
@@ -23,7 +39,14 @@ variable "proxmox_api_token_secret" {
   sensitive   = true
 }
 
-# Global
+# Cloudflare
+
+variable "cloudflare_api_token_paultibbettsuk" {
+  type      = string
+  sensitive = true
+}
+
+## Global
 
 variable "ssh_keys" {
   description = "The SSH keys to add"
@@ -44,7 +67,7 @@ variable "network_gateway" {
   }
 }
 
-# Proxmox
+## Proxmox
 
 variable "proxmox_host" {
   description = "The proxmox host to apply to"
@@ -58,7 +81,7 @@ variable "proxmox_storage" {
   default     = "vms"
 }
 
-# Proxmox cloud-init VM
+### Proxmox cloud-init VM
 
 variable "cloud_init_template_name" {
   description = "The cloud-init template to clone from"
@@ -66,7 +89,7 @@ variable "cloud_init_template_name" {
   default     = "ubuntu-2404-cloudinit-template"
 }
 
-# Proxmox LXC
+### Proxmox LXC
 
 variable "lxc_template" {
   description = "The LXC template to clone from"
@@ -74,10 +97,14 @@ variable "lxc_template" {
   default     = "vms:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
 }
 
-# Pi-hole
+## Pi-hole
+
 variable "pihole_admin_password" {
   description = "The admin password for Pi-hole"
   type        = string
   sensitive   = true
 }
 
+variable "paultibbettsuk_tunnel_subdomains" {
+  type = list(string)
+}

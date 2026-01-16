@@ -4,6 +4,10 @@ terraform {
       source  = "ansible/ansible"
       version = "1.3.0"
     }
+    hcloud = {
+      source  = "hetznercloud/hcloud"
+      version = "1.58"
+    }
     pihole = {
       source  = "lukaspustina/pihole"
       version = "0.3.0"
@@ -103,10 +107,14 @@ module "vpn" {
 module "tunnel" {
   source = "./modules/tunnel"
 
-  ssh_keys                 = var.ssh_keys
+  ssh_keys                 = var.ssh_keys # deprecated
+  ssh_key                  = var.ssh_key
   proxmox_storage          = var.proxmox_storage
   proxmox_host             = var.proxmox_host
   cloud_init_template_name = var.cloud_init_template_name
+
+  cloudflare_api_token = var.cloudflare_api_token_paultibbettsuk
+  subdomains           = var.paultibbettsuk_tunnel_subdomains
 }
 
 

@@ -8,6 +8,43 @@
     fail_msg: >-
       newt_id, newt_secret, and newt_endpoint must be set (preferably via Ansible Vault).
 
+- name: Select Pangolin blueprint
+  ansible.builtin.set_fact:
+    newt_blueprint: >-
+      {{
+        (
+          newt_blueprint
+          if (newt_blueprint is not none and newt_blueprint | length > 0)
+          else (
+            newt_blueprint_auth_only
+            if (newt_blueprint_mode | default('full')) == 'auth-only'
+            else newt_blueprint_full
+          )
+        ) | to_json | from_json
+      }}
+  when:
+    - newt_blueprint is not none or newt_blueprint_full is not none or newt_blueprint_auth_only is not none
+
+# Keep blueprint config in /etc/pangolin to separate policy from /etc/default env secrets.
+- name: Ensure Pangolin blueprint directory exists
+  ansible.builtin.file:
+    path: "{{ newt_blueprint_path | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  when: newt_blueprint is not none and newt_blueprint | length > 0
+
+- name: Deploy Pangolin blueprint configuration
+  ansible.builtin.template:
+    src: "{{ newt_blueprint_template }}"
+    dest: "{{ newt_blueprint_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart newt
+  when: newt_blueprint is not none and newt_blueprint | length > 0
+
 - name: Write Newt environment file
   ansible.builtin.copy:
     dest: "{{ newt_env_file }}"
@@ -31,6 +68,9 @@
       set -eu
       . {{ newt_env_file }}
       exec {{ newt_bin_path }} \
+      {% if newt_blueprint is not none and newt_blueprint | length > 0 %}
+        --blueprint-file "{{ newt_blueprint_path }}" \
+      {% endif %}
         --id "$NEWT_ID" \
         --secret "$NEWT_SECRET" \
         --endpoint "$NEWT_ENDPOINT"
@@ -52,4 +92,3 @@
     name: "{{ newt_service_name }}"
     enabled: true
     state: started
-

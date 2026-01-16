@@ -1,1 +1,26 @@
 newt_version: 1.8.0
+
+pangolin_base_domain: "paultibbetts.uk"
+pangolin_dashboard_domain: "pangolin.paultibbetts.uk"
+
+pangolin_image_tag: "latest"
+gerbil_image_tag: "latest"
+traefik_image_tag: "latest"
+crowdsec_image_tag: "latest"
+geoipupdate_image_tag: "latest"
+
+pangolin_install_gerbil: true
+pangolin_enable_ipv6: true
+pangolin_enable_crowdsec: true
+pangolin_enable_geoblocking: true
+pangolin_enable_email: false
+pangolin_trusted_proxy_cidrs: []
+pangolin_enable_integration_api: false
+pangolin_integration_api_domain: "api.pangolin.paultibbetts.uk"
+
+pangolin_env_extra:
+  GEOIPUPDATE_EDITION_IDS: "GeoLite2-Country GeoLite2-ASN"
+  GEOIPUPDATE_FREQUENCY: "72"
+
+pangolin_disable_signup_without_invite: true
+pangolin_disable_user_create_org: true

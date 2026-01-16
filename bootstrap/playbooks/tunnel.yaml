@@ -1,12 +1,11 @@
 ---
-#- hosts: tunnel:&site_edge
-#  gather_facts: true
-#  become: true
-#  roles:
-#    - common
-#    - pangolin
-#  tags:
-#    - pangolin
+- hosts: tunnel:&site_edge
+  gather_facts: true
+  become: true
+  roles:
+    - pangolin
+  tags:
+    - pangolin
 
 - hosts: tunnel:&site_home
   become: true
@@ -15,7 +14,6 @@
     newt_id: "{{ vault_newt_id }}"
     newt_secret: "{{ vault_newt_secret }}"
   roles:
-#    - common
     - newt
   tags:
     - newt

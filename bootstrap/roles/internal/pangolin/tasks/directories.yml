@@ -1,0 +1,34 @@
+#SPDX-License-Identifier: MIT-0
+---
+# Directory list matches compose volume mount paths under pangolin_project_dir.
+- name: Ensure Pangolin directory structure
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ pangolin_owner_user }}"
+    group: "{{ pangolin_owner_group }}"
+    mode: "{{ pangolin_dir_mode }}"
+  loop: "{{ pangolin_required_dirs }}"
+  vars:
+    pangolin_required_dirs: >-
+      {{
+        [
+          pangolin_project_dir,
+          pangolin_project_dir + '/config',
+          pangolin_project_dir + '/config/traefik',
+          pangolin_project_dir + '/config/traefik/logs',
+          pangolin_project_dir + '/config/letsencrypt',
+          pangolin_project_dir + '/config/GeoLite2'
+        ]
+        + (
+          pangolin_enable_crowdsec | bool
+          | ternary(
+              [
+                pangolin_project_dir + '/config/crowdsec',
+                pangolin_project_dir + '/config/crowdsec/acquis.d',
+                pangolin_project_dir + '/config/crowdsec/db'
+              ],
+              []
+            )
+        )
+      }}

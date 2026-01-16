@@ -3,6 +3,10 @@ variable "enable_debug" {
   default = false
 }
 
+provider "hcloud" {
+  token = var.hetzner_api_token
+}
+
 provider "proxmox" {
   pm_api_url          = var.proxmox_api_url
   pm_api_token_id     = var.proxmox_api_token_id
