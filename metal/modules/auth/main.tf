@@ -6,11 +6,11 @@ terraform {
     }
     pihole = {
       source  = "lukaspustina/pihole"
-      version = "0.3.0"
+      version = "0.3.1"
     }
     proxmox = {
       source  = "telmate/proxmox"
-      version = "3.0.2-rc05"
+      version = "3.0.2-rc07"
     }
   }
 }
