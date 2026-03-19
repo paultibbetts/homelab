@@ -31,5 +31,5 @@ renovate_dockerhub_username: "paultibbetts"
 renovate_dockerhub_token: "{{ vault_dockerhub_token | default('') }}"
 renovate_github_com_token: "{{ vault_github_com_token | default('') }}"
 
-renovate_timer_on_calendar: "hourly"
+renovate_timer_on_calendar: "daily"
 renovate_timer_persistent: true
