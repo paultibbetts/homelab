@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Renovate on a schedule
+
+[Timer]
+OnCalendar={{ renovate_timer_on_calendar }}
+Persistent={{ renovate_timer_persistent | ternary('true', 'false') }}
+Unit={{ renovate_service_name }}.service
+
+[Install]
+WantedBy=timers.target

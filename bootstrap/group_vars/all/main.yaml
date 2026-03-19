@@ -13,3 +13,5 @@ common_users:
 ops_user: "ops"
 docker_users:
   - "{{ ops_user }}"
+
+renovate_endpoint: https://gitea.cloud.paultibbetts.uk/api/v1/

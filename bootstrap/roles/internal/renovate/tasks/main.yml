@@ -1,0 +1,62 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Assert Renovate token is configured
+  ansible.builtin.assert:
+    that:
+      - renovate_token | length > 0
+    fail_msg: "renovate_token must be set, ideally from an Ansible Vault variable such as vault_renovate_token."
+
+- name: Ensure Renovate directory exists
+  ansible.builtin.file:
+    path: "{{ renovate_root_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Install Renovate global config
+  ansible.builtin.template:
+    src: "config.js.j2"
+    dest: "{{ renovate_config_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Install Renovate env file
+  ansible.builtin.copy:
+    dest: "{{ renovate_env_path }}"
+    owner: root
+    group: root
+    mode: "0600"
+    content: |
+      RENOVATE_TOKEN={{ renovate_token }}
+      DOCKERHUB_USERNAME={{ renovate_dockerhub_username }}
+      DOCKERHUB_TOKEN={{ renovate_dockerhub_token }}
+      RENOVATE_GITHUB_COM_TOKEN={{ renovate_github_com_token }}
+
+- name: Install Renovate systemd service
+  ansible.builtin.template:
+    src: "renovate.service.j2"
+    dest: "/etc/systemd/system/{{ renovate_service_name }}.service"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload systemd
+
+- name: Install Renovate systemd timer
+  ansible.builtin.template:
+    src: "renovate.timer.j2"
+    dest: "/etc/systemd/system/{{ renovate_timer_name }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload systemd
+
+- name: Flush systemd handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Enable and start Renovate timer
+  ansible.builtin.systemd:
+    name: "{{ renovate_timer_name }}"
+    enabled: true
+    state: started

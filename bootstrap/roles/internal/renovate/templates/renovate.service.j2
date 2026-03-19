@@ -1,0 +1,15 @@
+[Unit]
+Description=Run Renovate as a one-shot Docker job
+Wants=network-online.target docker.service
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+TimeoutStartSec={{ renovate_timeout_start_sec }}
+ExecStart={{ renovate_docker_binary }} run --rm \
+  --env-file {{ renovate_env_path }} \
+  --volume {{ renovate_config_path }}:{{ renovate_container_config_path }}:ro \
+  {{ renovate_docker_image }}
+
+[Install]
+WantedBy=multi-user.target

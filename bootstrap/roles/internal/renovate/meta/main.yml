@@ -1,0 +1,28 @@
+#SPDX-License-Identifier: MIT-0
+galaxy_info:
+  author: Paul Tibbetts
+  description: Runs Renovate as a scheduled one-shot Docker container via systemd timer.
+  company: Homelab
+
+  license: MIT
+
+  min_ansible_version: "2.10"
+
+  galaxy_tags:
+    - renovate
+    - gitea
+    - docker
+    - systemd
+    - automation
+
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+
+dependencies: []

@@ -1,0 +1,31 @@
+module.exports = {
+  platform: {{ renovate_platform | to_json }},
+  endpoint: {{ renovate_endpoint | to_json }},
+  token: process.env.RENOVATE_TOKEN,
+  gitAuthor: {{ renovate_git_author | to_json }},
+  autodiscover: {{ renovate_autodiscover | to_json }},
+  dependencyDashboard: {{ renovate_dependency_dashboard | to_json }},
+  pruneStaleBranches: {{ renovate_prune_stale_branches | to_json }},
+  onboarding: {{ renovate_onboarding | to_json }},
+  prHourlyLimit: {{ renovate_pr_hourly_limit }},
+  labels: {{ renovate_labels | to_json }},
+  hostRules: [
+    {
+      hostType: 'docker',
+      matchHost: 'docker.io',
+      username: process.env.DOCKERHUB_USERNAME,
+      password: process.env.DOCKERHUB_TOKEN,
+    },
+  ],
+{% if renovate_patch_grouping_enabled %}
+  packageRules: [
+    {
+      matchUpdateTypes: ['patch'],
+      groupName: 'patches',
+    },
+  ],
+{% endif %}
+{% if not renovate_autodiscover and renovate_repositories | length > 0 %}
+  repositories: {{ renovate_repositories | to_json }},
+{% endif %}
+};
