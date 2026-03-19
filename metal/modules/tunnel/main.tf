@@ -45,6 +45,7 @@ resource "proxmox_vm_qemu" "newt" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 
@@ -83,4 +84,3 @@ resource "hcloud_server" "edge" {
     ipv4         = hcloud_primary_ip.edge.id
   }
 }
-

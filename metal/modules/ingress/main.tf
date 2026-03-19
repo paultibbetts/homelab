@@ -62,6 +62,7 @@ resource "proxmox_vm_qemu" "ingress" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 
@@ -90,4 +91,3 @@ resource "pihole_dns_record" "ingress" {
   domain = local.fqdn
   ip     = proxmox_vm_qemu.ingress.ssh_host
 }
-

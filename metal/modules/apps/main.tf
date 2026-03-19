@@ -62,6 +62,7 @@ resource "proxmox_vm_qemu" "apps" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 

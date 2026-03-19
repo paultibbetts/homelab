@@ -62,6 +62,7 @@ resource "proxmox_vm_qemu" "gitea" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 
@@ -90,4 +91,3 @@ resource "pihole_dns_record" "git" {
   domain = local.fqdn
   ip     = proxmox_vm_qemu.gitea.ssh_host
 }
-

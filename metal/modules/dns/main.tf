@@ -61,6 +61,7 @@ resource "proxmox_vm_qemu" "pihole" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 
@@ -91,4 +92,3 @@ resource "pihole_dns_record" "dns" {
   domain = local.fqdn
   ip     = proxmox_vm_qemu.pihole.ssh_host
 }
-

@@ -62,6 +62,7 @@ resource "proxmox_vm_qemu" "mysql" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 
@@ -120,6 +121,7 @@ resource "proxmox_vm_qemu" "postgres" {
   lifecycle {
     ignore_changes = [
       qemu_os,
+      startup_shutdown,
     ]
   }
 
@@ -167,4 +169,3 @@ resource "pihole_dns_record" "postgres" {
   domain = local.postgres.fqdn
   ip     = proxmox_vm_qemu.postgres.ssh_host
 }
-
