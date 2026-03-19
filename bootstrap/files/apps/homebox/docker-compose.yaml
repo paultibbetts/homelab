@@ -1,6 +1,6 @@
 services:
   homebox:
-    image: ghcr.io/sysadminsmedia/homebox:latest
+    image: ghcr.io/sysadminsmedia/homebox:latest@sha256:532e0428d922fdea2441b31c1eb5b4018e5f1b2684273bee06dba102db576f30
     container_name: homebox
     restart: always
     environment:

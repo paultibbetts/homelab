@@ -1,6 +1,6 @@
 services:
   ntfy:
-    image: binwiederhier/ntfy
+    image: binwiederhier/ntfy@sha256:9114cd5cdcb8c2ea1239bd710caae867e82c2deda68271b9db151240b403b3f4
     container_name: ntfy
     command:
       - serve
