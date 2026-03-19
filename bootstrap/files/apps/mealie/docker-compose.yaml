@@ -1,6 +1,6 @@
 services:
   mealie:
-    image: ghcr.io/mealie-recipes/mealie:v3.7.0@sha256:bb2939094eed2f2b71458f2793c232d094c02507371107fe1068b79e6118c620 #
+    image: ghcr.io/mealie-recipes/mealie:v3.13.1@sha256:4ee2b9e807627fac79eb7509bbf6577271747346e3d16208a0de939276ccaac2 #
     container_name: mealie
     restart: always
     ports:
