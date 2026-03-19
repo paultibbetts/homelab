@@ -26,10 +26,6 @@ podAnnotations: {}
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
-podSecurityContext:
-  fsGroup: 911
-  fsGroupChangePolicy: "OnRootMismatch"
-
 securityContext:
   # s6 must start as root
   runAsNonRoot: false
