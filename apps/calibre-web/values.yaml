@@ -64,25 +64,24 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-production
-      external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
-      gethomepage.dev/href: "https://calibre-web.lab.paultibbetts.uk"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/description: Books
-      gethomepage.dev/group: Apps
-      gethomepage.dev/icon: calibre-web.png
-      gethomepage.dev/name: "Calibre web"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://calibre-web.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Books
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: calibre-web.png
+    gethomepage.dev/name: "Calibre web"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
   hosts:
     - host: &host calibre-web.lab.paultibbetts.uk
       paths:
         - path: /
           pathType: Prefix
   tls:
-      - secretName: calibre-web-tls
-        hosts:
-          - *host
-
+    - secretName: calibre-web-tls
+      hosts:
+        - *host
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
