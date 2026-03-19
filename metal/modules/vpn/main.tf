@@ -16,19 +16,19 @@ terraform {
 }
 
 resource "proxmox_vm_qemu" "vpn" {
-  name        = "vpn"
-  tags        = "tf"
-  target_node = var.proxmox_host
-  clone       = var.cloud_init_template_name
-  full_clone  = true
-  vm_state    = "running"
-  onboot      = true
-  agent       = 1
-  os_type     = "cloud-init"
-  memory      = var.memory
-  scsihw      = "virtio-scsi-pci"
-  bootdisk    = "scsi0"
-  vmid        = 300
+  name               = "vpn"
+  tags               = "tf"
+  target_node        = var.proxmox_host
+  clone              = var.cloud_init_template_name
+  full_clone         = true
+  vm_state           = "running"
+  start_at_node_boot = true
+  agent              = 1
+  os_type            = "cloud-init"
+  memory             = var.memory
+  scsihw             = "virtio-scsi-pci"
+  bootdisk           = "scsi0"
+  vmid               = 300
 
   cpu {
     cores = var.cores

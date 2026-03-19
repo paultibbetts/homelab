@@ -16,19 +16,19 @@ terraform {
 }
 
 resource "proxmox_vm_qemu" "mysql" {
-  name        = "mysql"
-  tags        = "database;tf"
-  target_node = var.proxmox_host
-  clone       = var.cloud_init_template_name
-  full_clone  = true
-  vm_state    = "running"
-  onboot      = true
-  agent       = 1
-  os_type     = "cloud-init"
-  memory      = var.mysql_memory
-  scsihw      = "virtio-scsi-pci"
-  vmid        = 201
-  hastate     = "ignored"
+  name               = "mysql"
+  tags               = "database;tf"
+  target_node        = var.proxmox_host
+  clone              = var.cloud_init_template_name
+  full_clone         = true
+  vm_state           = "running"
+  start_at_node_boot = true
+  agent              = 1
+  os_type            = "cloud-init"
+  memory             = var.mysql_memory
+  scsihw             = "virtio-scsi-pci"
+  vmid               = 201
+  hastate            = "ignored"
 
   cpu {
     cores = var.mysql_cores
@@ -74,19 +74,19 @@ resource "proxmox_vm_qemu" "mysql" {
 }
 
 resource "proxmox_vm_qemu" "postgres" {
-  name        = "postgres"
-  tags        = "database;tf"
-  target_node = var.proxmox_host
-  clone       = var.cloud_init_template_name
-  full_clone  = true
-  vm_state    = "running"
-  onboot      = true
-  agent       = 1
-  os_type     = "cloud-init"
-  memory      = var.postgres_memory
-  scsihw      = "virtio-scsi-pci"
-  bootdisk    = "scsi0"
-  vmid        = 202
+  name               = "postgres"
+  tags               = "database;tf"
+  target_node        = var.proxmox_host
+  clone              = var.cloud_init_template_name
+  full_clone         = true
+  vm_state           = "running"
+  start_at_node_boot = true
+  agent              = 1
+  os_type            = "cloud-init"
+  memory             = var.postgres_memory
+  scsihw             = "virtio-scsi-pci"
+  bootdisk           = "scsi0"
+  vmid               = 202
 
   cpu {
     cores = var.postgres_cores

@@ -16,18 +16,18 @@ terraform {
 }
 
 resource "proxmox_vm_qemu" "pihole" {
-  name        = "pihole"
-  tags        = "dns;tf"
-  target_node = var.proxmox_host
-  clone       = var.cloud_init_template_name
-  full_clone  = true
-  vm_state    = "running"
-  onboot      = true
-  agent       = 1
-  os_type     = "cloud-init"
-  memory      = var.pihole_memory
-  scsihw      = "virtio-scsi-pci"
-  vmid        = 100
+  name               = "pihole"
+  tags               = "dns;tf"
+  target_node        = var.proxmox_host
+  clone              = var.cloud_init_template_name
+  full_clone         = true
+  vm_state           = "running"
+  start_at_node_boot = true
+  agent              = 1
+  os_type            = "cloud-init"
+  memory             = var.pihole_memory
+  scsihw             = "virtio-scsi-pci"
+  vmid               = 100
 
   cpu {
     cores = var.pihole_cores
