@@ -108,7 +108,7 @@ readinessProbe:
 s6:
   runTmpfs:
     enabled: false
-  initImage: busybox:1.36
+  initImage: busybox:1.37
 
 volumes:
   - name: books
