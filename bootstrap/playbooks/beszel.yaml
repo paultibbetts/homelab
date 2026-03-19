@@ -2,7 +2,7 @@
 - hosts: monpi
   become: true
   roles:
-     - community.beszel.hub
+    - community.beszel.hub
   tags:
     - beszel
     - beszel_hub

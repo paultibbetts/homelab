@@ -3,7 +3,7 @@ kind: IngressRoute
 metadata:
   name: homepage
   namespace: homepage
-  labels: 
+  labels:
     app.kubernetes.io/name: homepage
   annotations:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"

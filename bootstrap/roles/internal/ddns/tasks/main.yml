@@ -19,4 +19,3 @@
         name: ddns
         minute: "5"
         job: "{{ ddns_script }}"
-

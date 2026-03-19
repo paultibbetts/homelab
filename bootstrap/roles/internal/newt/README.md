@@ -1,17 +1,14 @@
-Newt
-=========
+# Newt
 
 Installs the Newt binary and wires it into a systemd service using a small
 wrapper script and an environment file for credentials.
 
-Requirements
-------------
+## Requirements
 
 - Debian-family host (Ubuntu/Debian) on x86_64/amd64.
 - systemd available (the role installs a unit under `/etc/systemd/system`).
 
-Role Variables
---------------
+## Role Variables
 
 Defaults in `defaults/main.yml`:
 
@@ -36,15 +33,13 @@ Required vars you need to set:
 - `newt_id`: Newt ID.
 - `newt_secret`: Newt secret.
 
-Dependencies
-------------
+## Dependencies
 
 An instance of Pangolin set up and a site added.
 
 The (optional) blueprint support requires the blueprint to have the ID of the site name set.
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: newt_hosts
       roles:
@@ -143,17 +138,14 @@ I use Ansible Vault to encrypt my blueprint in a `vault.yaml` file to avoid expo
                 method: GET
                 status: 200
 
-License
--------
+## License
 
 MIT
 
-Author Information
-------------------
+## Author Information
 
 Paul Tibbetts
 
-Notes
------
+## Notes
 
 The custom blueprint stuff is not standard and is only because I expose my IDP via Newt and then register it with Pangolin before applying the full blueprint with all the resources in.

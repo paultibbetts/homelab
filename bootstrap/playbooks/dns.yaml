@@ -33,4 +33,3 @@
             hour: "4"
             minute: "0"
             job: "{{ backup_script }} && {{ healthcheck }}"
-

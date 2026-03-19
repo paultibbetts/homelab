@@ -8,7 +8,7 @@ Independent on-desk machine.
 
 ### Storage
 
-#### 
+####
 
 - 1 x [240GB WD Green SATA SSD M.2 2280](https://www.scan.co.uk/products/240gb-wd-green-sata-m2-ssd-m2-2280-sata-iii-6gb-s-slc-nand-read-545mb-s-wd-ssd-dashboard)
 

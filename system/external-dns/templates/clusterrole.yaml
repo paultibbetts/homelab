@@ -4,20 +4,20 @@ kind: ClusterRole
 metadata:
   name: external-dns
 rules:
-- apiGroups: [""]
-  resources: ["services","endpoints", "pods"]
-  verbs: ["get","watch","list"]
-- apiGroups: ["extensions","networking.k8s.io"]
-  resources: ["ingresses"]
-  verbs: ["get","watch","list"]
-- apiGroups: [""]
-  resources: ["nodes"]
-  verbs: ["list","watch"]
-- apiGroups: ["traefik.io"]
-  resources: ["ingressroutes", "ingressroutetcps", "ingressrouteudps"]
-  verbs: ["get", "watch", "list"]
-# https://github.com/kubernetes-sigs/external-dns/issues/5572
-# TODO switch to helm chart
-- apiGroups: ["discovery.k8s.io"]
-  resources: ["endpointslices"]
-  verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["services", "endpoints", "pods"]
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["extensions", "networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["list", "watch"]
+  - apiGroups: ["traefik.io"]
+    resources: ["ingressroutes", "ingressroutetcps", "ingressrouteudps"]
+    verbs: ["get", "watch", "list"]
+  # https://github.com/kubernetes-sigs/external-dns/issues/5572
+  # TODO switch to helm chart
+  - apiGroups: ["discovery.k8s.io"]
+    resources: ["endpointslices"]
+    verbs: ["get", "list", "watch"]

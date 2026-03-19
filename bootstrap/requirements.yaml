@@ -1,10 +1,10 @@
 roles:
-- src: geerlingguy.docker
-  version: 7.9.0
-- src: geerlingguy.mysql
-  version: 6.3.1
-- src: geerlingguy.postgresql
-  version: 4.0.3
+  - src: geerlingguy.docker
+    version: 7.9.0
+  - src: geerlingguy.mysql
+    version: 6.3.1
+  - src: geerlingguy.postgresql
+    version: 4.0.3
 collections:
   - name: ansible.posix
     version: ">=2.1.0,<3.0.0"

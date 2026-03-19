@@ -40,7 +40,6 @@ Provides storage and a few core apps.
 
 **Total** 4TB
 
-
 ## Software
 
 [TrueNAS Scale](https://www.truenas.com/truenas-scale/)

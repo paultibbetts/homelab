@@ -1,25 +1,20 @@
-Gitea
-=========
+# Gitea
 
 Installs Gitea.
 
-Requirements
-------------
+## Requirements
 
 None.
 
-Role Variables
---------------
+## Role Variables
 
 Check the `/defaults` directory.
 
-Dependencies
-------------
+## Dependencies
 
 None.
 
-Example Playbook
-----------------
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
@@ -27,12 +22,10 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - { role: gitea }
 
-License
--------
+## License
 
 BSD
 
-Author Information
-------------------
+## Author Information
 
 Paul Tibbetts

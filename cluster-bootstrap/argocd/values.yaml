@@ -22,7 +22,7 @@ argo-cd:
     rbac:
       create: true
       annotations: {}
-      policy.default: ''
+      policy.default: ""
       # Policy rules are in the form:
       #  p, subject, resource, action, object, effect
       # Role definitions and bindings are in the form:
@@ -39,7 +39,7 @@ argo-cd:
     extraArgs:
       - --insecure
     config:
-      statusbadge.enabled: 'true'
+      statusbadge.enabled: "true"
     ingress:
       enabled: false
     metrics: &metrics

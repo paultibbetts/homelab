@@ -8,9 +8,9 @@ services:
     image: freshrss/freshrss:1.28.1@sha256:9100f649f5c946f589f54cdb9be7a65996528f48f691ef90eb262a0e06e5a522
     # Optional build section if you want to build the image locally:
     # build:
-      # Pick #latest (stable release) or #edge (rolling release) or a specific release like #1.21.0
-      # context: https://github.com/FreshRSS/FreshRSS.git#1.27.0
-      # dockerfile: Docker/Dockerfile-Alpine
+    # Pick #latest (stable release) or #edge (rolling release) or a specific release like #1.21.0
+    # context: https://github.com/FreshRSS/FreshRSS.git#1.27.0
+    # dockerfile: Docker/Dockerfile-Alpine
     container_name: freshrss
     restart: unless-stopped
     logging:
@@ -41,7 +41,7 @@ services:
       # A timezone http://php.net/timezones (default is UTC)
       TZ: Europe/London
       # Cron job to refresh feeds at specified minutes
-      CRON_MIN: '2,32'
+      CRON_MIN: "2,32"
       # 'development' for additional logs; default is 'production'
       #FRESHRSS_ENV: development
       # Optional advanced parameter controlling the internal Apache listening port

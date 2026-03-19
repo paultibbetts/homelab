@@ -3,7 +3,7 @@ galaxy_info:
   author: Paul Tibbetts
   description: Deploys the Kanidm identity server with Docker Compose and optional self-signed TLS.
   license: MIT-0
-  min_ansible_version: '2.12'
+  min_ansible_version: "2.12"
   galaxy_tags:
     - kanidm
     - iam

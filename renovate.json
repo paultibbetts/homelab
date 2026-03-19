@@ -10,15 +10,16 @@
   },
   "packageRules": [
     {
-      "matchCategories": ["docker"], "pinDigests": true
+      "matchCategories": ["docker"],
+      "pinDigests": true
     },
     {
-     "matchDatasources": ["docker"],
-     "matchPackageNames": ["ghcr.io/librespeed/speedtest"],
-     "schedule": ["* * * * 0"]
-  }
- ],
- "customManagers": [
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/librespeed/speedtest"],
+      "schedule": ["* * * * 0"]
+    }
+  ],
+  "customManagers": [
     {
       "customType": "regex",
       "managerFilePatterns": ["^group_vars/.+\\.ya?ml$"],
@@ -28,4 +29,3 @@
     }
   ]
 }
-

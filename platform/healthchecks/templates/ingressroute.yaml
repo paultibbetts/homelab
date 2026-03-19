@@ -24,5 +24,3 @@ spec:
           port: http
   tls:
     secretName: healthchecks-tls
-
-

@@ -24,4 +24,3 @@ spec:
           port: http
   tls:
     secretName: librespeed-tls
-

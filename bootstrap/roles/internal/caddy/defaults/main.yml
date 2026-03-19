@@ -7,4 +7,3 @@ caddy_user_name: caddy
 caddy_user_home_directory: /var/lib/caddy
 caddy_config_path: /etc/caddy
 caddy_log_path: /var/log/caddy
-

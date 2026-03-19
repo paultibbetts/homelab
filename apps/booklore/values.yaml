@@ -55,13 +55,13 @@ securityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
-    - ALL
+      - ALL
     add:
-    - SETUID
-    - SETGID
-    - CHOWN
-    - DAC_OVERRIDE
-    - FOWNER
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
@@ -78,24 +78,24 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-production
-      external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
-      gethomepage.dev/href: "https://booklore.lab.paultibbetts.uk"
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/description: Books
-      gethomepage.dev/group: Apps
-      gethomepage.dev/icon: booklore.png
-      gethomepage.dev/name: "Calibre web"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://booklore.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Books
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: booklore.png
+    gethomepage.dev/name: "Calibre web"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
   hosts:
     - host: &host booklore.lab.paultibbetts.uk
       paths:
         - path: /
           pathType: Prefix
   tls:
-      - secretName: booklore-tls
-        hosts:
-          - *host
+    - secretName: booklore-tls
+      hosts:
+        - *host
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -137,7 +137,7 @@ extraVolumes:
 
 extraVolumeMounts:
   - { name: nginx-state, mountPath: /var/lib/nginx }
-  - { name: nginx-log,  mountPath: /var/log/nginx }
+  - { name: nginx-log, mountPath: /var/log/nginx }
   - { name: books, mountPath: /bookdrop, subPath: bookdrop }
 
 nodeSelector: {}

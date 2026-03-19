@@ -45,10 +45,10 @@ grafana:
     server:
       root_url: https://grafana.lab.paultibbetts.uk
   extraSecretMounts:
-  - name: auth-generic-oauth-secret-mount
-    secretName: auth-generic-oauth-secret
-    defaultMode: 0440
-    mountPath: /etc/secrets/auth_generic_oauth
-    readOnly: true
+    - name: auth-generic-oauth-secret-mount
+      secretName: auth-generic-oauth-secret
+      defaultMode: 0440
+      mountPath: /etc/secrets/auth_generic_oauth
+      readOnly: true
   persistence:
     enabled: true

@@ -2,4 +2,4 @@
 - hosts: monpi
   become: true
   roles:
-     - uptime_kuma
+    - uptime_kuma

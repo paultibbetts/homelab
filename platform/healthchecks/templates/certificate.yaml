@@ -10,4 +10,3 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-production
-

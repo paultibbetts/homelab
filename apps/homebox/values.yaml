@@ -3,7 +3,6 @@ homebox:
     TZ: Europe/London
     HBOX_DATABASE_DRIVER: postgres
 
-
   # For more information checkout: https://artifacthub.io/packages/helm/bitnami/postgresql
   postgresql:
     enabled: true

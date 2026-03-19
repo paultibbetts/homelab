@@ -17,33 +17,33 @@ spec:
       securityContext:
         fsGroup: 1000
       containers:
-      - name: healthchecks
-        image: healthchecks/healthchecks:v3.13
-        imagePullPolicy: Always
-        env:
-          - name: DB
-            value: sqlite
-          - name: DB_NAME
-            value: /data/hc.sqlite
-          - name: SITE_ROOT
-            value: "https://healthchecks.lab.paultibbetts.uk"
-          - name: INTEGRATIONS_ALLOW_PRIVATE_IPS
-            value: "True"
-          - name: DEBUG
-            value: "False"
-          - name: REGISTRATION_OPEN
-            value: "False"
-          - name: SITE_NAME
-            value: Healthchecks
-        envFrom:
-          - secretRef:
-              name: healthchecks-secret-env
-        ports:
-        - containerPort: 8000
-          name: web
-        volumeMounts:
-        - name: healthchecks-data
-          mountPath: /data
+        - name: healthchecks
+          image: healthchecks/healthchecks:v3.13
+          imagePullPolicy: Always
+          env:
+            - name: DB
+              value: sqlite
+            - name: DB_NAME
+              value: /data/hc.sqlite
+            - name: SITE_ROOT
+              value: "https://healthchecks.lab.paultibbetts.uk"
+            - name: INTEGRATIONS_ALLOW_PRIVATE_IPS
+              value: "True"
+            - name: DEBUG
+              value: "False"
+            - name: REGISTRATION_OPEN
+              value: "False"
+            - name: SITE_NAME
+              value: Healthchecks
+          envFrom:
+            - secretRef:
+                name: healthchecks-secret-env
+          ports:
+            - containerPort: 8000
+              name: web
+          volumeMounts:
+            - name: healthchecks-data
+              mountPath: /data
       volumes:
         - name: healthchecks-data
           persistentVolumeClaim:

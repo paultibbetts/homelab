@@ -59,4 +59,3 @@
   loop: "{{ common_users }}"
   loop_control:
     label: "{{ item.name }}"
-
