@@ -73,7 +73,7 @@ resource "proxmox_lxc" "jellyfin" {
   }
 
   lifecycle {
-    # the LXC was originally created manually
+    # the LXC was originally created manually
     prevent_destroy = true
 
     ignore_changes = [
@@ -104,4 +104,3 @@ resource "pihole_dns_record" "jellyfin" {
   domain = local.fqdn
   ip     = var.ip
 }
-
