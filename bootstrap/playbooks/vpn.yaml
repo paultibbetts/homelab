@@ -1,5 +1,0 @@
----
-- hosts: vpn
-  become: true
-  roles:
-    - { role: ddns, tags: [ddns] }

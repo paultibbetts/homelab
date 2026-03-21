@@ -1,5 +1,0 @@
----
-- hosts: ingress
-  become: true
-  roles:
-    - { role: caddy, tags: [caddy] }
