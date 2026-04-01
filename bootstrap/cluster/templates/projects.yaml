@@ -47,3 +47,20 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: homepage
+  namespace: {{ .Release.Namespace }}
+spec:
+  sourceRepos:
+    - "*"
+  destinations:
+    - server: "*"
+      namespace: homepage
+  clusterResourceWhitelist:
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRole
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding

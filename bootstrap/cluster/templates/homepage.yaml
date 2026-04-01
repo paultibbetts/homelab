@@ -1,35 +1,30 @@
-{{- range $index, $stack := .Values.stacks }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ $stack.name }}
-  namespace: {{ $.Release.Namespace }}
+  name: homepage
+  namespace: {{ .Release.Namespace }}
 spec:
   generators:
     - git:
-        repoURL: {{ $.Values.gitops.repo }}
-        revision: {{ $.Values.gitops.revision }}
+        repoURL: {{ .Values.gitops.repo }}
+        revision: {{ .Values.gitops.revision }}
         directories:
-          - path: {{ $stack.name }}/*
-{{- if eq $stack.name "platform" }}
           - path: platform/homepage
-            exclude: true
-{{- end }}
   template:
     metadata:
       name: '{{ `{{path.basename}}` }}'
       labels:
-        stack: {{ $stack.name }}
+        stack: platform
     spec:
       destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: '{{ default `{{path.basename}}` $stack.namespace }}'
-      project: '{{ default "default" $stack.project }}'
+        server: https://kubernetes.default.svc
+        namespace: '{{ `{{path.basename}}` }}'
+      project: homepage
       source:
-        repoURL: {{ $.Values.gitops.repo }}
+        repoURL: {{ .Values.gitops.repo }}
         path: '{{ `{{path}}` }}'
-        targetRevision: {{ $.Values.gitops.revision }}
+        targetRevision: {{ .Values.gitops.revision }}
       syncPolicy:
         automated:
           prune: true
@@ -78,4 +73,3 @@ spec:
           jqPathExpressions:
             - ".spec.volumeClaimTemplates[].apiVersion"
             - ".spec.volumeClaimTemplates[].kind"
-{{- end }}
