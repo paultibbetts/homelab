@@ -3,6 +3,7 @@ gitops:
   revision: main
 stacks:
   - name: bootstrap
+    project: bootstrap
     namespace: argocd
   - name: system
   - name: platform

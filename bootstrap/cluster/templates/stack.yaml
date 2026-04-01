@@ -21,7 +21,7 @@ spec:
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{ default `{{path.basename}}` $stack.namespace }}'
-      project: default
+      project: '{{ default "default" $stack.project }}'
       source:
         repoURL: {{ $.Values.gitops.repo }}
         path: '{{ `{{path}}` }}'
