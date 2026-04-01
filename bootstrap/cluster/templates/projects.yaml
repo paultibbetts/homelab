@@ -30,3 +30,20 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: system
+  namespace: {{ .Release.Namespace }}
+spec:
+  sourceRepos:
+    - "*"
+  destinations:
+    - server: "*"
+      namespace: "!argocd"
+    - server: "*"
+      namespace: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
