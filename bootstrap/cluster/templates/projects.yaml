@@ -51,6 +51,23 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
+  name: platform
+  namespace: {{ .Release.Namespace }}
+spec:
+  sourceRepos:
+    - "*"
+  destinations:
+    - server: "*"
+      namespace: "!argocd"
+    - server: "*"
+      namespace: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
   name: homepage
   namespace: {{ .Release.Namespace }}
 spec:

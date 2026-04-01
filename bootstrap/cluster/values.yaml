@@ -8,4 +8,5 @@ stacks:
   - name: system
     project: system
   - name: platform
+    project: platform
   - name: apps
