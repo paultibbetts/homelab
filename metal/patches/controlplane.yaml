@@ -17,4 +17,3 @@ machine:
       - 3.uk.pool.ntp.org
 cluster:
   allowSchedulingOnControlPlanes: true
-

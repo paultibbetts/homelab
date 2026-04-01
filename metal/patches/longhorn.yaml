@@ -12,4 +12,3 @@ machine:
           - bind
           - rshared
           - rw
-
