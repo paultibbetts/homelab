@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# https://docs.siderolabs.com/talos/v1.12/getting-started/prodnotes#step-14-bootstrap-your-kubernetes-cluster
+
+source "$(dirname "$0")/lib/env"
+
+: "${CONTROL_PLANE_IP:?CONTROL_PLANE_IP is required}"
+
+talosctl bootstrap --nodes "${CONTROL_PLANE_IP[0]}"

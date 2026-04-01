@@ -1,0 +1,20 @@
+machine:
+  install:
+    disk: /dev/mmcblk0
+  network:
+    nameservers:
+      - 192.168.1.2
+    interfaces:
+      - interface: end0
+        dhcp: true
+        vip:
+          ip: 192.168.1.8
+  time:
+    servers:
+      - 0.uk.pool.ntp.org
+      - 1.uk.pool.ntp.org
+      - 2.uk.pool.ntp.org
+      - 3.uk.pool.ntp.org
+cluster:
+  allowSchedulingOnControlPlanes: true
+

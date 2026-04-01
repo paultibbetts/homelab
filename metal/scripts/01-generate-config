@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# https://docs.siderolabs.com/talos/v1.12/getting-started/prodnotes#step-6-generate-machine-configurations
+
+source "$(dirname "$0")/lib/env"
+
+: "${CLUSTER_NAME:?CLUSTER_NAME is required}"
+: "${CLUSTER_ENDPOINT:?CLUSTER_ENDPOINT is required}"
+
+if [[ ! -f "secrets.yaml" ]]; then
+  echo "secrets.yaml not found"
+  exit 1
+fi
+
+talosctl gen config "$CLUSTER_NAME" "$CLUSTER_ENDPOINT" \
+    --with-secrets secrets.yaml \
+    --config-patch @patches/controlplane.yaml \
+    --config-patch @patches/longhorn.yaml \
+    --output-types controlplane \
+    --output controlplane.yaml

@@ -1,0 +1,14 @@
+# generated machine configs
+controlplane*.yaml
+worker*.yaml
+
+# secrets
+secrets.yaml
+.env
+
+# tool configs
+kubeconfig
+talosconfig
+
+# include patches
+!/patches/*.yaml

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# https://docs.siderolabs.com/talos/v1.12/getting-started/prodnotes#step-11-apply-the-machine-configuration
+
+source "$(dirname "$0")/lib/env"
+
+: "${CONTROL_PLANE_IP:?CONTROL_PLANE_IP is required}"
+
+for ip in "${CONTROL_PLANE_IP[@]}"; do
+  echo "=== Applying configuration to node $ip ==="
+  talosctl apply-config \
+    --nodes $ip \
+    --file controlplane.yaml
+  echo "Configuration applied to $ip"
+  echo ""
+done
