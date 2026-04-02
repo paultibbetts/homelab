@@ -9,9 +9,9 @@ stacks:
   - name: system
     project: system
     wave: "10"
-#  - name: config
-#    project: system
-#    wave: "20"
+  - name: config
+    project: system
+    wave: "20"
 #  - name: platform
 #    project: platform
 #    wave: "30"
