@@ -20,7 +20,11 @@ spec:
 {{- end }}
   template:
     metadata:
+{{- if eq $stack.name "config" }}
+      name: 'config-{{ `{{path.basename}}` }}'
+{{- else }}
       name: '{{ `{{path.basename}}` }}'
+{{- end }}
       labels:
         stack: {{ $stack.name }}
       annotations:
