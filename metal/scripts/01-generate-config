@@ -17,3 +17,7 @@ talosctl gen config "$CLUSTER_NAME" "$CLUSTER_ENDPOINT" \
     --config-patch @patches/longhorn.yaml \
     --output-types controlplane \
     --output controlplane.yaml
+
+talosctl machineconfig patch controlplane.yaml \
+    --patch @patches/remove-exclude-lb-label.yaml \
+    --output controlplane.yaml
