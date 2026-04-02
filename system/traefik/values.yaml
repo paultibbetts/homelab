@@ -7,10 +7,6 @@ traefik:
         - lan
     replicas: 3
   ports:
-    web:
-      redirectTo:
-        port: websecure
-        permanent: true
     websecure:
       http3:
         enabled: true
@@ -19,6 +15,9 @@ traefik:
   additionalArguments:
     - "--serversTransport.insecureSkipVerify=true"
     - "--log.level=INFO"
+    - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+    - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+    - "--entryPoints.web.http.redirections.entryPoint.permanent=true"
   ingressRoute:
     dashboard:
       enabled: true
