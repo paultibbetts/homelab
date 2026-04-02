@@ -20,7 +20,7 @@ traefik:
     - "--entryPoints.web.http.redirections.entryPoint.permanent=true"
   ingressRoute:
     dashboard:
-      enabled: true
+      enabled: false
   providers:
     kubernetesCRD:
       enabled: true
