@@ -8,11 +8,9 @@ traefik:
     replicas: 3
   ports:
     web:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https
-          permanent: true
+      redirectTo:
+        port: websecure
+        permanent: true
     websecure:
       http3:
         enabled: true
