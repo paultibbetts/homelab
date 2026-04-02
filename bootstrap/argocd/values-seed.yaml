@@ -1,3 +1,6 @@
+dashboard:
+  enabled: false
+
 argo-cd:
   server:
     metrics: &metrics

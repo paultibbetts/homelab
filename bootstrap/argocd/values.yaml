@@ -1,3 +1,6 @@
+dashboard:
+  enabled: true
+
 argo-cd:
   configs:
     cm:

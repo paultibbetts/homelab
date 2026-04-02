@@ -1,3 +1,4 @@
+{{- if .Values.dashboard.enabled }}
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
@@ -29,3 +30,4 @@ spec:
           scheme: h2c
   tls:
     secretName: argocd-server-tls
+{{- end }}
