@@ -5,6 +5,8 @@ kind: ApplicationSet
 metadata:
   name: {{ $stack.name }}
   namespace: {{ $.Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: '{{ default "0" $stack.wave }}'
 spec:
   generators:
     - git:
@@ -21,6 +23,8 @@ spec:
       name: '{{ `{{path.basename}}` }}'
       labels:
         stack: {{ $stack.name }}
+      annotations:
+        argocd.argoproj.io/sync-wave: '{{ default "0" $stack.wave }}'
     spec:
       destination:
         server: 'https://kubernetes.default.svc'

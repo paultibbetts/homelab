@@ -5,8 +5,15 @@ stacks:
   - name: bootstrap
     project: bootstrap
     namespace: argocd
+    wave: "0"
   - name: system
     project: system
+    wave: "10"
+  - name: config
+    project: system
+    wave: "20"
   - name: platform
     project: platform
+    wave: "30"
   - name: apps
+    wave: "40"
