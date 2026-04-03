@@ -37,7 +37,7 @@ data:
   services.yaml: |
     - MonPi:
         - Uptime Kuma:
-            href: https://uptime.cloud.paultibbetts.uk
+            href: https://uptime.cloud.paultibbetts.uk/status/lab
             description: Uptime
             icon: uptime-kuma
             widget:
