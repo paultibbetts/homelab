@@ -1,4 +1,6 @@
 machine:
+  nodeLabels:
+    node.longhorn.io/create-default-disk: "true"
   disks:
     - device: /dev/nvme0n1
       partitions:
