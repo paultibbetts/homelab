@@ -6,6 +6,7 @@ longhorn:
     kubernetesClusterAutoscalerEnabled: true
     defaultDataPath: /var/lib/longhorn
     node-down-pod-deletion-policy: delete-both-statefulset-and-deployment-pod
+    storageReservedPercentageForDefaultDisk: 10
   persistence:
     defaultClass: true
     defaultFsType: ext4
