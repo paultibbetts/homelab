@@ -37,14 +37,19 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          startupProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 30
+            periodSeconds: 5
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
+            periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: http
+            periodSeconds: 10
           env:
             - name: PORT
               value: "{{ .Values.service.port }}"
