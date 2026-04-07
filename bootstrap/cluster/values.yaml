@@ -15,5 +15,5 @@ stacks:
   - name: platform
     project: platform
     wave: "30"
-#  - name: apps
-#    wave: "40"
+  - name: apps
+    wave: "40"
