@@ -22,5 +22,4 @@ spec:
       services:
         - name: librespeed
           port: http
-  tls:
-    secretName: librespeed-tls
+  tls: {}

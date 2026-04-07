@@ -22,5 +22,4 @@ spec:
       services:
         - name: opengist-http
           port: http
-  tls:
-    secretName: opengist-tls
+  tls: {}
