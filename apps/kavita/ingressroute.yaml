@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kavita
+  namespace: kavita
+  labels:
+    app: kavita
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://kavita.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Ebook and comic server
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: kavita.png
+    gethomepage.dev/name: Kavita
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`kavita.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: kavita
+          port: 5000
+  tls: {}
