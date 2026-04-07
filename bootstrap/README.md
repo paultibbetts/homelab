@@ -12,3 +12,4 @@ After that, Argo CD manages the apps in `bootstrap/`, including Argo CD itself.
 ```sh
 ./bootstrap/init.sh
 ``
+```
