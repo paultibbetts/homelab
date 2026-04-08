@@ -15,6 +15,10 @@ spec:
       labels:
         app: kavita
     spec:
+      securityContext:
+        runAsUser: 3004
+        supplementalGroups:
+          - 3003
       containers:
         - name: kavita
           image: jvmilazz0/kavita:latest
