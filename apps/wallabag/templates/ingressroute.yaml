@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wallabag
+  namespace: wallabag
+  labels:
+    app.kubernetes.io/name: wallabag
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://wallabag.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Read-it-later bookmark manager
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: wallabag.png
+    gethomepage.dev/name: Wallabag
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`wallabag.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: wallabag
+          port: http
+  tls: {}
