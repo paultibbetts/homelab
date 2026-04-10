@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: linkding
-          image: sissbruecker/linkding:1.44.1
+          image: sissbruecker/linkding:1.45.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
