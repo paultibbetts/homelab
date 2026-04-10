@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stream
+  labels:
+    app.kubernetes.io/name: stream
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: stream
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: stream
+    spec:
+      containers:
+        - name: stream
+          image: ghcr.io/dynamicskillset/stream:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http

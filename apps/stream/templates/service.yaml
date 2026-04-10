@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stream
+  labels:
+    app.kubernetes.io/name: stream
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: stream
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: http

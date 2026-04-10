@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stream
+  namespace: stream
+  labels:
+    app.kubernetes.io/name: stream
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://stream.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Velocity-based RSS reader
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: stream.png
+    gethomepage.dev/name: Stream
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`stream.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: stream
+          port: http
+  tls: {}
