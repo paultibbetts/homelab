@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: komga
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: komga
+  annotations:
+    external-dns.alpha.kubernetes.io/target: {{ .Values.ingressRoute.externalDnsTarget | quote }}
+    gethomepage.dev/href: {{ printf "https://%s" .Values.ingressRoute.host | quote }}
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Comic and manga server
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: komga.png
+    gethomepage.dev/name: Komga
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`{{ .Values.ingressRoute.host }}`)
+      kind: Rule
+      services:
+        - name: {{ .Values.komga.fullnameOverride }}
+          port: {{ .Values.komga.service.port }}
+  tls: {}

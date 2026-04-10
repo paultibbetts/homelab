@@ -1,0 +1,6 @@
+dependencies:
+- name: komga
+  repository: https://repo.helmforge.dev
+  version: 1.4.7
+digest: sha256:d0e157150526c8dc6e8d97aa89de2e307374bb77af0501b3fe0e6bba6d36c5de
+generated: "2026-04-10T14:07:43.712138+01:00"

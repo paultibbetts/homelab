@@ -1,0 +1,30 @@
+komga:
+  fullnameOverride: komga
+  commonLabels:
+    app: komga
+  komga:
+    timezone: Europe/London
+  service:
+    port: 25600
+  persistence:
+    config:
+      enabled: true
+      existingClaim: komga-config
+    data:
+      enabled: true
+      existingClaim: media-komga
+  podSecurityContext:
+    supplementalGroups:
+      - 3003
+
+configPersistence:
+  size: 5Gi
+
+mediaPersistence:
+  claimName: media-komga
+  size: 1Ti
+  volumeName: media-komga
+
+ingressRoute:
+  host: komga.lab.paultibbetts.uk
+  externalDnsTarget: traefik.lab.paultibbetts.uk
