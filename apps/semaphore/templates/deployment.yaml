@@ -14,10 +14,16 @@ spec:
       labels:
         app.kubernetes.io/name: semaphore
     spec:
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: semaphore
           image: semaphoreui/semaphore:v2.17.21
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
           env:
             - name: TZ
               value: Europe/London
