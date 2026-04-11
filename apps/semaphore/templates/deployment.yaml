@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semaphore
+  labels:
+    app.kubernetes.io/name: semaphore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: semaphore
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: semaphore
+    spec:
+      containers:
+        - name: semaphore
+          image: semaphoreui/semaphore:v2.17.21
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: Europe/London
+            - name: SEMAPHORE_DB_DIALECT
+              value: sqlite
+            - name: SEMAPHORE_DB
+              value: /etc/semaphore/semaphore.sqlite
+            - name: SEMAPHORE_PLAYBOOK_PATH
+              value: /tmp/semaphore/
+            - name: SEMAPHORE_TMP_PATH
+              value: /tmp/semaphore/
+            - name: SEMAPHORE_WEB_ROOT
+              value: https://semaphore.lab.paultibbetts.uk
+            - name: SEMAPHORE_ADMIN
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_ADMIN
+            - name: SEMAPHORE_ADMIN_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_ADMIN_NAME
+            - name: SEMAPHORE_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_ADMIN_EMAIL
+            - name: SEMAPHORE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_ADMIN_PASSWORD
+            - name: SEMAPHORE_ACCESS_KEY_ENCRYPTION
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_ACCESS_KEY_ENCRYPTION
+            - name: SEMAPHORE_COOKIE_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_COOKIE_HASH
+            - name: SEMAPHORE_COOKIE_ENCRYPTION
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-env
+                  key: SEMAPHORE_COOKIE_ENCRYPTION
+          ports:
+            - containerPort: 3000
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /etc/semaphore
+            - name: tmp
+              mountPath: /tmp/semaphore
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: semaphore-data
+        - name: tmp
+          emptyDir: {}
