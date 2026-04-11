@@ -65,7 +65,7 @@ ingress:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://redlib.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: Inventory management
+    gethomepage.dev/description: Privacy-focused Reddit alternative frontend
     gethomepage.dev/group: Apps
     gethomepage.dev/icon: redlib.png
     gethomepage.dev/name: Redlib

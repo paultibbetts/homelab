@@ -9,7 +9,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://kavita.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: Ebook and comic server
+    gethomepage.dev/description: Ebooks
     gethomepage.dev/group: Apps
     gethomepage.dev/icon: kavita.png
     gethomepage.dev/name: Kavita

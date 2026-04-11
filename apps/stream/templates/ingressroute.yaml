@@ -11,7 +11,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Velocity-based RSS reader
     gethomepage.dev/group: Apps
-    gethomepage.dev/icon: stream.png
+    gethomepage.dev/icon: si-rss
     gethomepage.dev/name: Stream
 spec:
   entryPoints:
