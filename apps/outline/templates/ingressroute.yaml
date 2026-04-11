@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: outline
+  namespace: outline
+  labels:
+    app.kubernetes.io/name: outline
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://outline.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Collaborative knowledge base
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: outline.png
+    gethomepage.dev/name: Outline
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`outline.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: outline
+          port: http
+  tls: {}

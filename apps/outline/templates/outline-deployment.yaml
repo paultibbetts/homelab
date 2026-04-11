@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outline
+  labels:
+    app.kubernetes.io/name: outline
+    app.kubernetes.io/component: app
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: outline
+      app.kubernetes.io/component: app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: outline
+        app.kubernetes.io/component: app
+    spec:
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: outline
+          image: docker.getoutline.com/outlinewiki/outline:1.6.1
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            runAsNonRoot: true
+          env:
+            - name: URL
+              value: https://outline.lab.paultibbetts.uk
+            - name: PORT
+              value: "3000"
+            - name: NODE_ENV
+              value: production
+            - name: PGSSLMODE
+              value: disable
+            - name: DATABASE_URL
+              value: postgres://outline:$(POSTGRES_PASSWORD)@postgres:5432/outline
+            - name: REDIS_URL
+              value: redis://redis:6379
+            - name: FILE_STORAGE
+              value: local
+            - name: FILE_STORAGE_LOCAL_ROOT_DIR
+              value: /var/lib/outline/data
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: SECRET_KEY
+            - name: UTILS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: UTILS_SECRET
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: POSTGRES_PASSWORD
+            - name: OIDC_ISSUER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: OIDC_ISSUER_URL
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: OIDC_CLIENT_ID
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: OIDC_CLIENT_SECRET
+            - name: OIDC_SCOPES
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: OIDC_SCOPES
+            - name: OIDC_DISABLE_REDIRECT
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: OIDC_DISABLE_REDIRECT
+            - name: OIDC_DISPLAY_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: OIDC_DISPLAY_NAME
+          ports:
+            - containerPort: 3000
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/outline/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: outline-data
