@@ -20,6 +20,6 @@ spec:
     - match: Host(`semaphore.lab.paultibbetts.uk`)
       kind: Rule
       services:
-        - name: semaphore
+        - name: semaphore-http
           port: http
   tls: {}
