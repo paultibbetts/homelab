@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: penpot
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: penpot
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://penpot.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Collaborative design and prototyping
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: penpot.png
+    gethomepage.dev/name: Penpot
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`penpot.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: penpot
+          port: http
+  tls: {}
