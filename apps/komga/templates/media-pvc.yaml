@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.mediaPersistence.claimName }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: komga
+    app.kubernetes.io/name: komga
 spec:
   accessModes:
     - ReadOnlyMany

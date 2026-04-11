@@ -1,7 +1,5 @@
 komga:
   fullnameOverride: komga
-  commonLabels:
-    app: komga
   komga:
     timezone: Europe/London
   service:

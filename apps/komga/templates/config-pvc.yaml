@@ -4,7 +4,7 @@ metadata:
   name: komga-config
   namespace: {{ .Release.Namespace }}
   labels:
-    app: komga
+    app.kubernetes.io/name: komga
 spec:
   accessModes:
     - ReadWriteOnce
