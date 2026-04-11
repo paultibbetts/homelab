@@ -39,6 +39,11 @@ spec:
               value: production
             - name: PGSSLMODE
               value: disable
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: outline-env
+                  key: POSTGRES_PASSWORD
             - name: DATABASE_URL
               value: postgres://outline:$(POSTGRES_PASSWORD)@postgres:5432/outline
             - name: REDIS_URL
@@ -57,11 +62,6 @@ spec:
                 secretKeyRef:
                   name: outline-env
                   key: UTILS_SECRET
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: outline-env
-                  key: POSTGRES_PASSWORD
             - name: OIDC_ISSUER_URL
               valueFrom:
                 secretKeyRef:
