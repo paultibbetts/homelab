@@ -9,6 +9,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://penpot.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
+    gethomepage.dev/app: "penpot-frontend"
     gethomepage.dev/description: Collaborative design and prototyping
     gethomepage.dev/group: Apps
     gethomepage.dev/icon: penpot.png
