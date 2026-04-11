@@ -4,7 +4,7 @@ metadata:
   name: books-kavita
   namespace: kavita
   labels:
-    app: kavita
+    app.kubernetes.io/name: kavita
 spec:
   accessModes:
     - ReadOnlyMany

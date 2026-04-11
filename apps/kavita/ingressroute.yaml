@@ -4,7 +4,7 @@ metadata:
   name: kavita
   namespace: kavita
   labels:
-    app: kavita
+    app.kubernetes.io/name: kavita
   annotations:
     external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://kavita.lab.paultibbetts.uk"

@@ -4,16 +4,16 @@ metadata:
   name: kavita
   namespace: kavita
   labels:
-    app: kavita
+    app.kubernetes.io/name: kavita
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kavita
+      app.kubernetes.io/name: kavita
   template:
     metadata:
       labels:
-        app: kavita
+        app.kubernetes.io/name: kavita
     spec:
       securityContext:
         supplementalGroups:

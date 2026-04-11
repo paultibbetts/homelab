@@ -4,7 +4,7 @@ metadata:
   name: kavita-config
   namespace: kavita
   labels:
-    app: kavita
+    app.kubernetes.io/name: kavita
 spec:
   accessModes:
     - ReadWriteOnce

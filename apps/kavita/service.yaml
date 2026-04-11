@@ -4,10 +4,10 @@ metadata:
   name: kavita
   namespace: kavita
   labels:
-    app: kavita
+    app.kubernetes.io/name: kavita
 spec:
   selector:
-    app: kavita
+    app.kubernetes.io/name: kavita
   ports:
     - port: 5000
       targetPort: 5000
