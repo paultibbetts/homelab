@@ -19,10 +19,31 @@ spec:
         app.kubernetes.io/name: outline
         app.kubernetes.io/component: redis
     spec:
+      securityContext:
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+        - name: redis-data-permissions
+          image: busybox:1.36
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - mkdir -p /mnt/redis && chown -R 999:999 /mnt/redis
+          volumeMounts:
+            - name: data
+              mountPath: /mnt
       containers:
         - name: redis
           image: redis:8-alpine
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            runAsNonRoot: true
+          env:
+            - name: SKIP_FIX_PERMS
+              value: "1"
           args:
             - redis-server
             - --appendonly
@@ -33,6 +54,7 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+              subPath: redis
       volumes:
         - name: data
           persistentVolumeClaim:
