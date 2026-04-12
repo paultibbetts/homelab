@@ -1,0 +1,63 @@
+plane-ce:
+  planeVersion: v1.2.1
+
+  ingress:
+    enabled: false
+    appHost: plane.lab.paultibbetts.uk
+    ingressClass: traefik
+
+  external_secrets:
+    rabbitmq_existingSecret: plane-rabbitmq
+    pgdb_existingSecret: plane-pgdb
+    doc_store_existingSecret: plane-docstore
+    app_env_existingSecret: plane-app-env
+    live_env_existingSecret: plane-live-env
+
+  redis:
+    local_setup: true
+    storageClass: longhorn
+    volumeSize: 1Gi
+
+  postgres:
+    local_setup: true
+    storageClass: longhorn
+    volumeSize: 10Gi
+
+  rabbitmq:
+    local_setup: true
+    storageClass: longhorn
+    volumeSize: 1Gi
+
+  minio:
+    local_setup: true
+    storageClass: longhorn
+    volumeSize: 20Gi
+
+  web:
+    pullPolicy: IfNotPresent
+
+  space:
+    pullPolicy: IfNotPresent
+
+  admin:
+    pullPolicy: IfNotPresent
+
+  live:
+    pullPolicy: IfNotPresent
+
+  api:
+    pullPolicy: IfNotPresent
+
+  worker:
+    pullPolicy: IfNotPresent
+
+  beatworker:
+    pullPolicy: IfNotPresent
+
+  env:
+    minio_endpoint_ssl: false
+    cors_allowed_origins: https://plane.lab.paultibbetts.uk
+    docstore_bucket: uploads
+    doc_upload_size_limit: "5242880"
+    secret_key: b88090600aa3457c53baa827a5de832cd63fb208910bfec7bbfa86c53aaafdad
+    live_server_secret_key: 65904338946a1a4ac2f6d048bd087f85ade757a52da90bb1
