@@ -8,6 +8,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '{{ default "0" $stack.wave }}'
 spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
   generators:
     - git:
         repoURL: {{ $.Values.gitops.repo }}
@@ -21,9 +24,9 @@ spec:
   template:
     metadata:
 {{- if eq $stack.name "config" }}
-      name: 'config-{{ `{{path.basename}}` }}'
+      name: 'config-{{ `{{.path.basename}}` }}'
 {{- else }}
-      name: '{{ `{{path.basename}}` }}'
+      name: '{{ `{{.path.basename}}` }}'
 {{- end }}
       labels:
         stack: {{ $stack.name }}
@@ -32,11 +35,11 @@ spec:
     spec:
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{ default `{{path.basename}}` $stack.namespace }}'
+        namespace: '{{ default `{{.path.basename}}` $stack.namespace }}'
       project: '{{ default "default" $stack.project }}'
       source:
         repoURL: {{ $.Values.gitops.repo }}
-        path: '{{ `{{path}}` }}'
+        path: '{{ `{{.path.path}}` }}'
         targetRevision: {{ $.Values.gitops.revision }}
       syncPolicy:
         automated:
@@ -51,11 +54,6 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
-{{- if eq $stack.name "apps" }}
-{{- if eq `{{path.basename}}` "plane" }}
-          - RespectIgnoreDifferences=true
-{{- end }}
-{{- end }}
           - ServerSideApply=true
       ignoreDifferences:
         - group: apps
@@ -64,13 +62,27 @@ spec:
             - ".spec.volumeClaimTemplates[].apiVersion"
             - ".spec.volumeClaimTemplates[].kind"
 {{- if eq $stack.name "apps" }}
-{{- if eq `{{path.basename}}` "plane" }}
+  templatePatch: |
+    {{ `{{- if eq .path.basename "plane" }}` }}
+    spec:
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - RespectIgnoreDifferences=true
+          - ServerSideApply=true
+      ignoreDifferences:
+        - group: apps
+          kind: StatefulSet
+          jqPathExpressions:
+            - ".spec.volumeClaimTemplates[].apiVersion"
+            - ".spec.volumeClaimTemplates[].kind"
         - group: batch
           kind: Job
           name: plane-api-migrate-1
           jqPathExpressions:
             - ".spec.selector"
             - ".spec.template"
-{{- end }}
+    {{ `{{- end }}` }}
 {{- end }}
 {{- end }}
