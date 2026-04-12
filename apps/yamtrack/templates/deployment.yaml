@@ -38,6 +38,11 @@ spec:
                 secretKeyRef:
                   name: yamtrack-env
                   key: URLS
+            - name: STEAM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: yamtrack-env
+                  key: STEAM_API_KEY
           ports:
             - containerPort: 8000
               name: http
