@@ -51,6 +51,11 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
+{{- if eq $stack.name "apps" }}
+{{- if eq `{{path.basename}}` "plane" }}
+          - RespectIgnoreDifferences=true
+{{- end }}
+{{- end }}
           - ServerSideApply=true
       ignoreDifferences:
         - group: apps
@@ -58,4 +63,12 @@ spec:
           jqPathExpressions:
             - ".spec.volumeClaimTemplates[].apiVersion"
             - ".spec.volumeClaimTemplates[].kind"
+{{- if eq $stack.name "apps" }}
+{{- if eq `{{path.basename}}` "plane" }}
+        - group: batch
+          kind: Job
+          jqPathExpressions:
+            - ".spec.template.metadata.annotations.timestamp"
+{{- end }}
+{{- end }}
 {{- end }}
