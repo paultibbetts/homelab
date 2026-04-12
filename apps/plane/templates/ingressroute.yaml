@@ -17,22 +17,22 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`plane.lab.paultibbetts.uk`) && PathPrefix(`/spaces/`)
+    - match: Host(`plane.lab.paultibbetts.uk`) && PathPrefix(`/spaces`)
       kind: Rule
       services:
         - name: plane-space
           port: 3000
-    - match: Host(`plane.lab.paultibbetts.uk`) && PathPrefix(`/god-mode/`)
+    - match: Host(`plane.lab.paultibbetts.uk`) && PathPrefix(`/god-mode`)
       kind: Rule
       services:
         - name: plane-admin
           port: 3000
-    - match: Host(`plane.lab.paultibbetts.uk`) && PathPrefix(`/live/`)
+    - match: Host(`plane.lab.paultibbetts.uk`) && PathPrefix(`/live`)
       kind: Rule
       services:
         - name: plane-live
           port: 3000
-    - match: Host(`plane.lab.paultibbetts.uk`) && (PathPrefix(`/api/`) || PathPrefix(`/auth/`))
+    - match: Host(`plane.lab.paultibbetts.uk`) && (PathPrefix(`/api`) || PathPrefix(`/auth`))
       kind: Rule
       services:
         - name: plane-api
