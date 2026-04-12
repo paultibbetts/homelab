@@ -13,6 +13,7 @@ metadata:
     gethomepage.dev/group: Apps
     gethomepage.dev/icon: plane.png
     gethomepage.dev/name: Plane
+    gethomepage.dev/pod-selector: "app.name=plane-plane-web"
 spec:
   entryPoints:
     - websecure
