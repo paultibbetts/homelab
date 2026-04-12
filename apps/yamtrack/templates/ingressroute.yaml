@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: yamtrack
+  namespace: yamtrack
+  labels:
+    app.kubernetes.io/name: yamtrack
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://yamtrack.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Media tracker
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: yamtrack.png
+    gethomepage.dev/name: Yamtrack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`yamtrack.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: yamtrack
+          port: http
+  tls: {}
