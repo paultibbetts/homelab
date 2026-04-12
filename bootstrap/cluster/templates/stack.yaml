@@ -67,8 +67,10 @@ spec:
 {{- if eq `{{path.basename}}` "plane" }}
         - group: batch
           kind: Job
+          name: plane-api-migrate-1
           jqPathExpressions:
-            - ".spec.template.metadata.annotations.timestamp"
+            - ".spec.selector"
+            - ".spec.template"
 {{- end }}
 {{- end }}
 {{- end }}
