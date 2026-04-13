@@ -21,8 +21,8 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:18-alpine
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.images.postgres.repository }}:{{ .Values.images.postgres.tag }}"
+          imagePullPolicy: {{ .Values.images.postgres.pullPolicy }}
           env:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata

@@ -24,8 +24,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: outline
-          image: docker.getoutline.com/outlinewiki/outline:1.6.1
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.images.outline.repository }}:{{ .Values.images.outline.tag }}"
+          imagePullPolicy: {{ .Values.images.outline.pullPolicy }}
           securityContext:
             runAsUser: 1001
             runAsGroup: 1001

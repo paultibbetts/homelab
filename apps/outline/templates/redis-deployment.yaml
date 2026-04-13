@@ -24,8 +24,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: redis-data-permissions
-          image: busybox:1.37
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.images.busybox.repository }}:{{ .Values.images.busybox.tag }}"
+          imagePullPolicy: {{ .Values.images.busybox.pullPolicy }}
           command:
             - sh
             - -c
@@ -35,8 +35,8 @@ spec:
               mountPath: /mnt
       containers:
         - name: redis
-          image: redis:8-alpine
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.images.redis.repository }}:{{ .Values.images.redis.tag }}"
+          imagePullPolicy: {{ .Values.images.redis.pullPolicy }}
           securityContext:
             runAsUser: 999
             runAsGroup: 999

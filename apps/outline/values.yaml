@@ -1,0 +1,17 @@
+images:
+  outline:
+    repository: outlinewiki/outline
+    tag: "1.6.1"
+    pullPolicy: IfNotPresent
+  postgres:
+    repository: postgres
+    tag: "18-alpine"
+    pullPolicy: IfNotPresent
+  redis:
+    repository: redis
+    tag: "8-alpine"
+    pullPolicy: IfNotPresent
+  busybox:
+    repository: busybox
+    tag: "1.37"
+    pullPolicy: IfNotPresent
