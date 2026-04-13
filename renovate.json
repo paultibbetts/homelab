@@ -17,6 +17,11 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/librespeed/speedtest"],
       "schedule": ["* * * * 0"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["getmeili/meilisearch"],
+      "dependencyDashboardApproval": true
     }
   ],
   "customManagers": [
