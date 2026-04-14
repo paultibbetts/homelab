@@ -21,7 +21,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: yamtrack
-          image: ghcr.io/fuzzygrim/yamtrack:0.25.0
+          image: ghcr.io/fuzzygrim/yamtrack:0.25.2
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
