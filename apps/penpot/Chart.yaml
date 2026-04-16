@@ -3,5 +3,5 @@ name: penpot
 version: 0.0.0
 dependencies:
   - name: penpot
-    version: 0.38.0
+    version: 0.39.0
     repository: https://helm.penpot.app
