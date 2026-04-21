@@ -3,6 +3,8 @@
 
 source "$(dirname "$0")/lib/env"
 
+: "${CONTROL_PLANE_IP:?CONTROL_PLANE_IP is required}"
+
 mkdir -p ~/.talos
 cp ./talosconfig ~/.talos/config
 export TALOSCONFIG=~/.talos/config
