@@ -1,13 +1,13 @@
 terraform {
   required_providers {
-	cloudflare = {
-		source = "cloudflare/cloudflare"
-		version = "~> 5.18.0"
-	}
-	kubernetes = {
-		source = "hashicorp/kubernetes"
-		version = "~> 3.1.0"
-	}
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 5.18.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 3.1.0"
+    }
   }
   backend "s3" {
     bucket                      = "tfstate"
