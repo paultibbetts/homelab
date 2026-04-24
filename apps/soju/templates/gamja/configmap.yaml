@@ -6,4 +6,8 @@ metadata:
     app.kubernetes.io/name: gamja
 data:
   config.json: |
-    {}
+    {
+      "server": {
+        "url": "/socket"
+      }
+    }

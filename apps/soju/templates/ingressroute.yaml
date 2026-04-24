@@ -17,6 +17,11 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`soju.lab.paultibbetts.uk`) && PathPrefix(`/socket`)
+      kind: Rule
+      services:
+        - name: soju
+          port: http
     - match: Host(`soju.lab.paultibbetts.uk`)
       kind: Rule
       services:
