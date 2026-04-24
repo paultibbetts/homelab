@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: soju
+  labels:
+    app.kubernetes.io/name: soju
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: soju
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: soju
+    spec:
+      containers:
+        - name: soju
+          image: codeberg.org/emersion/soju
+          ports:
+            - name: irc
+              containerPort: 6667
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /soju-config
+              subPath: soju.conf
+              readOnly: true
+            - name: data
+              mountPath: /db
+      volumes:
+        - name: config
+          configMap:
+            name: soju-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: soju-data

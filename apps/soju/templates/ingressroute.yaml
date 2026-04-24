@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: soju
+  namespace: soju
+  labels:
+    app.kubernetes.io/name: soju
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://soju.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: IRC bouncer and web client
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: irc
+    gethomepage.dev/name: Soju
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`soju.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: gamja
+          port: http
+  tls: {}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: soju-config
+  labels:
+    app.kubernetes.io/name: soju
+data:
+  soju.conf: |
+    hostname soju.lab.paultibbetts.uk
+    db sqlite3 /db/main.db
+    message-store db
+    listen irc+insecure://0.0.0.0:6667
+    listen http+insecure://0.0.0.0:8080
+    listen unix+admin://
+    http-ingress https://soju.lab.paultibbetts.uk

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gamja-config
+  labels:
+    app.kubernetes.io/name: gamja
+data:
+  config.json: |
+    {}

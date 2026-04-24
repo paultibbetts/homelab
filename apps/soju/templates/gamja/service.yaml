@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gamja
+  labels:
+    app.kubernetes.io/name: gamja
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: gamja
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http

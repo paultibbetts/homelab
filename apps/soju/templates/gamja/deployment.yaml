@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gamja
+  labels:
+    app.kubernetes.io/name: gamja
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gamja
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gamja
+    spec:
+      containers:
+        - name: gamja
+          image: codeberg.org/emersion/gamja:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: config
+              mountPath: /gamja-config.json
+              subPath: config.json
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: gamja-config
