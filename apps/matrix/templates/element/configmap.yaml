@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: element-config
+  labels:
+    app.kubernetes.io/name: element
+data:
+  config.json: |
+    {
+      "default_server_config": {
+        "m.homeserver": {
+          "base_url": "https://matrix.lab.paultibbetts.uk",
+          "server_name": "matrix.lab.paultibbetts.uk"
+        }
+      },
+      "disable_custom_urls": true,
+      "default_federate": false,
+      "brand": "Element"
+    }

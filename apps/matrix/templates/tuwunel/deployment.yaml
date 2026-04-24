@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix
+  labels:
+    app.kubernetes.io/name: matrix
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: matrix
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: matrix
+    spec:
+      containers:
+        - name: tuwunel
+          image: ghcr.io/matrix-construct/tuwunel:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TUWUNEL_CONFIG
+              value: /etc/tuwunel/tuwunel.toml
+            - name: TUWUNEL_REGISTRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: matrix-registration
+                  key: registration_token
+          ports:
+            - name: http
+              containerPort: 6167
+          volumeMounts:
+            - name: config
+              mountPath: /etc/tuwunel/tuwunel.toml
+              subPath: tuwunel.toml
+              readOnly: true
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          configMap:
+            name: matrix-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: matrix-data

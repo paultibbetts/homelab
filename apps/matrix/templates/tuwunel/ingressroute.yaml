@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: matrix
+  namespace: matrix
+  labels:
+    app.kubernetes.io/name: matrix
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`matrix.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: matrix
+          port: http
+  tls: {}
