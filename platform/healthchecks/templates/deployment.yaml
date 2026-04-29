@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: healthchecks
-          image: healthchecks/healthchecks:v4.1
+          image: healthchecks/healthchecks:v4.2
           imagePullPolicy: Always
           env:
             - name: DB
