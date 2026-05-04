@@ -3,5 +3,5 @@ name: komga
 version: 0.0.0
 dependencies:
   - name: komga
-    version: 1.4.9
+    version: 1.4.11
     repository: https://repo.helmforge.dev
