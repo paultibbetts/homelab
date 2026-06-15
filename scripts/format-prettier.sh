@@ -54,3 +54,5 @@ fi
   --prose-wrap preserve \
   --write \
   "${files[@]}"
+
+echo "Done."
