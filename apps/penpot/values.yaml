@@ -23,6 +23,8 @@ penpot:
     assets:
       enabled: true
       size: 20Gi
+      accessModes:
+        - ReadWriteMany
 
   ingress:
     enabled: false
