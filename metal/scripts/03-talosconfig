@@ -1,14 +1,42 @@
 #!/usr/bin/env bash
 # https://docs.siderolabs.com/talos/v1.12/getting-started/prodnotes#step-12-manage-your-talos-configuration-file
 
+set -e
+
 source "$(dirname "$0")/lib/env"
 
+: "${CLUSTER_NAME:?CLUSTER_NAME is required}"
 : "${CONTROL_PLANE_IP:?CONTROL_PLANE_IP is required}"
 
-mkdir -p ~/.talos
-cp ./talosconfig ~/.talos/config
-export TALOSCONFIG=~/.talos/config
+if [[ ! -f "./talosconfig" ]]; then
+  echo "./talosconfig not found; run ./scripts/01-generate-config first"
+  exit 1
+fi
+
+TALOSCONFIG_PATH="${TALOSCONFIG:-$HOME/.talos/config}"
+
+mkdir -p "$(dirname "$TALOSCONFIG_PATH")"
+
+if [[ ! -f "$TALOSCONFIG_PATH" ]]; then
+  cp ./talosconfig "$TALOSCONFIG_PATH"
+elif talosctl --talosconfig "$TALOSCONFIG_PATH" --context "$CLUSTER_NAME" config info >/dev/null 2>&1; then
+  if [[ "${FORCE:-0}" != "1" ]]; then
+    echo "Talos context '$CLUSTER_NAME' already exists in $TALOSCONFIG_PATH"
+    echo "Refusing to replace it without confirmation."
+    echo "Run FORCE=1 ./scripts/03-talosconfig to replace that context for a rebuilt cluster."
+    exit 1
+  fi
+
+  talosctl --talosconfig "$TALOSCONFIG_PATH" config remove "$CLUSTER_NAME" --noconfirm
+  talosctl --talosconfig "$TALOSCONFIG_PATH" config merge ./talosconfig
+else
+  talosctl --talosconfig "$TALOSCONFIG_PATH" config merge ./talosconfig
+fi
+
+export TALOSCONFIG="$TALOSCONFIG_PATH"
+talosctl --talosconfig "$TALOSCONFIG_PATH" config context "$CLUSTER_NAME"
 
 # https://docs.siderolabs.com/talos/v1.12/getting-started/prodnotes#step-13-set-endpoints-of-your-control-plane-nodes
 
-talosctl config endpoint "${CONTROL_PLANE_IP[@]}"
+talosctl --talosconfig "$TALOSCONFIG_PATH" --context "$CLUSTER_NAME" config endpoint "${CONTROL_PLANE_IP[@]}"
+talosctl --talosconfig "$TALOSCONFIG_PATH" --context "$CLUSTER_NAME" config node "${CONTROL_PLANE_IP[@]}"

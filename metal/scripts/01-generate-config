@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # https://docs.siderolabs.com/talos/v1.12/getting-started/prodnotes#step-6-generate-machine-configurations
 
+set -e
+
 source "$(dirname "$0")/lib/env"
 
 : "${CLUSTER_NAME:?CLUSTER_NAME is required}"
@@ -15,8 +17,8 @@ talosctl gen config "$CLUSTER_NAME" "$CLUSTER_ENDPOINT" \
     --with-secrets secrets.yaml \
     --config-patch @patches/controlplane.yaml \
     --config-patch @patches/longhorn.yaml \
-    --output-types controlplane \
-    --output controlplane.yaml
+    --output-types controlplane,talosconfig \
+    --output .
 
 talosctl machineconfig patch controlplane.yaml \
     --patch @patches/remove-exclude-lb-label.yaml \

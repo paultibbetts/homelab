@@ -2,16 +2,16 @@
 set -euo pipefail
 
 CP_IPS=(
-  192.168.1.70
-  192.168.1.214
-  192.168.1.178
+  10.1.21.70
+  10.1.21.214
+  10.1.21.178
 )
 
 TALOS_SHUTDOWN_WAIT="${TALOS_SHUTDOWN_WAIT:-false}"
 TALOS_SHUTDOWN_TIMEOUT="${TALOS_SHUTDOWN_TIMEOUT:-5m}"
 TALOS_SHUTDOWN_FORCE="${TALOS_SHUTDOWN_FORCE:-true}"
 
-declare -A NODE_NAMES=()
+NODE_NAMES=()
 
 get_node_name_by_ip() {
   local ip="$1"
@@ -42,14 +42,15 @@ shutdown_node() {
 }
 
 echo "=== Cordoning all nodes ==="
-for ip in "${CP_IPS[@]}"; do
+for i in "${!CP_IPS[@]}"; do
+  ip="${CP_IPS[$i]}"
   node="$(get_node_name_by_ip "$ip")"
   if [[ -z "${node:-}" ]]; then
     echo "Could not find node name for IP $ip" >&2
     exit 1
   fi
 
-  NODE_NAMES["$ip"]="$node"
+  NODE_NAMES[$i]="$node"
   echo "Cordoning $node ($ip)..."
   kubectl cordon "$node" || true
 done
@@ -57,8 +58,9 @@ done
 echo
 echo "=== Best-effort drain of each node ==="
 echo "PDB-blocked Longhorn pods may prevent a full drain; that is expected."
-for ip in "${CP_IPS[@]}"; do
-  node="${NODE_NAMES[$ip]}"
+for i in "${!CP_IPS[@]}"; do
+  ip="${CP_IPS[$i]}"
+  node="${NODE_NAMES[$i]}"
 
   echo "Draining $node ($ip)..."
   kubectl drain "$node" \
@@ -74,8 +76,9 @@ sleep 20
 
 echo
 echo "=== Shutting down control planes one-by-one ==="
-for ip in "${CP_IPS[@]}"; do
-  node="${NODE_NAMES[$ip]:-unknown}"
+for i in "${!CP_IPS[@]}"; do
+  ip="${CP_IPS[$i]}"
+  node="${NODE_NAMES[$i]:-unknown}"
   echo "About to shut down ${node:-unknown} ($ip)..."
   shutdown_node "$ip"
 

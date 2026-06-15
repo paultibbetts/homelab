@@ -3,12 +3,12 @@ machine:
     disk: /dev/mmcblk0
   network:
     nameservers:
-      - 192.168.1.2
+      - 10.1.21.2
     interfaces:
       - interface: end0
         dhcp: true
         vip:
-          ip: 192.168.1.8
+          ip: 10.1.21.21
   time:
     servers:
       - 0.uk.pool.ntp.org
