@@ -32,6 +32,10 @@ data:
           style: row
           columns: 2
 
+      MonPi:
+        style: row
+        columns: 1
+
       Cloud:
         style: row
         columns: 2
