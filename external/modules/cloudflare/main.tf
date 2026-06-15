@@ -32,14 +32,14 @@ resource "cloudflare_api_token" "cert_manager" {
 	{ id = local.zone_read_id },
 	{ id = local.dns_write_id },
     ]
-    resources = {
+    resources = jsonencode({
       "com.cloudflare.api.account.zone.*" = "*"
-    }
+    })
   }]
   status = "active"
 }
 
-resource "kubernetes_secret" "cert_manager_token" {
+resource "kubernetes_secret_v1" "cert_manager_token" {
 	metadata {
 		name = "cloudflare-api-token"
 		namespace = "cert-manager"
