@@ -14,10 +14,23 @@ data:
     layout:
       Apps:
         icon: si-appstore
-      Platform:
-        icon: mdi-layers
-      System:
-        icon: mdi-chip
+        style: row
+        columns: 4
+
+      Infrastructure:
+        header: false
+        style: row
+        columns: 2
+
+        Platform:
+          icon: mdi-layers
+          style: row
+          columns: 2
+
+        System:
+          icon: mdi-chip
+          style: row
+          columns: 2
     providers:
       longhorn:
         url: https://longhorn.lab.paultibbetts.uk
