@@ -31,6 +31,10 @@ data:
           icon: mdi-chip
           style: row
           columns: 2
+
+      Cloud:
+        style: row
+        columns: 2
     providers:
       longhorn:
         url: https://longhorn.lab.paultibbetts.uk
