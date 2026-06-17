@@ -1,6 +1,6 @@
 dependencies:
 - name: komga
   repository: https://repo.helmforge.dev
-  version: 1.4.11
-digest: sha256:a60f843afedbf378522d51af52a57085d5f2ec514305eb2f5d8d5382aa83d1cd
-generated: "2026-05-04T00:01:34.877215049Z"
+  version: 1.4.12
+digest: sha256:77cbc7ea774b8a44de8acc4f9a3e4d6ed8a9ee7e5bd17ff9709c8a86042b3e05
+generated: "2026-06-17T00:01:24.211377234Z"
