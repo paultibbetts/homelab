@@ -1,10 +1,6 @@
 penpot:
   fullnameOverride: penpot
 
-  global:
-    postgresqlEnabled: true
-    valkeyEnabled: true
-
   config:
     publicUri: https://penpot.lab.paultibbetts.uk
     flags: enable-registration enable-login-with-password disable-email-verification
@@ -13,11 +9,14 @@ penpot:
       apiSecretKey: api-secret-key
     telemetryEnabled: false
     postgresql:
+      host: penpot-postgres
       username: penpot
       database: penpot
       existingSecret: penpot-secrets
       secretKeys:
         passwordKey: password
+    redis:
+      host: penpot-valkey
 
   persistence:
     assets:
@@ -28,9 +27,3 @@ penpot:
 
   ingress:
     enabled: false
-
-  postgresql:
-    auth:
-      username: penpot
-      database: penpot
-      existingSecret: penpot-secrets
