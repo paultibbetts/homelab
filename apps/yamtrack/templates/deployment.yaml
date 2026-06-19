@@ -4,6 +4,7 @@ metadata:
   name: yamtrack
   labels:
     app.kubernetes.io/name: yamtrack
+    app.kubernetes.io/component: app
 spec:
   replicas: 1
   strategy:
@@ -15,6 +16,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: yamtrack
+        app.kubernetes.io/component: app
     spec:
       securityContext:
         fsGroup: 1000

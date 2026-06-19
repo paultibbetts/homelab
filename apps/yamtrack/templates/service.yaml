@@ -4,10 +4,12 @@ metadata:
   name: yamtrack
   labels:
     app.kubernetes.io/name: yamtrack
+    app.kubernetes.io/component: app
 spec:
   type: ClusterIP
   selector:
     app.kubernetes.io/name: yamtrack
+    app.kubernetes.io/component: app
   ports:
     - name: http
       protocol: TCP
