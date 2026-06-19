@@ -1,0 +1,41 @@
+searxng:
+  fullnameOverride: searxng
+
+  image:
+    tag: 2026.6.19-fe1848673
+
+  secret:
+    create: false
+    existingSecret: searxng-secret
+    existingSecretKey: SEARXNG_SECRET
+
+  env:
+    values:
+      SEARXNG_VALKEY_URL: valkey://searxng-valkey:6379/0
+
+  ingress:
+    enabled: false
+
+  config:
+    settings:
+      general:
+        instance_name: SearXNG
+      server:
+        base_url: https://searxng.lab.paultibbetts.uk/
+        limiter: false
+        public_instance: false
+        image_proxy: true
+        method: GET
+
+  persistence:
+    cache:
+      enabled: true
+      storageClass: longhorn
+      size: 2Gi
+
+  valkey:
+    enabled: true
+    persistence:
+      enabled: true
+      storageClass: longhorn
+      size: 1Gi
