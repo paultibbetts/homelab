@@ -1,7 +1,7 @@
 web-app:
   replicaCount: 1
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-7a13ac5c856b
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-e9c826e60c4f
     pullPolicy: IfNotPresent
   containerPort: 80
   env:
