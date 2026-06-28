@@ -1,7 +1,7 @@
 web-app:
   replicaCount: 1
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:slim-migration-1f6a0d3a02b7
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:slim-migration-9d4fda1c0538
     pullPolicy: IfNotPresent
   containerPort: 80
   env:
