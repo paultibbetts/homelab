@@ -16,7 +16,7 @@ newt:
     - name: homelab
       enabled: true
       auth:
-        existingSecretName: newt-auth
+        existingSecretName: newt-main-tunnel-auth
       replicas: 1
       resources:
         requests:
