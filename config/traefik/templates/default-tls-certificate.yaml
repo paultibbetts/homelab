@@ -7,6 +7,8 @@ spec:
   secretName: traefik-default-tls
   dnsNames:
     - "*.lab.paultibbetts.uk"
+    - "*.dev.lab.paultibbetts.uk"
+    - "*.preview.lab.paultibbetts.uk"
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-production
