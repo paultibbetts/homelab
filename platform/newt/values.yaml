@@ -1,0 +1,29 @@
+newt:
+  global:
+    notes:
+      defaultTraefikTarget: traefik.traefik.svc.cluster.local:443
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+        ephemeral-storage: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+        ephemeral-storage: 256Mi
+
+  newtInstances:
+    - name: homelab
+      enabled: true
+      auth:
+        existingSecretName: newt-auth
+      replicas: 1
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+          ephemeral-storage: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+          ephemeral-storage: 256Mi

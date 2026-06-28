@@ -1,0 +1,7 @@
+apiVersion: v2
+name: newt
+version: 0.0.0
+dependencies:
+  - name: newt
+    version: 1.4.0
+    repository: https://charts.fossorial.io
