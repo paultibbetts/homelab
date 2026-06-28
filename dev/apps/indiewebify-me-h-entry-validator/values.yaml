@@ -1,21 +1,16 @@
 web-app:
   replicaCount: 1
-
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator@sha256:PLACEHOLDER
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-7a13ac5c856b
     pullPolicy: IfNotPresent
-
   containerPort: 80
-
   env:
     - name: APP_ENV
       value: production
-
   service:
     type: ClusterIP
     port: 80
     targetPort: 80
-
   ingress:
     enabled: true
     className: traefik
@@ -28,7 +23,6 @@ web-app:
         paths:
           - path: /
             pathType: Prefix
-
   resources:
     requests:
       cpu: 25m
