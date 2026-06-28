@@ -1,7 +1,7 @@
 web-app:
   replicaCount: 1
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-d7e7fcc91d51
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:slim-migration-9d4fda1c0538
     pullPolicy: IfNotPresent
   containerPort: 80
   env:
@@ -19,7 +19,7 @@ web-app:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - host: indiewebify-me-h-entry-validator.dev.lab.paultibbetts.uk
+      - host: indiewebify-me-slim-migration.preview.lab.paultibbetts.uk
         paths:
           - path: /
             pathType: Prefix
