@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: dev
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://gitea.cloud.paultibbetts.uk/paul/homelab.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: dev-*
+    - server: https://kubernetes.default.svc
+      namespace: preview-*
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace

@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-previews
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - git:
+        repoURL: https://gitea.cloud.paultibbetts.uk/paul/homelab.git
+        revision: main
+        directories:
+          - path: dev/previews/*
+  template:
+    metadata:
+      name: 'preview-{{ .path.basename }}'
+      labels:
+        stack: dev
+        dev.paultibbetts.uk/type: preview
+      annotations:
+        argocd.argoproj.io/sync-wave: "10"
+    spec:
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'preview-{{ .path.basename }}'
+      project: dev
+      source:
+        repoURL: https://gitea.cloud.paultibbetts.uk/paul/homelab.git
+        path: '{{ .path.path }}'
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 1m
+            factor: 2
+            maxDuration: 10m
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true

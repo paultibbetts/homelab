@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev
+  namespace: {{ .Release.Namespace }}
+  labels:
+    stack: bootstrap
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Release.Namespace }}
+  project: bootstrap
+  source:
+    repoURL: https://gitea.cloud.paultibbetts.uk/paul/homelab.git
+    path: dev/root
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 10
+      backoff:
+        duration: 1m
+        factor: 2
+        maxDuration: 10m
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true

@@ -1,0 +1,44 @@
+replicaCount: 1
+
+image:
+  value: ""
+  repository: nginx
+  tag: latest
+  digest: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+deploymentAnnotations: {}
+deploymentLabels: {}
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+containerPort: 80
+
+env: []
+envFrom: []
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+  annotations: {}
+  labels: {}
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts: []
+
+resources: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
