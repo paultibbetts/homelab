@@ -17,6 +17,29 @@ newt:
       enabled: true
       auth:
         existingSecretName: newt-main-tunnel-auth
+      blueprintFile: /etc/newt/blueprints/homelab.yaml
+      blueprintData: |
+        public-resources:
+          dev-wildcard:
+            name: Dev Wildcard
+            mode: http
+            full-domain: "*.dev.lab.paultibbetts.uk"
+            tls-server-name: pangolin-dev.dev.lab.paultibbetts.uk
+            enabled: true
+            targets:
+              - hostname: traefik.traefik.svc.cluster.local
+                port: 443
+                method: https
+          preview-wildcard:
+            name: Preview Wildcard
+            mode: http
+            full-domain: "*.preview.lab.paultibbetts.uk"
+            tls-server-name: pangolin-preview.preview.lab.paultibbetts.uk
+            enabled: true
+            targets:
+              - hostname: traefik.traefik.svc.cluster.local
+                port: 443
+                method: https
       replicas: 1
       resources:
         requests:

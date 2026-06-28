@@ -17,7 +17,7 @@ kubectl create secret generic newt-main-tunnel-auth \
   --from-literal=NEWT_SECRET="${NEWT_SECRET}"
 ```
 
-For Pangolin Enterprise wildcard resources, point the wildcard resource target at the in-cluster Traefik HTTPS service:
+This chart also applies a Newt blueprint for Pangolin Enterprise wildcard resources. Both wildcard resources point at the in-cluster Traefik HTTPS service:
 
 ```text
 traefik.traefik.svc.cluster.local:443
