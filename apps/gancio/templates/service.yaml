@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gancio
+  namespace: gancio
+  labels:
+    app.kubernetes.io/name: gancio
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: gancio
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http

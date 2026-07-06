@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gancio
+  namespace: gancio
+  labels:
+    app.kubernetes.io/name: gancio
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gancio
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gancio
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: gancio
+          image: cisti/gancio:2.0.0-beta.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NUXT_SESSION_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gancio-env
+                  key: NUXT_SESSION_PASSWORD
+          ports:
+            - containerPort: 13120
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          volumeMounts:
+            - name: env
+              mountPath: /app/.env
+              subPath: .env
+              readOnly: true
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: env
+          configMap:
+            name: gancio-env
+        - name: data
+          persistentVolumeClaim:
+            claimName: gancio-data

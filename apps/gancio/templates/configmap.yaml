@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gancio-env
+  namespace: gancio
+  labels:
+    app.kubernetes.io/name: gancio
+data:
+  .env: |
+    BASEURL=https://gancio.lab.paultibbetts.uk
+    HOST=0.0.0.0
+    PORT=13120
+    LOG_LEVEL=info
+    LOG_PATH=./data/logs
+    DB_DIALECT=sqlite
+    DB_STORAGE=./data/gancio.sqlite
+    DB_LOGGING=false
+    USER_LOCALE=./data/user_locale
+    UPLOAD_PATH=./data/uploads
+    ALLOW_ACCESS_TO_HIDDEN_SERVICE=false

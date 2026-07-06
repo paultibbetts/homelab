@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gancio
+  namespace: gancio
+  labels:
+    app.kubernetes.io/name: gancio
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://gancio.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Local events calendar
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: gancio.png
+    gethomepage.dev/name: Gancio
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`gancio.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: gancio
+          port: http
+  tls: {}
