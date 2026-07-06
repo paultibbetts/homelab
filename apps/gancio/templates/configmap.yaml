@@ -11,10 +11,10 @@ data:
     HOST=0.0.0.0
     PORT=13120
     LOG_LEVEL=info
-    LOG_PATH=./data/logs
+    LOG_PATH=./logs
     DB_DIALECT=sqlite
-    DB_STORAGE=./data/gancio.sqlite
+    DB_STORAGE=./gancio.sqlite
     DB_LOGGING=false
-    USER_LOCALE=./data/user_locale
-    UPLOAD_PATH=./data/uploads
+    USER_LOCALE=./user_locale
+    UPLOAD_PATH=./uploads
     ALLOW_ACCESS_TO_HIDDEN_SERVICE=false

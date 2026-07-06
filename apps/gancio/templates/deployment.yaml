@@ -14,6 +14,8 @@ spec:
       app.kubernetes.io/name: gancio
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
         app.kubernetes.io/name: gancio
     spec:
