@@ -4,7 +4,7 @@ preset: web-app
 host: indiewebify-me-slim-migration.preview.lab.paultibbetts.uk
 helmValues: |
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:slim-migration-9d4fda1c0538
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:slim-migration-0f7e1b3d6969
   env:
     - name: APP_ENV
       value: production
