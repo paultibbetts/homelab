@@ -1,25 +1,10 @@
 name: indiewebify-me-h-entry-validator
 namespace: preview-indiewebify-me-h-entry-validator
 preset: web-app
-sourcePath: charts/web-app
 host: indiewebify-me-h-entry-validator.preview.lab.paultibbetts.uk
 helmValues: |
-  replicaCount: 1
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-8f7252ffe7a7
-    pullPolicy: IfNotPresent
-  containerPort: 80
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-d7e7fcc91d51
   env:
     - name: APP_ENV
       value: production
-  service:
-    type: ClusterIP
-    port: 80
-    targetPort: 80
-  resources:
-    requests:
-      cpu: 25m
-      memory: 64Mi
-    limits:
-      cpu: 250m
-      memory: 256Mi
