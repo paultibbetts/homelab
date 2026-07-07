@@ -1,0 +1,24 @@
+name: indiewebify-me-slim-migration
+namespace: preview-indiewebify-me-slim-migration
+preset: web-app
+host: indiewebify-me-slim-migration.preview.lab.paultibbetts.uk
+helmValues: |
+  replicaCount: 1
+  image:
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:slim-migration-9d4fda1c0538
+    pullPolicy: IfNotPresent
+  containerPort: 80
+  env:
+    - name: APP_ENV
+      value: production
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+  resources:
+    requests:
+      cpu: 25m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi

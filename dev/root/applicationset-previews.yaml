@@ -13,25 +13,43 @@ spec:
     - git:
         repoURL: https://gitea.cloud.paultibbetts.uk/paul/homelab.git
         revision: main
-        directories:
-          - path: dev/previews/*
+        files:
+          - path: dev/previews/*.yaml
   template:
     metadata:
-      name: 'preview-{{ .path.basename }}'
+      name: 'preview-{{ .name }}'
       labels:
         stack: dev
         dev.paultibbetts.uk/type: preview
+        dev.paultibbetts.uk/preset: '{{ .preset }}'
       annotations:
         argocd.argoproj.io/sync-wave: "10"
     spec:
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'preview-{{ .path.basename }}'
+        namespace: '{{ .namespace }}'
       project: dev
       source:
         repoURL: https://gitea.cloud.paultibbetts.uk/paul/homelab.git
-        path: '{{ .path.path }}'
+        path: '{{ if eq .preset "web-app" }}charts/web-app{{ else }}{{ .sourcePath }}{{ end }}'
         targetRevision: main
+        helm:
+          values: |
+            {{ if eq .preset "web-app" }}
+            ingress:
+              enabled: true
+              className: traefik
+              annotations:
+                external-dns.alpha.kubernetes.io/target: traefik.lab.paultibbetts.uk
+                traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                traefik.ingress.kubernetes.io/router.tls: "true"
+              hosts:
+                - host: {{ .host }}
+                  paths:
+                    - path: /
+                      pathType: Prefix
+            {{ end }}
+            {{ .helmValues }}
       syncPolicy:
         automated:
           prune: true
