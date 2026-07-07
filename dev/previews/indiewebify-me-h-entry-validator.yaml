@@ -4,7 +4,7 @@ preset: web-app
 host: indiewebify-me-h-entry-validator.preview.lab.paultibbetts.uk
 helmValues: |
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-d7e7fcc91d51
+    value: gitea.cloud.paultibbetts.uk/paul/indiewebify-me:feat-h-entry-validator-cf635a437b1a
   env:
     - name: APP_ENV
       value: production
