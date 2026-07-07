@@ -4,4 +4,4 @@ preset: web-app
 host: paultibbetts-uk-feat-cooks.preview.lab.paultibbetts.uk
 helmValues: |
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/paultibbetts.uk:feat-cooks-34cea180f56b
+    value: gitea.cloud.paultibbetts.uk/paul/paultibbetts.uk:feat-cooks-c371f5ee21ad
