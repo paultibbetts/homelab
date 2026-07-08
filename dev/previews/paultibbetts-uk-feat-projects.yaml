@@ -1,0 +1,7 @@
+name: paultibbetts-uk-feat-projects
+namespace: preview-paultibbetts-uk-feat-projects
+preset: web-app
+host: paultibbetts-uk-feat-projects.preview.lab.paultibbetts.uk
+helmValues: |
+  image:
+    value: gitea.cloud.paultibbetts.uk/paul/paultibbetts.uk:feat-projects-a528fb93c74a
