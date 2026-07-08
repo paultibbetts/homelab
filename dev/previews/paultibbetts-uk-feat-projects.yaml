@@ -4,4 +4,4 @@ preset: web-app
 host: paultibbetts-uk-feat-projects.preview.lab.paultibbetts.uk
 helmValues: |
   image:
-    value: gitea.cloud.paultibbetts.uk/paul/paultibbetts.uk:feat-projects-a528fb93c74a
+    value: gitea.cloud.paultibbetts.uk/paul/paultibbetts.uk:feat-projects-59f70dc8347d
