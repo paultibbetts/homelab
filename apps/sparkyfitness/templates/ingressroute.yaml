@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sparkyfitness
+  namespace: sparkyfitness
+  labels:
+    app.kubernetes.io/name: sparkyfitness
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://sparkyfitness.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Fitness and nutrition tracking
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: sparkyfitness.png
+    gethomepage.dev/name: SparkyFitness
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sparkyfitness.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: sparkyfitness-frontend
+          port: 80
+  tls: {}

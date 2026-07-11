@@ -1,0 +1,34 @@
+sparkyfitness:
+  fullnameOverride: sparkyfitness
+
+  global:
+    storageClass: longhorn
+
+  config:
+    timezone: Europe/London
+    frontendUrl: https://sparkyfitness.lab.paultibbetts.uk
+    forceEmailLogin: true
+
+  ingress:
+    enabled: false
+
+  server:
+    secrets:
+      generate: false
+      existingSecret: sparkyfitness-app
+    appDatabase:
+      existingSecret: sparkyfitness-appdb
+    persistence:
+      backup:
+        storageClass: longhorn
+      uploads:
+        storageClass: longhorn
+
+  postgresql:
+    enabled: true
+    auth:
+      database: sparkyfitness
+      username: sparky_admin
+      existingSecret: sparkyfitness-postgresql-auth
+    persistence:
+      storageClass: longhorn
