@@ -1,0 +1,7 @@
+name: paultibbetts-uk-feat-photos
+namespace: preview-paultibbetts-uk-feat-photos
+preset: web-app
+host: paultibbetts-uk-feat-photos.preview.lab.paultibbetts.uk
+helmValues: |
+  image:
+    value: gitea.cloud.paultibbetts.uk/paul/paultibbetts.uk:feat-photos-529178b8eb86
