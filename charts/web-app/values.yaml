@@ -37,7 +37,9 @@ ingress:
   annotations: {}
   hosts: []
 
-resources: {}
+resources:
+  requests:
+    memory: 64Mi
 
 nodeSelector: {}
 tolerations: []

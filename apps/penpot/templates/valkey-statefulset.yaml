@@ -26,6 +26,9 @@ spec:
           ports:
             - name: valkey
               containerPort: 6379
+          resources:
+            requests:
+              memory: 64Mi
           volumeMounts:
             - name: data
               mountPath: /data

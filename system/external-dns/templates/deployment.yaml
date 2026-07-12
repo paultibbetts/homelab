@@ -41,5 +41,8 @@ spec:
             - --pihole-api-version=6
             # Change this to the actual address of your Pi-hole web server
             - --pihole-server=https://pihole.cloud.paultibbetts.uk
+          resources:
+            requests:
+              memory: 64Mi
       securityContext:
         fsGroup: 65534 # For ExternalDNS to be able to read Kubernetes token files

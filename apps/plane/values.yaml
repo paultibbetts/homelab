@@ -35,24 +35,31 @@ plane-ce:
 
   web:
     pullPolicy: IfNotPresent
+    memoryRequest: 128Mi
 
   space:
     pullPolicy: IfNotPresent
+    memoryRequest: 128Mi
 
   admin:
     pullPolicy: IfNotPresent
+    memoryRequest: 128Mi
 
   live:
     pullPolicy: IfNotPresent
+    memoryRequest: 128Mi
 
   api:
     pullPolicy: IfNotPresent
+    memoryRequest: 512Mi
 
   worker:
     pullPolicy: IfNotPresent
+    memoryRequest: 512Mi
 
   beatworker:
     pullPolicy: IfNotPresent
+    memoryRequest: 512Mi
 
   env:
     minio_endpoint_ssl: false

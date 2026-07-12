@@ -6,6 +6,9 @@ traefik:
       searches:
         - lan
     replicas: 3
+  resources:
+    requests:
+      memory: 128Mi
   ports:
     websecure:
       http3:

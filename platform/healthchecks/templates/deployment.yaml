@@ -41,6 +41,9 @@ spec:
           ports:
             - containerPort: 8000
               name: web
+          resources:
+            requests:
+              memory: 256Mi
           volumeMounts:
             - name: healthchecks-data
               mountPath: /data

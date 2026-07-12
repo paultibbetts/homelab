@@ -1,6 +1,9 @@
 grafana:
   deploymentStrategy:
     type: Recreate
+  resources:
+    requests:
+      memory: 256Mi
   ingress:
     enabled: true
     ingressClassName: traefik
@@ -21,6 +24,9 @@ grafana:
         hosts:
           - *host
   sidecar:
+    resources:
+      requests:
+        memory: 64Mi
     dashboards:
       enabled: true
       searchNamespace: monitoring-system

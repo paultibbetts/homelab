@@ -17,6 +17,22 @@ penpot:
         passwordKey: password
     redis:
       host: penpot-valkey
+  backend:
+    resources:
+      requests:
+        memory: 512Mi
+  frontend:
+    resources:
+      requests:
+        memory: 128Mi
+  exporter:
+    resources:
+      requests:
+        memory: 128Mi
+  mcp:
+    resources:
+      requests:
+        memory: 128Mi
 
   persistence:
     assets:

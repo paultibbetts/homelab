@@ -28,6 +28,9 @@ spec:
               value: Europe/London
           ports:
             - containerPort: 5000
+          resources:
+            requests:
+              memory: 512Mi
           volumeMounts:
             - name: config
               mountPath: /kavita/config

@@ -1,6 +1,10 @@
 longhorn:
   preUpgradeChecker:
     jobEnabled: false
+  longhornManager:
+    resources:
+      requests:
+        memory: 256Mi
   defaultSettings:
     createDefaultDiskLabeledNodes: true
     kubernetesClusterAutoscalerEnabled: true

@@ -30,6 +30,9 @@ spec:
             - sh
             - -c
             - mkdir -p /mnt/redis && chown -R 999:999 /mnt/redis
+          resources:
+            requests:
+              memory: 16Mi
           volumeMounts:
             - name: data
               mountPath: /mnt
@@ -44,6 +47,9 @@ spec:
           ports:
             - containerPort: 6379
               name: redis
+          resources:
+            requests:
+              memory: 64Mi
           volumeMounts:
             - name: data
               mountPath: /data

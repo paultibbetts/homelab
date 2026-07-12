@@ -32,6 +32,9 @@ spec:
           ports:
             - containerPort: 7700
               name: http
+          resources:
+            requests:
+              memory: 512Mi
           volumeMounts:
             - name: data
               mountPath: /meili_data

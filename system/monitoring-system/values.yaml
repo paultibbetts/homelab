@@ -13,3 +13,27 @@ kube-prometheus-stack:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
+      resources:
+        requests:
+          memory: 512Mi
+  alertmanager:
+    alertmanagerSpec:
+      resources:
+        requests:
+          memory: 128Mi
+  prometheusOperator:
+    resources:
+      requests:
+        memory: 128Mi
+    prometheusConfigReloader:
+      resources:
+        requests:
+          memory: 50Mi
+  kube-state-metrics:
+    resources:
+      requests:
+        memory: 64Mi
+  prometheus-node-exporter:
+    resources:
+      requests:
+        memory: 32Mi

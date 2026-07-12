@@ -1,4 +1,7 @@
 opengist:
   configExistingSecret: opengist-config
+  resources:
+    requests:
+      memory: 128Mi
   persistence:
     storageClass: "longhorn"

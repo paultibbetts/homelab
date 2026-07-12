@@ -20,3 +20,6 @@ spec:
           env:
             - name: MODE
               value: standalone
+          resources:
+            requests:
+              memory: 128Mi

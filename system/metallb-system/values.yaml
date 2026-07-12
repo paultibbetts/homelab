@@ -1,5 +1,33 @@
 metallb:
+  controller:
+    resources:
+      requests:
+        memory: 64Mi
+  speaker:
+    resources:
+      requests:
+        memory: 64Mi
   frr-k8s:
+    frrk8s:
+      resources:
+        requests:
+          memory: 64Mi
+      frr:
+        resources:
+          requests:
+            memory: 64Mi
+      reloader:
+        resources:
+          requests:
+            memory: 32Mi
+      frrMetrics:
+        resources:
+          requests:
+            memory: 32Mi
+      frrStatus:
+        resources:
+          requests:
+            memory: 32Mi
     prometheus:
       serviceMonitor:
         enabled: false

@@ -14,6 +14,9 @@ komga:
   podSecurityContext:
     supplementalGroups:
       - 3003
+  resources:
+    requests:
+      memory: 512Mi
 
 configPersistence:
   size: 5Gi

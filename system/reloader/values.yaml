@@ -1,3 +1,7 @@
 reloader:
   reloader:
     reloadStrategy: annotations
+    deployment:
+      resources:
+        requests:
+          memory: 64Mi

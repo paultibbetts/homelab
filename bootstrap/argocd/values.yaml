@@ -51,14 +51,34 @@ argo-cd:
       enabled: true
       serviceMonitor:
         enabled: false
+    resources:
+      requests:
+        memory: 128Mi
   dex:
     enabled: false
   controller:
     metrics: *metrics
+    resources:
+      requests:
+        memory: 512Mi
   repoServer:
     metrics: *metrics
+    resources:
+      requests:
+        memory: 256Mi
   redis:
     metrics: *metrics
+    resources:
+      requests:
+        memory: 64Mi
+  applicationSet:
+    resources:
+      requests:
+        memory: 128Mi
+  notifications:
+    resources:
+      requests:
+        memory: 64Mi
   global:
     domain: argocd.lab.paultibbetts.uk
   certificate:
