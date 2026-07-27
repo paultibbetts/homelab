@@ -1,9 +1,7 @@
 opengist:
-  strategy:
-    type: Recreate
+  statefulSet:
+    enabled: true
   configExistingSecret: opengist-config
   resources:
     requests:
       memory: 128Mi
-  persistence:
-    storageClass: "longhorn"
