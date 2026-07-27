@@ -1,4 +1,6 @@
 opengist:
+  strategy:
+    type: Recreate
   configExistingSecret: opengist-config
   resources:
     requests:
