@@ -42,7 +42,7 @@ spec:
             - name: AUTO_CREATE_PRODUCTS
               value: "false"
             - name: AUTO_CREATE_UNITS
-              value: "false"
+              value: "true"
             - name: ENSURE_LOW_STOCK_ON_MEALIE_LIST
               value: "false"
             - name: SYNC_MEALIE_IN_POSSESSION
