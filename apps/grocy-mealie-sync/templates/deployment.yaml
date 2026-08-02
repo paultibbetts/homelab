@@ -37,22 +37,34 @@ spec:
               value: /app/data/sync.db
             - name: TZ
               value: Europe/London
+            # MEALIE_SHOPPING_LIST_ID is deliberately omitted so the existing
+            # UI-selected list remains configurable and is not locked by a placeholder.
             # These settings are intentionally locked for the initial safe setup.
             # Remove an environment variable to control that setting in the web UI.
             - name: AUTO_CREATE_PRODUCTS
               value: "false"
+            # Bootstrap setting: after reviewing and correcting all imported unit mappings,
+            # change this to "false" to prevent future automatic Grocy unit creation.
             - name: AUTO_CREATE_UNITS
               value: "true"
             - name: ENSURE_LOW_STOCK_ON_MEALIE_LIST
               value: "false"
             - name: SYNC_MEALIE_IN_POSSESSION
-              value: "false"
+              value: "true"
             - name: MEALIE_IN_POSSESSION_ONLY_ABOVE_MIN_STOCK
               value: "false"
+            - name: SYNC_SUB_PRODUCTS
+              value: "false"
+            - name: SYNC_PARENT_OWN_STOCK
+              value: "false"
+            - name: MAPPING_WIZARD_MIN_STOCK_STEP
+              value: "0.1"
             - name: STOCK_ONLY_MIN_STOCK
               value: "true"
             - name: CLEANUP_CHECKED_ITEMS_AFTER_HOURS
               value: "-1"
+            - name: CLEANUP_CHECKED_ITEMS_MODE
+              value: synced_only
             - name: MCP_ENABLED
               value: "false"
             - name: ALLOW_INSECURE_TLS
