@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grocy-mealie-sync
+  namespace: grocy-mealie-sync
+  labels:
+    app.kubernetes.io/name: grocy-mealie-sync
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: grocy-mealie-sync
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: http

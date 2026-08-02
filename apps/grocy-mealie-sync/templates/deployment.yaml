@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grocy-mealie-sync
+  namespace: grocy-mealie-sync
+  labels:
+    app.kubernetes.io/name: grocy-mealie-sync
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: grocy-mealie-sync
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: grocy-mealie-sync
+    spec:
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: grocy-mealie-sync
+          image: ghcr.io/harmellis/grocy-mealie-sync:1.14.2
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            runAsNonRoot: true
+          env:
+            - name: GROCY_URL
+              value: http://grocy.grocy.svc.cluster.local:80
+            - name: MEALIE_URL
+              value: https://mealie.cloud.paultibbetts.uk
+            - name: DATABASE_PATH
+              value: /app/data/sync.db
+            - name: TZ
+              value: Europe/London
+            # These settings are intentionally locked for the initial safe setup.
+            # Remove an environment variable to control that setting in the web UI.
+            - name: AUTO_CREATE_PRODUCTS
+              value: "false"
+            - name: AUTO_CREATE_UNITS
+              value: "false"
+            - name: ENSURE_LOW_STOCK_ON_MEALIE_LIST
+              value: "false"
+            - name: SYNC_MEALIE_IN_POSSESSION
+              value: "false"
+            - name: MEALIE_IN_POSSESSION_ONLY_ABOVE_MIN_STOCK
+              value: "false"
+            - name: STOCK_ONLY_MIN_STOCK
+              value: "true"
+            - name: CLEANUP_CHECKED_ITEMS_AFTER_HOURS
+              value: "-1"
+            - name: MCP_ENABLED
+              value: "false"
+            - name: ALLOW_INSECURE_TLS
+              value: "false"
+            - name: AUTH_ENABLED
+              value: "true"
+            - name: GROCY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: grocy-mealie-sync-env
+                  key: GROCY_API_KEY
+            - name: MEALIE_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: grocy-mealie-sync-env
+                  key: MEALIE_API_TOKEN
+            - name: AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grocy-mealie-sync-env
+                  key: AUTH_SECRET
+          ports:
+            - containerPort: 3000
+              name: http
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            failureThreshold: 18
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 30
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: grocy-mealie-sync-data
