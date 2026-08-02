@@ -30,6 +30,18 @@ spec:
               value: "1000"
             - name: TZ
               value: Europe/London
+            - name: GROCY_CURRENCY
+              value: GBP
+            - name: GROCY_CALENDAR_FIRST_DAY_OF_WEEK
+              value: "1"
+            - name: GROCY_ENERGY_UNIT
+              value: kcal
+            - name: GROCY_FEATURE_FLAG_EQUIPMENT
+              value: "false"
+            - name: GROCY_FEATURE_FLAG_RECIPES
+              value: "false"
+            - name: GROCY_FEATURE_FLAG_RECIPES_MEALPLAN
+              value: "false"
           ports:
             - containerPort: 80
               name: http
