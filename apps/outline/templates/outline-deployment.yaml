@@ -98,6 +98,8 @@ spec:
           resources:
             requests:
               memory: 512Mi
+            limits:
+              memory: 1Gi
           volumeMounts:
             - name: data
               mountPath: /var/lib/outline/data

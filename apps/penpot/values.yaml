@@ -21,18 +21,26 @@ penpot:
     resources:
       requests:
         memory: 512Mi
+      limits:
+        memory: 1Gi
   frontend:
     resources:
       requests:
         memory: 128Mi
+      limits:
+        memory: 256Mi
   exporter:
     resources:
       requests:
         memory: 128Mi
+      limits:
+        memory: 256Mi
   mcp:
     resources:
       requests:
         memory: 128Mi
+      limits:
+        memory: 256Mi
 
   persistence:
     assets:

@@ -17,6 +17,8 @@ komga:
   resources:
     requests:
       memory: 512Mi
+    limits:
+      memory: 1Gi
 
 configPersistence:
   size: 5Gi

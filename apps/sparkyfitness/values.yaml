@@ -26,6 +26,12 @@ sparkyfitness:
 
   postgresql:
     enabled: true
+    standalone:
+      resources:
+        requests:
+          memory: 256Mi
+        limits:
+          memory: 512Mi
     auth:
       database: sparkyfitness
       username: sparky_admin
