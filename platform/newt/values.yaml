@@ -20,6 +20,11 @@ newt:
       enabled: true
       auth:
         existingSecretName: newt-main-tunnel-auth
+      configPersistence:
+        enabled: true
+        type: emptyDir
+        mountPath: /var/lib/newt
+        fileName: config.json
       blueprintFile: /etc/newt/blueprints/homelab.yaml
       blueprintData: |
         public-resources:
