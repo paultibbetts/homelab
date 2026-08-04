@@ -54,6 +54,18 @@ newt:
             full-domain: "kavita.lab.paultibbetts.uk"
             tls-server-name: "kavita.lab.paultibbetts.uk"
             enabled: true
+            auth:
+              sso-enabled: true
+              sso-roles:
+                - Member
+              auto-login-idp: 1
+            rules:
+              - action: pass
+                match: country
+                value: GB
+              - action: deny
+                match: country
+                value: ALL
             targets:
               - hostname: traefik.traefik.svc.cluster.local
                 port: 443
