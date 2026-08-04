@@ -40,6 +40,16 @@ newt:
               - hostname: traefik.traefik.svc.cluster.local
                 port: 443
                 method: https
+          kavita:
+            name: Kavita
+            protocol: http
+            full-domain: "kavita.lab.paultibbetts.uk"
+            tls-server-name: "kavita.lab.paultibbetts.uk"
+            enabled: true
+            targets:
+              - hostname: traefik.traefik.svc.cluster.local
+                port: 443
+                method: https
       replicas: 1
       resources:
         requests:
