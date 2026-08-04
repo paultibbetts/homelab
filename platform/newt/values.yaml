@@ -58,6 +58,19 @@ newt:
               - hostname: traefik.traefik.svc.cluster.local
                 port: 443
                 method: https
+                healthcheck:
+                  hostname: traefik.traefik.svc.cluster.local
+                  port: 443
+                  enabled: true
+                  scheme: https
+                  path: /api/health
+                  interval: 30
+                  timeout: 5
+                  method: GET
+                  status: 200
+                  headers:
+                    - name: Host
+                      value: kavita.lab.paultibbetts.uk
       replicas: 1
       resources:
         requests:
