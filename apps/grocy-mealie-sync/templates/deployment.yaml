@@ -39,10 +39,10 @@ spec:
               value: Europe/London
             # MEALIE_SHOPPING_LIST_ID is deliberately omitted so the existing
             # UI-selected list remains configurable and is not locked by a placeholder.
-            # These settings are intentionally locked for the initial safe setup.
+            # These settings are controlled by the deployment rather than the web UI.
             # Remove an environment variable to control that setting in the web UI.
             - name: AUTO_CREATE_PRODUCTS
-              value: "false"
+              value: "true"
             # Bootstrap setting: after reviewing and correcting all imported unit mappings,
             # change this to "false" to prevent future automatic Grocy unit creation.
             - name: AUTO_CREATE_UNITS

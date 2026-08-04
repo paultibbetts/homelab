@@ -81,7 +81,7 @@ The intended shopping workflow is:
 
 The deployment locks these settings with environment variables:
 
-- Product creation in Grocy: disabled.
+- Product creation in Grocy: enabled.
 - Quantity-unit creation in Grocy: temporarily enabled to bootstrap Mealie
   units into Grocy. Review all mappings (especially aliases such as `g`/`gram`
   and `ml`/`millilitre`) in the Mapping Wizard, then change
@@ -98,10 +98,9 @@ The deployment locks these settings with environment variables:
 - Restocking only applies to Grocy products with a positive minimum stock.
 - The Mapping Wizard accepts minimum-stock increments of `0.1`.
 
-The Grocy default unit is intentionally unset because automatic product
-creation is disabled. `MEALIE_SHOPPING_LIST_ID` is intentionally absent from
-the manifest, preserving the existing UI-selected dedicated list. If it needs
-to be recreated, select the list in the UI rather than adding an invented UUID.
+`MEALIE_SHOPPING_LIST_ID` is intentionally absent from the manifest,
+preserving the existing UI-selected dedicated list. If it needs to be
+recreated, select the list in the UI rather than adding an invented UUID.
 
 Every setting listed above that is represented by an environment variable is
 locked in the UI. Change or remove its entry in `templates/deployment.yaml` to
