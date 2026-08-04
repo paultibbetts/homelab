@@ -1,5 +1,8 @@
 newt:
   global:
+    deploymentAnnotations:
+      configmap.reloader.stakater.com/reload: newt-newt-homelab-blueprint
+      reloader.stakater.com/rollout-strategy: restart
     notes:
       defaultTraefikTarget: traefik.traefik.svc.cluster.local:443
     resources:
