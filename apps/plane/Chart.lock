@@ -1,6 +1,6 @@
 dependencies:
 - name: plane-ce
   repository: https://helm.plane.so/
-  version: 1.6.1
-digest: sha256:9feaf51de48683e659b1013cee93c4561f24d5f0184aef047b98e755e42bf6be
-generated: "2026-08-02T00:02:00.157799169Z"
+  version: 1.6.2
+digest: sha256:d2624413005cf5a33bab3d3d85363d955315334440c88fd50751549517dbf6da
+generated: "2026-08-17T00:01:47.26401019Z"
