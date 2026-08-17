@@ -84,5 +84,22 @@ spec:
             - ".spec.selector"
             - ".spec.template"
     {{ `{{- end }}` }}
+    {{ `{{- if eq .path.basename "opengist" }}` }}
+    spec:
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - RespectIgnoreDifferences=true
+          - ServerSideApply=true
+      ignoreDifferences:
+        - group: apps
+          kind: StatefulSet
+          jqPathExpressions:
+            - ".spec.volumeClaimTemplates[].apiVersion"
+            - ".spec.volumeClaimTemplates[].kind"
+            - ".spec.volumeClaimTemplates[].metadata.labels.\"helm.sh/chart\""
+            - ".spec.volumeClaimTemplates[].metadata.labels.\"app.kubernetes.io/version\""
+    {{ `{{- end }}` }}
 {{- end }}
 {{- end }}
