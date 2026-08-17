@@ -4,6 +4,8 @@ grafana:
   resources:
     requests:
       memory: 256Mi
+    limits:
+      memory: 512Mi
   ingress:
     enabled: true
     ingressClassName: traefik
@@ -27,6 +29,8 @@ grafana:
     resources:
       requests:
         memory: 64Mi
+      limits:
+        memory: 128Mi
     dashboards:
       enabled: true
       searchNamespace: monitoring-system

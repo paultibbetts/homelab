@@ -44,6 +44,8 @@ spec:
           resources:
             requests:
               memory: 256Mi
+            limits:
+              memory: 512Mi
           volumeMounts:
             - name: healthchecks-data
               mountPath: /data

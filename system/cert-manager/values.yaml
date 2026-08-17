@@ -3,18 +3,26 @@ cert-manager:
   resources:
     requests:
       memory: 64Mi
+    limits:
+      memory: 128Mi
   webhook:
     resources:
       requests:
         memory: 64Mi
+      limits:
+        memory: 128Mi
   cainjector:
     resources:
       requests:
         memory: 64Mi
+      limits:
+        memory: 128Mi
   startupapicheck:
     resources:
       requests:
         memory: 32Mi
+      limits:
+        memory: 64Mi
   prometheus:
     enabled: false
     servicemonitor:

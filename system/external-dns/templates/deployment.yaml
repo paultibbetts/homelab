@@ -44,5 +44,7 @@ spec:
           resources:
             requests:
               memory: 64Mi
+            limits:
+              memory: 128Mi
       securityContext:
         fsGroup: 65534 # For ExternalDNS to be able to read Kubernetes token files

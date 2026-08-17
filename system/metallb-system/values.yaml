@@ -3,31 +3,45 @@ metallb:
     resources:
       requests:
         memory: 64Mi
+      limits:
+        memory: 128Mi
   speaker:
     resources:
       requests:
         memory: 64Mi
+      limits:
+        memory: 128Mi
   frr-k8s:
     frrk8s:
       resources:
         requests:
           memory: 64Mi
+        limits:
+          memory: 128Mi
       frr:
         resources:
           requests:
             memory: 64Mi
+          limits:
+            memory: 128Mi
       reloader:
         resources:
           requests:
             memory: 32Mi
+          limits:
+            memory: 64Mi
       frrMetrics:
         resources:
           requests:
             memory: 32Mi
+          limits:
+            memory: 64Mi
       frrStatus:
         resources:
           requests:
             memory: 32Mi
+          limits:
+            memory: 64Mi
     prometheus:
       serviceMonitor:
         enabled: false

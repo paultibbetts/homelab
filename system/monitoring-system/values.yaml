@@ -16,24 +16,36 @@ kube-prometheus-stack:
       resources:
         requests:
           memory: 512Mi
+        limits:
+          memory: 1Gi
   alertmanager:
     alertmanagerSpec:
       resources:
         requests:
           memory: 128Mi
+        limits:
+          memory: 256Mi
   prometheusOperator:
     resources:
       requests:
         memory: 128Mi
+      limits:
+        memory: 256Mi
     prometheusConfigReloader:
       resources:
         requests:
           memory: 50Mi
+        limits:
+          memory: 128Mi
   kube-state-metrics:
     resources:
       requests:
         memory: 64Mi
+      limits:
+        memory: 128Mi
   prometheus-node-exporter:
     resources:
       requests:
         memory: 32Mi
+      limits:
+        memory: 64Mi
