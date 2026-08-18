@@ -8,6 +8,8 @@ longhorn:
       limits:
         memory: 512Mi
   defaultSettings:
+    backupTarget: s3://longhorn@us-east-1/
+    backupTargetCredentialSecret: longhorn-minio-credentials
     createDefaultDiskLabeledNodes: true
     kubernetesClusterAutoscalerEnabled: true
     defaultDataPath: /var/lib/longhorn
