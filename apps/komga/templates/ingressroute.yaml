@@ -20,6 +20,6 @@ spec:
     - match: Host(`{{ .Values.ingressRoute.host }}`)
       kind: Rule
       services:
-        - name: {{ .Values.komga.fullnameOverride }}
+        - name: komga
           port: {{ .Values.komga.service.port }}
   tls: {}
