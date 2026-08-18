@@ -1,16 +1,11 @@
 komga:
-  fullnameOverride: komga
-  komga:
-    timezone: Europe/London
+  image:
+    repository: docker.io/gotson/komga
+    tag: 1.26.3
+    pullPolicy: IfNotPresent
+  timezone: Europe/London
   service:
     port: 25600
-  persistence:
-    config:
-      enabled: true
-      existingClaim: komga-config
-    data:
-      enabled: true
-      existingClaim: media-komga
   podSecurityContext:
     supplementalGroups:
       - 3003

@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: komga
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: komga
+    app.kubernetes.io/instance: komga
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: komga
+      app.kubernetes.io/instance: komga
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: komga
+        app.kubernetes.io/instance: komga
+    spec:
+      securityContext:
+        {{- toYaml .Values.komga.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: komga
+          image: {{ printf "%s:%s" .Values.komga.image.repository .Values.komga.image.tag | quote }}
+          imagePullPolicy: {{ .Values.komga.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.komga.service.port }}
+              protocol: TCP
+          env:
+            - name: SERVER_PORT
+              value: {{ .Values.komga.service.port | quote }}
+            - name: SERVER_SERVLET_CONTEXTPATH
+              value: "/"
+            - name: SERVER_SERVLET_SESSION_TIMEOUT
+              value: "30m"
+            - name: TZ
+              value: {{ .Values.komga.timezone | quote }}
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            {{- toYaml .Values.komga.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: komga-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.mediaPersistence.claimName }}

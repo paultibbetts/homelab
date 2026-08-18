@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: komga
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: komga
+    app.kubernetes.io/instance: komga
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.komga.service.port }}
+      targetPort: http
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: komga
+    app.kubernetes.io/instance: komga
