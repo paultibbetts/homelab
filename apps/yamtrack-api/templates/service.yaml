@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yamtrack-api
+  namespace: yamtrack-api
+  labels:
+    app.kubernetes.io/name: yamtrack-api
+    app.kubernetes.io/component: app
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: yamtrack-api
+    app.kubernetes.io/component: app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
+      targetPort: http

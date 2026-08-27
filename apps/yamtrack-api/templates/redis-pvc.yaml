@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: yamtrack-api-redis-data
+  namespace: yamtrack-api
+  labels:
+    app.kubernetes.io/name: yamtrack-api
+    app.kubernetes.io/component: redis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yamtrack-api
+  namespace: yamtrack-api
+  labels:
+    app.kubernetes.io/name: yamtrack-api
+    app.kubernetes.io/component: app
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: yamtrack-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: yamtrack-api
+        app.kubernetes.io/component: app
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: yamtrack-api
+          image: ghcr.io/fuzzygrim/yamtrack:api
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: Europe/London
+            - name: REDIS_URL
+              value: redis://yamtrack-api-redis:6379
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: yamtrack-api-env
+                  key: SECRET
+            - name: URLS
+              valueFrom:
+                secretKeyRef:
+                  name: yamtrack-api-env
+                  key: URLS
+          ports:
+            - containerPort: 8000
+              name: http
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: data
+              mountPath: /yamtrack/db
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: yamtrack-api-data
