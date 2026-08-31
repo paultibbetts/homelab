@@ -22,7 +22,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: grocy-mealie-sync
-          image: ghcr.io/harmellis/grocy-mealie-sync:1.14.2
+          image: ghcr.io/harmellis/grocy-mealie-sync:1.16.0
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 1001
