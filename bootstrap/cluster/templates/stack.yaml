@@ -83,6 +83,12 @@ spec:
           jqPathExpressions:
             - ".spec.selector"
             - ".spec.template"
+        - group: batch
+          kind: Job
+          name: plane-minio-bucket-1
+          jqPathExpressions:
+            - ".spec.selector"
+            - ".spec.template"
     {{ `{{- end }}` }}
     {{ `{{- if eq .path.basename "opengist" }}` }}
     spec:
