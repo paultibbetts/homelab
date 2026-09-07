@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hortusfox
+  labels:
+    app.kubernetes.io/name: hortusfox
+    app.kubernetes.io/component: app
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hortusfox
+      app.kubernetes.io/component: app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hortusfox
+        app.kubernetes.io/component: app
+    spec:
+      initContainers:
+        - name: create-data-directories
+          image: busybox:1.38
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - mkdir -p /data/img /data/attachments /data/logs /data/backup /data/themes /data/migrations
+          resources:
+            requests:
+              memory: 16Mi
+            limits:
+              memory: 64Mi
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      containers:
+        - name: hortusfox
+          image: ghcr.io/danielbrendel/hortusfox-web:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: hortusfox-env
+                  key: APP_ADMIN_EMAIL
+            - name: APP_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hortusfox-env
+                  key: APP_ADMIN_PASSWORD
+            - name: APP_TIMEZONE
+              value: Europe/London
+            - name: DB_HOST
+              value: mariadb
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_DATABASE
+              value: hortusfox
+            - name: DB_USERNAME
+              value: hortusfox
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hortusfox-env
+                  key: MARIADB_PASSWORD
+            - name: DB_CHARSET
+              value: utf8mb4
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: data
+              mountPath: /var/www/html/public/img
+              subPath: img
+            - name: data
+              mountPath: /var/www/html/public/attachments
+              subPath: attachments
+            - name: data
+              mountPath: /var/www/html/app/logs
+              subPath: logs
+            - name: data
+              mountPath: /var/www/html/public/backup
+              subPath: backup
+            - name: data
+              mountPath: /var/www/html/public/themes
+              subPath: themes
+            - name: data
+              mountPath: /var/www/html/app/migrations
+              subPath: migrations
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hortusfox-data

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  labels:
+    app.kubernetes.io/name: hortusfox
+    app.kubernetes.io/component: mariadb
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hortusfox
+      app.kubernetes.io/component: mariadb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hortusfox
+        app.kubernetes.io/component: mariadb
+    spec:
+      securityContext:
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: mariadb
+          image: mariadb:11.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MARIADB_DATABASE
+              value: hortusfox
+            - name: MARIADB_USER
+              value: hortusfox
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hortusfox-env
+                  key: MARIADB_PASSWORD
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hortusfox-env
+                  key: MARIADB_ROOT_PASSWORD
+          ports:
+            - containerPort: 3306
+              name: mariadb
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mariadb-data

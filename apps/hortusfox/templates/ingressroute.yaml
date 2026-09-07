@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hortusfox
+  namespace: hortusfox
+  labels:
+    app.kubernetes.io/name: hortusfox
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://hortusfox.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Plant management
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: hortusfox.png
+    gethomepage.dev/name: HortusFox
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`hortusfox.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: hortusfox
+          port: http
+  tls: {}
