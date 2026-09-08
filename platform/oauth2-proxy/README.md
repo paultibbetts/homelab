@@ -17,6 +17,12 @@ The Kanidm OAuth client redirect URI must remain:
 https://oauth2-proxy.lab.paultibbetts.uk/oauth2/callback
 ```
 
+Generate `cookie-secret` as an unpadded base64url-encoded 32-byte value:
+
+```sh
+openssl rand -base64 32 | tr '+/' '-_' | tr -d '=\n'
+```
+
 The proxy uses a shared, HTTPS-only cookie for `.lab.paultibbetts.uk`. No
 applications use it until a Traefik ForwardAuth middleware is attached to their
 IngressRoute.
