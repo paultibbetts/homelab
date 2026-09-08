@@ -5,6 +5,7 @@ oauth2-proxy:
       provider = "oidc"
       oidc_issuer_url = "https://auth.cloud.paultibbetts.uk/oauth2/openid/oauth2-proxy"
       redirect_url = "https://oauth2-proxy.lab.paultibbetts.uk/oauth2/callback"
+      code_challenge_method = "S256"
       reverse_proxy = true
       set_xauthrequest = true
       pass_user_headers = true
