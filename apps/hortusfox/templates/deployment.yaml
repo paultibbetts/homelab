@@ -52,6 +52,18 @@ spec:
                   key: APP_ADMIN_PASSWORD
             - name: APP_TIMEZONE
               value: Europe/London
+            - name: PROXY_ENABLE
+              value: "true"
+            - name: PROXY_HEADER_EMAIL
+              value: X-Auth-Request-Email
+            - name: PROXY_HEADER_USERNAME
+              value: X-Auth-Request-Preferred-Username
+            - name: PROXY_AUTO_SIGNUP
+              value: "true"
+            - name: PROXY_HIDE_LOGOUT
+              value: "true"
+            - name: PROXY_OVERWRITE_VALUES
+              value: "true"
             - name: DB_HOST
               value: mariadb
             - name: DB_PORT

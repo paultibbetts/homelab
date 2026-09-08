@@ -19,6 +19,8 @@ spec:
   routes:
     - match: Host(`hortusfox.lab.paultibbetts.uk`)
       kind: Rule
+      middlewares:
+        - name: oauth2-proxy
       services:
         - name: hortusfox
           port: http
