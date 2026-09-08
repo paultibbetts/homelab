@@ -1,0 +1,25 @@
+oauth2-proxy:
+  config:
+    existingSecret: oauth2-proxy-env
+    configFile: |-
+      provider = "oidc"
+      oidc_issuer_url = "https://auth.cloud.paultibbetts.uk/oauth2/openid/oauth2-proxy"
+      redirect_url = "https://oauth2-proxy.lab.paultibbetts.uk/oauth2/callback"
+      reverse_proxy = true
+      set_xauthrequest = true
+      pass_user_headers = true
+      skip_provider_button = true
+      email_domains = [ "*" ]
+      cookie_name = "_oauth2_proxy"
+      cookie_domains = [ ".lab.paultibbetts.uk" ]
+      whitelist_domains = [ ".lab.paultibbetts.uk" ]
+      upstreams = [ "static://202" ]
+  service:
+    type: ClusterIP
+  serviceAccount:
+    automountServiceAccountToken: false
+  resources:
+    requests:
+      memory: 64Mi
+    limits:
+      memory: 128Mi

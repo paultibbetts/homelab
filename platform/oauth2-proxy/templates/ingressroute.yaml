@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+  labels:
+    app.kubernetes.io/name: oauth2-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`oauth2-proxy.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: oauth2-proxy
+          port: http
+  tls: {}
