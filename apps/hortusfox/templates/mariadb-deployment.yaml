@@ -24,7 +24,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: mariadb
-          image: mariadb:11.4
+          image: mariadb:13.0
           imagePullPolicy: IfNotPresent
           env:
             - name: MARIADB_DATABASE
