@@ -18,7 +18,6 @@ traefik:
   global:
     checkNewVersion: false
   additionalArguments:
-    - "--serversTransport.insecureSkipVerify=true"
     - "--log.level=INFO"
     - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
     - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
