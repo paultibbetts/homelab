@@ -1,7 +1,7 @@
 komga:
   image:
     repository: docker.io/gotson/komga
-    tag: 1.27.0
+    tag: 1.27.1
     pullPolicy: IfNotPresent
   timezone: Europe/London
   service:
