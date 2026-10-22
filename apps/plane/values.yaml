@@ -73,5 +73,3 @@ plane-ce:
     cors_allowed_origins: https://plane.lab.paultibbetts.uk
     docstore_bucket: uploads
     doc_upload_size_limit: "5242880"
-    secret_key: b88090600aa3457c53baa827a5de832cd63fb208910bfec7bbfa86c53aaafdad
-    live_server_secret_key: 65904338946a1a4ac2f6d048bd087f85ade757a52da90bb1

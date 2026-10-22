@@ -11,7 +11,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Fitness and nutrition tracking
     gethomepage.dev/group: Apps
-    gethomepage.dev/icon: sparkyfitness.png
+    gethomepage.dev/icon: sh-sparkyfitness
     gethomepage.dev/name: SparkyFitness
 spec:
   entryPoints:

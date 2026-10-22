@@ -24,9 +24,11 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: mariadb
-          image: mariadb:11.4
+          image: mariadb:lts
           imagePullPolicy: IfNotPresent
           env:
+            - name: MARIADB_AUTO_UPGRADE
+              value: "1"
             - name: MARIADB_DATABASE
               value: hortusfox
             - name: MARIADB_USER

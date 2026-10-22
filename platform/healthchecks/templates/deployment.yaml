@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: healthchecks
-          image: healthchecks/healthchecks:v4.4
+          image: healthchecks/healthchecks:v5.0
           imagePullPolicy: Always
           env:
             - name: DB
@@ -41,6 +41,26 @@ spec:
           ports:
             - containerPort: 8000
               name: web
+          startupProbe:
+            httpGet:
+              path: /health
+              port: web
+            periodSeconds: 5
+            failureThreshold: 12
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: web
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: web
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3
           resources:
             requests:
               memory: 256Mi
