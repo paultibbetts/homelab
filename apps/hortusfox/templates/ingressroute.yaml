@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: hortusfox
   annotations:
-    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://hortusfox.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Plant management

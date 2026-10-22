@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: sparkyfitness
   annotations:
-    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://sparkyfitness.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Fitness and nutrition tracking

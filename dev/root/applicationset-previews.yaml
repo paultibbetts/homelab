@@ -40,7 +40,7 @@ spec:
               enabled: true
               className: traefik
               annotations:
-                external-dns.alpha.kubernetes.io/target: traefik.lab.paultibbetts.uk
+                external-dns.kubernetes.io/target: traefik.lab.paultibbetts.uk
                 traefik.ingress.kubernetes.io/router.entrypoints: websecure
                 traefik.ingress.kubernetes.io/router.tls: "true"
               hosts:

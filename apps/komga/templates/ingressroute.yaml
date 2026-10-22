@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: komga
   annotations:
-    external-dns.alpha.kubernetes.io/target: {{ .Values.ingressRoute.externalDnsTarget | quote }}
+    external-dns.kubernetes.io/target: {{ .Values.ingressRoute.externalDnsTarget | quote }}
     gethomepage.dev/href: {{ printf "https://%s" .Values.ingressRoute.host | quote }}
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Comic and manga server

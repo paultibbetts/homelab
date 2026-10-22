@@ -11,7 +11,7 @@ grafana:
     ingressClassName: traefik
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-production
-      external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+      external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
       gethomepage.dev/href: "https://grafana.lab.paultibbetts.uk"
       gethomepage.dev/enabled: "true"
       gethomepage.dev/description: Dashboards
