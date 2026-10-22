@@ -34,7 +34,7 @@ image:
   repository: quay.io/redlib/redlib
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest@sha256:3f5eb87b1beb5a7b4e5b72265cc502e6a365247a62b8b6f0c1080ec0b8eb0f74"
+  tag: "latest@sha256:37f624d87ce6cdd90d945af3688fdf0c195a0251d3b5ba62047792e8be2390df"
 
 imagePullSecrets: []
 nameOverride: ""
