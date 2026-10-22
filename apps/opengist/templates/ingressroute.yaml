@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: opengist
   annotations:
-    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://opengist.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Gists

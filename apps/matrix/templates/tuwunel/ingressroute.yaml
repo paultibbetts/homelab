@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: matrix
   annotations:
-    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
 spec:
   entryPoints:
     - websecure

@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: linkding
   annotations:
-    external-dns.alpha.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
     gethomepage.dev/href: "https://linkding.lab.paultibbetts.uk"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Bookmark manager
