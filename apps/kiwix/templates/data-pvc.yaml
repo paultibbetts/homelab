@@ -1,0 +1,17 @@
+{{- if .Values.dataPersistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.dataPersistence.claimName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: kiwix
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: {{ .Values.dataPersistence.size }}
+  storageClassName: ""
+  volumeName: {{ .Values.dataPersistence.volumeName }}
+{{- end }}

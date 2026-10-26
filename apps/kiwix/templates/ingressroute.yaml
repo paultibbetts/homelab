@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kiwix
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: kiwix
+  annotations:
+    external-dns.kubernetes.io/target: {{ .Values.ingressRoute.externalDnsTarget | quote }}
+    gethomepage.dev/href: {{ printf "https://%s" .Values.ingressRoute.host | quote }}
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Offline knowledge library
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: kiwix.png
+    gethomepage.dev/name: Kiwix
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`{{ .Values.ingressRoute.host }}`)
+      kind: Rule
+      services:
+        - name: kiwix
+          port: {{ .Values.kiwix.service.port }}
+  tls: {}

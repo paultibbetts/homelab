@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kiwix
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: kiwix
+    app.kubernetes.io/instance: kiwix
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.kiwix.service.port }}
+      targetPort: http
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: kiwix
+    app.kubernetes.io/instance: kiwix

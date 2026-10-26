@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiwix
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: kiwix
+    app.kubernetes.io/instance: kiwix
+spec:
+  replicas: {{ .Values.kiwix.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kiwix
+      app.kubernetes.io/instance: kiwix
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kiwix
+        app.kubernetes.io/instance: kiwix
+    spec:
+      containers:
+        - name: kiwix
+          image: {{ printf "%s:%s" .Values.kiwix.image.repository .Values.kiwix.image.tag | quote }}
+          imagePullPolicy: {{ .Values.kiwix.image.pullPolicy }}
+          {{- if .Values.dataPersistence.enabled }}
+          args:
+            - /data
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.kiwix.service.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.kiwix.resources | nindent 12 }}
+          {{- if .Values.dataPersistence.enabled }}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              readOnly: true
+          {{- end }}
+      {{- if .Values.dataPersistence.enabled }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.dataPersistence.claimName }}
+      {{- end }}
