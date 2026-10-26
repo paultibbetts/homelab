@@ -34,10 +34,15 @@ spec:
             - |
               set -- /usr/local/bin/kiwix-serve --port={{ .Values.kiwix.service.port }}
               while IFS= read -r zim; do
+                [ -n "$zim" ] || continue
                 set -- "$@" "$zim"
               done <<EOF
               $(find /data -type f -name '*.zim' -print)
               EOF
+              if [ "$#" -eq 2 ]; then
+                echo "No readable ZIM files found under /data."
+                exit 1
+              fi
               exec "$@"
           {{- end }}
           ports:
