@@ -20,13 +20,25 @@ spec:
         app.kubernetes.io/name: kiwix
         app.kubernetes.io/instance: kiwix
     spec:
+      securityContext:
+        {{- toYaml .Values.kiwix.podSecurityContext | nindent 8 }}
       containers:
         - name: kiwix
           image: {{ printf "%s:%s" .Values.kiwix.image.repository .Values.kiwix.image.tag | quote }}
           imagePullPolicy: {{ .Values.kiwix.image.pullPolicy }}
           {{- if .Values.dataPersistence.enabled }}
+          command:
+            - /bin/sh
+            - -ec
           args:
-            - /data
+            - |
+              set -- /usr/local/bin/kiwix-serve --port={{ .Values.kiwix.service.port }}
+              while IFS= read -r zim; do
+                set -- "$@" "$zim"
+              done <<EOF
+              $(find /data -type f -name '*.zim' -print)
+              EOF
+              exec "$@"
           {{- end }}
           ports:
             - name: http
