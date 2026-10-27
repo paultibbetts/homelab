@@ -9,6 +9,7 @@ spec:
   forwardAuth:
     address: http://oauth2-proxy.oauth2-proxy.svc.cluster.local/
     trustForwardHeader: true
+    maxResponseBodySize: 65536
     authResponseHeaders:
       - X-Auth-Request-Email
       - X-Auth-Request-Preferred-Username
