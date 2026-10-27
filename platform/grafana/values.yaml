@@ -1,6 +1,8 @@
 grafana:
   deploymentStrategy:
     type: Recreate
+  admin:
+    existingSecret: grafana-admin-secret
   resources:
     requests:
       memory: 256Mi
