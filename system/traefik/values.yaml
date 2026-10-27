@@ -40,6 +40,7 @@ traefik:
     kubernetesCRD:
       enabled: true
       allowExternalNameServices: true
+      safeNaming: true
     kubernetesIngress:
       enabled: true
       allowExternalNameServices: true
