@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: soundbored
-          image: christom/soundbored:d0a869ce46a9d9217852c6087464d021f6685011
+          image: christom/soundbored:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: DISCORD_TOKEN

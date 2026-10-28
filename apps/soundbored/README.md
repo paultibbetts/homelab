@@ -1,7 +1,7 @@
 # Soundbored
 
-Soundbored is a self-hosted Discord soundboard. This chart uses the pinned
-upstream image `christom/soundbored:d0a869ce46a9d9217852c6087464d021f6685011`
+Soundbored is a self-hosted Discord soundboard. This chart uses the
+upstream image `christom/soundbored:latest`, which Renovate pins to a digest,
 and stores uploaded audio and its SQLite database on separate PVCs.
 
 It is available at `https://soundbored.lab.paultibbetts.uk`. The deployment
