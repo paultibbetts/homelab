@@ -1,0 +1,25 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: soundbored
+  namespace: soundbored
+  labels:
+    app.kubernetes.io/name: soundbored
+  annotations:
+    external-dns.kubernetes.io/target: "traefik.lab.paultibbetts.uk"
+    gethomepage.dev/href: "https://soundbored.lab.paultibbetts.uk"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Discord soundboard
+    gethomepage.dev/group: Apps
+    gethomepage.dev/icon: discord.png
+    gethomepage.dev/name: Soundbored
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`soundbored.lab.paultibbetts.uk`)
+      kind: Rule
+      services:
+        - name: soundbored
+          port: http
+  tls: {}
