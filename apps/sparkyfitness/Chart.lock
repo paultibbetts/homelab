@@ -1,6 +1,6 @@
 dependencies:
 - name: sparkyfitness
   repository: oci://ghcr.io/codewithcj/charts
-  version: 1.9.0
-digest: sha256:32a9cc6e928f6c26f14e3f9d2048cf74a724a5a099f1faf89747a5f70f819eb9
-generated: "2026-10-21T19:04:37.605944923Z"
+  version: 1.11.0
+digest: sha256:df05ce755dd723ad417db2cd0c817bacf03316db8921c7376ae65063e772f5c1
+generated: "2026-10-31T00:01:58.855166715Z"
