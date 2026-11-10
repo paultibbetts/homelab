@@ -35,7 +35,7 @@ sidecar already searches `monitoring-system` for `grafana_dashboard: "1"` Config
 `http://10.1.21.10:8093/truenas?template=alertmanager`
 
 The `AlertmanagerConfig` only matches alerts labelled
-`monitoring.paultibbetts.uk/target: truenas`; it does not replace existing routes or
+`monitoring_target: truenas`; it does not replace existing routes or
 receivers. The small `alertmanagerConfigSelector` addition in `values.yaml` is needed
 solely so the existing Alertmanager selects this labelled config.
 

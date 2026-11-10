@@ -17,7 +17,7 @@ spec:
     groupInterval: 5m
     repeatInterval: 12h
     matchers:
-      - name: monitoring.paultibbetts.uk/target
+      - name: monitoring_target
         matchType: "="
         value: truenas
   receivers:

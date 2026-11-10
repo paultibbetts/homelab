@@ -15,7 +15,7 @@ spec:
           for: 10m
           labels:
             severity: warning
-            monitoring.paultibbetts.uk/target: truenas
+            monitoring_target: truenas
           annotations:
             summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} is above 80% utilised"
             description: "Pool {{ `{{ $labels.pool }}` }} is {{ `{{ $value | humanizePercentage }}` }} utilised (warning threshold: 80%)."
@@ -24,7 +24,7 @@ spec:
           for: 10m
           labels:
             severity: critical
-            monitoring.paultibbetts.uk/target: truenas
+            monitoring_target: truenas
           annotations:
             summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} is above 90% utilised"
             description: "Pool {{ `{{ $labels.pool }}` }} is {{ `{{ $value | humanizePercentage }}` }} utilised (critical threshold: 90%)."
@@ -33,7 +33,7 @@ spec:
           for: 10m
           labels:
             severity: warning
-            monitoring.paultibbetts.uk/target: truenas
+            monitoring_target: truenas
           annotations:
             summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} has less than 200 GiB free"
             description: "Pool {{ `{{ $labels.pool }}` }} has {{ `{{ $value | humanize1024 }}` }}B available. Consider a per-pool threshold if pool sizes differ significantly."
@@ -42,7 +42,7 @@ spec:
           for: 5m
           labels:
             severity: critical
-            monitoring.paultibbetts.uk/target: truenas
+            monitoring_target: truenas
           annotations:
             summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} is unhealthy"
             description: "TrueNAS reports pool {{ `{{ $labels.pool }}` }} as unhealthy. Check pool status, vdev errors, and recent scrub results."
@@ -51,7 +51,7 @@ spec:
           for: 5m
           labels:
             severity: warning
-            monitoring.paultibbetts.uk/target: truenas
+            monitoring_target: truenas
           annotations:
             summary: "TrueNAS exporter is unavailable"
             description: "Prometheus cannot scrape the TrueNAS exporter, or it has not exposed truenas_up for five minutes."
@@ -60,7 +60,7 @@ spec:
           for: 5m
           labels:
             severity: warning
-            monitoring.paultibbetts.uk/target: truenas
+            monitoring_target: truenas
           annotations:
             summary: "TrueNAS exporter cannot collect from the TrueNAS API"
             description: "The exporter is reachable but its most recent TrueNAS API collection failed."
