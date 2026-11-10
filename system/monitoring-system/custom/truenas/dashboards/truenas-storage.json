@@ -1,0 +1,29 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {"type":"stat","title":"Pool capacity","targets":[{"expr":"truenas_pool_size_bytes","legendFormat":"{{pool}}"}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":8,"w":8,"x":0,"y":0}},
+    {"type":"stat","title":"Pool available","targets":[{"expr":"truenas_pool_free_bytes","legendFormat":"{{pool}}"}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":8,"w":8,"x":8,"y":0}},
+    {"type":"bargauge","title":"Pool utilisation","targets":[{"expr":"100 * truenas_pool_allocated_bytes / clamp_min(truenas_pool_size_bytes, 1)","legendFormat":"{{pool}}"}],"fieldConfig":{"defaults":{"unit":"percent","min":0,"max":100,"thresholds":{"mode":"absolute","steps":[{"color":"green","value":null},{"color":"orange","value":80},{"color":"red","value":90}]}}},"gridPos":{"h":8,"w":8,"x":16,"y":0}},
+    {"type":"timeseries","title":"Pool consumption","targets":[{"expr":"truenas_pool_allocated_bytes","legendFormat":"{{pool}} used"},{"expr":"truenas_pool_free_bytes","legendFormat":"{{pool}} free"}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":8,"w":12,"x":0,"y":8}},
+    {"type":"timeseries","title":"Pool growth rate (7d / 30d)","targets":[{"expr":"delta(truenas_pool_allocated_bytes[7d]) / 7","legendFormat":"{{pool}} 7d daily"},{"expr":"delta(truenas_pool_allocated_bytes[30d]) / 30","legendFormat":"{{pool}} 30d daily"}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":8,"w":12,"x":12,"y":8}},
+    {"type":"table","title":"Largest datasets","targets":[{"expr":"topk(20, truenas_dataset_used_bytes)","format":"table","instant":true}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":10,"w":12,"x":0,"y":16}},
+    {"type":"table","title":"Dataset availability and snapshot use","targets":[{"expr":"truenas_dataset_available_bytes or truenas_dataset_used_by_snapshots_bytes","format":"table","instant":true}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":10,"w":12,"x":12,"y":16}},
+    {"type":"stat","title":"Pool health","targets":[{"expr":"truenas_pool_healthy","legendFormat":"{{pool}}"}],"fieldConfig":{"defaults":{"min":0,"max":1,"mappings":[{"type":"value","options":{"0":{"text":"Unhealthy","color":"red"},"1":{"text":"Healthy","color":"green"}}}]}},"gridPos":{"h":8,"w":6,"x":0,"y":26}},
+    {"type":"timeseries","title":"Disk temperatures","targets":[{"expr":"truenas_disk_temperature_celsius","legendFormat":"{{disk}}"}],"fieldConfig":{"defaults":{"unit":"celsius"}},"gridPos":{"h":8,"w":6,"x":6,"y":26}},
+    {"type":"timeseries","title":"CPU and memory utilisation","targets":[{"expr":"truenas_cpu_usage_percent","legendFormat":"CPU"},{"expr":"100 * truenas_memory_physical_used_bytes / clamp_min(truenas_memory_physical_total_bytes, 1)","legendFormat":"Memory"}],"fieldConfig":{"defaults":{"unit":"percent","min":0,"max":100}},"gridPos":{"h":8,"w":6,"x":12,"y":26}},
+    {"type":"timeseries","title":"Network throughput","targets":[{"expr":"truenas_network_rx_bytes_per_second","legendFormat":"{{interface}} receive"},{"expr":"truenas_network_tx_bytes_per_second","legendFormat":"{{interface}} transmit"}],"fieldConfig":{"defaults":{"unit":"Bps"}},"gridPos":{"h":8,"w":6,"x":18,"y":26}},
+    {"type":"stat","title":"Exporter / API health","targets":[{"expr":"up{job=\"truenas-exporter\"}","legendFormat":"Prometheus scrape"},{"expr":"truenas_up","legendFormat":"TrueNAS API"}],"fieldConfig":{"defaults":{"min":0,"max":1,"mappings":[{"type":"value","options":{"0":{"text":"Down","color":"red"},"1":{"text":"Up","color":"green"}}}]}},"gridPos":{"h":8,"w":6,"x":0,"y":34}},
+    {"type":"timeseries","title":"ZFS ARC utilisation","targets":[{"expr":"100 * truenas_zfs_arc_size_bytes / clamp_min(truenas_zfs_arc_max_size_bytes, 1)","legendFormat":"ARC"}],"fieldConfig":{"defaults":{"unit":"percent","min":0,"max":100}},"gridPos":{"h":8,"w":6,"x":6,"y":34}},
+    {"type":"timeseries","title":"Scrub status and errors","targets":[{"expr":"truenas_pool_scan_percent","legendFormat":"{{pool}} scan percent"},{"expr":"truenas_pool_scan_errors","legendFormat":"{{pool}} scan errors"}],"fieldConfig":{"defaults":{}},"gridPos":{"h":8,"w":12,"x":12,"y":34}},
+    {"type":"table","title":"Disk health","targets":[{"expr":"truenas_smart_test_last_result or truenas_disk_smart_enabled","format":"table","instant":true}],"fieldConfig":{"defaults":{}},"gridPos":{"h":8,"w":12,"x":0,"y":42}},
+    {"type":"bargauge","title":"Datasets with largest snapshot use","targets":[{"expr":"topk(20, truenas_dataset_used_by_snapshots_bytes)","legendFormat":"{{dataset}}"}],"fieldConfig":{"defaults":{"unit":"bytes"}},"gridPos":{"h":8,"w":12,"x":12,"y":42}}
+  ],
+  "schemaVersion": 41,
+  "tags": ["truenas", "storage"],
+  "templating": {"list": []},
+  "time": {"from":"now-24h","to":"now"},
+  "title": "TrueNAS Storage",
+  "uid": "truenas-storage",
+  "version": 1
+}

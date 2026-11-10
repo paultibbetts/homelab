@@ -1,0 +1,66 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: truenas-storage
+  labels:
+    app.kubernetes.io/part-of: truenas-monitoring
+spec:
+  groups:
+    - name: truenas.storage
+      rules:
+        - alert: TrueNASPoolUsageWarning
+          expr: |
+            (truenas_pool_allocated_bytes / clamp_min(truenas_pool_size_bytes, 1)) > 0.80
+            and on (pool) (truenas_pool_allocated_bytes / clamp_min(truenas_pool_size_bytes, 1)) <= 0.90
+          for: 10m
+          labels:
+            severity: warning
+            monitoring.paultibbetts.uk/target: truenas
+          annotations:
+            summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} is above 80% utilised"
+            description: "Pool {{ `{{ $labels.pool }}` }} is {{ `{{ $value | humanizePercentage }}` }} utilised (warning threshold: 80%)."
+        - alert: TrueNASPoolUsageCritical
+          expr: truenas_pool_allocated_bytes / clamp_min(truenas_pool_size_bytes, 1) > 0.90
+          for: 10m
+          labels:
+            severity: critical
+            monitoring.paultibbetts.uk/target: truenas
+          annotations:
+            summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} is above 90% utilised"
+            description: "Pool {{ `{{ $labels.pool }}` }} is {{ `{{ $value | humanizePercentage }}` }} utilised (critical threshold: 90%)."
+        - alert: TrueNASPoolLowAvailableSpace
+          expr: truenas_pool_free_bytes < 214748364800
+          for: 10m
+          labels:
+            severity: warning
+            monitoring.paultibbetts.uk/target: truenas
+          annotations:
+            summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} has less than 200 GiB free"
+            description: "Pool {{ `{{ $labels.pool }}` }} has {{ `{{ $value | humanize1024 }}` }}B available. Consider a per-pool threshold if pool sizes differ significantly."
+        - alert: TrueNASPoolUnhealthy
+          expr: truenas_pool_healthy == 0
+          for: 5m
+          labels:
+            severity: critical
+            monitoring.paultibbetts.uk/target: truenas
+          annotations:
+            summary: "TrueNAS pool {{ `{{ $labels.pool }}` }} is unhealthy"
+            description: "TrueNAS reports pool {{ `{{ $labels.pool }}` }} as unhealthy. Check pool status, vdev errors, and recent scrub results."
+        - alert: TrueNASExporterUnavailable
+          expr: up{job="truenas-exporter"} == 0 or absent(truenas_up)
+          for: 5m
+          labels:
+            severity: warning
+            monitoring.paultibbetts.uk/target: truenas
+          annotations:
+            summary: "TrueNAS exporter is unavailable"
+            description: "Prometheus cannot scrape the TrueNAS exporter, or it has not exposed truenas_up for five minutes."
+        - alert: TrueNASAPIUnhealthy
+          expr: truenas_up == 0
+          for: 5m
+          labels:
+            severity: warning
+            monitoring.paultibbetts.uk/target: truenas
+          annotations:
+            summary: "TrueNAS exporter cannot collect from the TrueNAS API"
+            description: "The exporter is reachable but its most recent TrueNAS API collection failed."

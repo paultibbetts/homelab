@@ -1,0 +1,35 @@
+{{- $authSecret := "" }}
+{{- if and .Values.truenas .Values.truenas.ntfy .Values.truenas.ntfy.auth }}
+{{- $authSecret = default "" .Values.truenas.ntfy.auth.existingSecret }}
+{{- end }}
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: truenas-ntfy
+  labels:
+    monitoring.paultibbetts.uk/alertmanager-config: "true"
+    app.kubernetes.io/part-of: truenas-monitoring
+spec:
+  route:
+    receiver: truenas-ntfy
+    groupBy: [alertname, pool]
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    matchers:
+      - name: monitoring.paultibbetts.uk/target
+        matchType: "="
+        value: truenas
+  receivers:
+    - name: truenas-ntfy
+      webhookConfigs:
+        - url: http://10.1.21.10:8093/truenas?template=alertmanager
+          sendResolved: true
+{{- if $authSecret }}
+          httpConfig:
+            authorization:
+              type: Bearer
+              credentials:
+                name: {{ $authSecret }}
+                key: token
+{{- end }}

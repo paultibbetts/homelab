@@ -20,6 +20,14 @@ kube-prometheus-stack:
           memory: 1Gi
   alertmanager:
     alertmanagerSpec:
+      # Discover only explicitly-labelled, GitOps-managed AlertmanagerConfig
+      # resources. Existing Alertmanager configuration remains in place.
+      alertmanagerConfigSelector:
+        matchLabels:
+          monitoring.paultibbetts.uk/alertmanager-config: "true"
+      alertmanagerConfigNamespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring-system
       resources:
         requests:
           memory: 128Mi
@@ -49,3 +57,12 @@ kube-prometheus-stack:
         memory: 32Mi
       limits:
         memory: 64Mi
+
+# Deployment-specific custom monitoring configuration. This is deliberately
+# separate from the kube-prometheus-stack values above.
+truenas:
+  ntfy:
+    auth:
+      # Set to the manually-created Secret name when ntfy authentication is enabled.
+      # The Secret must contain a `token` key.
+      existingSecret: truenas-ntfy-auth
