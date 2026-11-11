@@ -35,7 +35,7 @@ spec:
               protocol: TCP
           env:
             - name: TRUENAS_WS_URL
-              value: wss://nas.infra.home.arpa/api/current
+              value: wss://truenas.cloud.paultibbetts.uk/api/current
             - name: TRUENAS_API_KEY
               valueFrom:
                 secretKeyRef:
