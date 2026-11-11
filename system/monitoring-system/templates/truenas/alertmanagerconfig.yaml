@@ -20,6 +20,15 @@ spec:
       - name: monitoring_target
         matchType: "="
         value: truenas
+    # Capacity remediation can legitimately take days. Keep the initial and
+    # resolved notification, but avoid twice-daily reminders for this warning.
+    routes:
+      - receiver: truenas-ntfy
+        repeatInterval: 7d
+        matchers:
+          - name: alertname
+            matchType: "="
+            value: TrueNASPoolUsageWarning
   receivers:
     - name: truenas-ntfy
       webhookConfigs:
