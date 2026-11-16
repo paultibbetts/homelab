@@ -1,6 +1,6 @@
 dependencies:
 - name: penpot
   repository: https://helm.penpot.app
-  version: 1.12.0
-digest: sha256:553699a37799657becb9266434d2b5bf8f09642f14f2814394a718e1c72f5477
-generated: "2026-11-11T20:42:38.982664763Z"
+  version: 1.13.0
+digest: sha256:e3850787c78924817f0e6498ccb31d2a23aef8c5da53fc229b15f373e49df556
+generated: "2026-11-16T23:24:14.552999055Z"
