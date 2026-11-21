@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:18-alpine
+          image: postgres:19-alpine
           imagePullPolicy: IfNotPresent
           env:
             - name: PGDATA
